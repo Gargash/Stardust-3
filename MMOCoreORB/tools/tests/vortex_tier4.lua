@@ -57,6 +57,7 @@ CreatureObject = SceneObject
 PlayerObject = SceneObject
 ShipObject = SceneObject
 ShipAiAgent = SceneObject
+TangibleObject = SceneObject
 WaypointObject = SceneObject
 Logger = {log = function(_, text) table.insert(messages, text) end}
 local noop = function() end
@@ -85,12 +86,13 @@ local methods = {
 	getSpecies = function() return 0 end,
 	assignFixedPatrolPointsTable = function(_, points) check(type(points) == "table", "Missing fixed patrol") end,
 	removeSpaceFactionAlly = noop,
+	setPvpStatusBit = function(self, bit) self.pvpStatusBit = bit end,
 	sendSystemMessage = function(_, message) table.insert(messages, message) end,
 }
 methods.getPositionX = methods.getWorldPositionX
 methods.getPositionZ = methods.getWorldPositionZ
 methods.getPositionY = methods.getWorldPositionY
-for _, name in ipairs({"playEffect", "playMusicMessage", "removeSpaceMissionObject", "addSpaceMissionObject", "setQuestDetails", "removeWaypoint", "setMissionOwner", "setMinimumGuardPatrol", "setMaximumGuardPatrol", "setGuardPatrol", "setFixedPatrol", "setDespawnOnNoPlayerInRange", "createSquadron", "assignToSquadron", "addPatrolPoint", "setShipFactionString", "addSpaceFactionAlly", "removeSpaceFactionEnemy", "addSpaceFactionEnemy", "engageShipTarget", "setHyperspacing", "setDefender", "setCurrentSpeed", "setMaxSpeed", "setFollowShipObject", "setEngineDisabled", "setShipAIBehavior", "setPvpStatusBitmask", "setOptionsBitmask", "addBankCredits"}) do methods[name] = noop end
+for _, name in ipairs({"playEffect", "playMusicMessage", "removeSpaceMissionObject", "addSpaceMissionObject", "setQuestDetails", "removeWaypoint", "setMissionOwner", "setMinimumGuardPatrol", "setMaximumGuardPatrol", "setGuardPatrol", "setFixedPatrol", "setWaveAttack", "setDespawnOnNoPlayerInRange", "createSquadron", "assignToSquadron", "addPatrolPoint", "setShipFactionString", "addSpaceFactionAlly", "removeSpaceFactionEnemy", "addSpaceFactionEnemy", "engageShipTarget", "setHyperspacing", "setDefender", "setCurrentSpeed", "setMaxSpeed", "setFollowShipObject", "setEngineDisabled", "setShipAIBehavior", "setPvpStatusBitmask", "setOptionsBitmask", "addBankCredits"}) do methods[name] = noop end
 local function object(values)
 	objects[values.id] = setmetatable(values, {__index = methods})
 	return objects[values.id]
@@ -129,6 +131,7 @@ SpaceHelpers = setmetatable({
 	getPlayerShipFactionString = function() return "rebel" end,
 }, {__index = function() return noop end})
 for _, name in ipairs({"ZONESWITCHED", "SHIPDESTROYED", "ENTEREDAREA", "SHIPDOCKED", "WAYPOINT_SPACE", "WAYPOINTQUESTTASK"}) do _G[name] = name end
+ATTACKABLE = 1
 
 local function reset(mission)
 	data, status, vectors, events, observers, objects, messages, spawns, active, complete = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
@@ -298,6 +301,17 @@ for i,duty in ipairs(duties) do
 end
 check(duties[3].recoveryFaction == "rebel" and duties[3].recoverShip == "lambdashuttle_inquisition_data_vessel", "Wrong recovery faction/target")
 check(duties[4].shipTypes[1][1] == "imp_tie_fighter_tier4", "Destroy duty still targets Black Sun")
+
+-- Escort-duty interceptors remain attackable after their wave AI profile is applied.
+local escortDuty = duties[1]
+reset(escortDuty)
+local escortedShip = object({id=10, ship=true, zone=escortDuty.questZone})
+writeData("10:" .. escortDuty.className .. ":escorterID:", 1)
+escortDuty:spawnAttackWave(escortedShip)
+check(#spawns > 0, "Escort duty did not spawn an attack wave")
+for _,ship in ipairs(spawns) do
+	check(ship.pvpStatusBit == ATTACKABLE, "Escort-duty attacker is not attackable")
+end
 
 -- Protected allies fail only missions that opt into protection.
 local battle = space_battle_naboo_rebel_tier4_4

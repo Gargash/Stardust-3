@@ -715,6 +715,9 @@ function SpaceEscortScreenplay:spawnAttackWave(pEscortAgent)
 		-- Set as a wave attack ship
 		ShipAiAgent(pShipAgent):setWaveAttack()
 
+		-- Keep mission interceptors targetable after applying their wave AI profile.
+		TangibleObject(pShipAgent):setPvpStatusBit(ATTACKABLE)
+
 		-- Ship attacking the escort ship should be hyperspaced out and destroyed, just in case make sure they are cleaned up
 		ShipAiAgent(pShipAgent):setDespawnOnNoPlayerInRange(true)
 
