@@ -243,6 +243,22 @@ for _,chain in ipairs(squad.TIER4_MISSION_CHAINS) do
 end
 check(_G.space_battle_naboo_rebel_tier4_4_c == nil, "Unsupported legacy mission still registered")
 check(loadfile(root .. "screenplays/space/conversations/rebel/vortex_squadron/v3fxConvoHandler.lua"), "Trainer syntax error")
+check(loadfile(root .. "mobile/conversations/space/rebel/vortex_squadron/v3_fx_convo.lua"), "Trainer conversation syntax error")
+
+local function readFile(path)
+	local file = assert(io.open(path))
+	local contents = file:read("*a")
+	file:close()
+	return contents
+end
+
+local trainerHandler = readFile(root .. "screenplays/space/conversations/rebel/vortex_squadron/v3fxConvoHandler.lua")
+local trainerConversation = readFile(root .. "mobile/conversations/space/rebel/vortex_squadron/v3_fx_convo.lua")
+check(trainerHandler:find('pilotTier == 2.-getScreen%("report_to_fazoll"%)'), "Tier 2 handoff still uses the generic destination")
+check(trainerHandler:find('pilotTier == 3.-getScreen%("tier2_completed"%)'), "Tier 3 handoff still uses the generic destination")
+check(trainerHandler:find('pilotTier == 4.-getScreen%("tier3_completed"%)'), "Tier 4 handoff still uses the generic destination")
+check(trainerHandler:find('reportToBurke.-getScreen%("report_to_burke"%)'), "Accepted Burke handoff is not persistent")
+check(trainerConversation:find('id = "report_to_burke".-s_de5265b4'), "Extok's Burke reminder is missing")
 
 -- The rescue escort really deploys its one authored TIE; malformed wave tables spawn none.
 local rescue = rescue_naboo_rebel_tier4_3

@@ -1286,6 +1286,15 @@ v3_fx_convo_accept_master_mission = ConvoScreen:new {
 }
 v3_fx_convo:addScreen(v3_fx_convo_accept_master_mission)
 
+-- Extok repeats the Burke assignment after the transfer has been accepted.
+v3_fx_convo_report_to_burke = ConvoScreen:new {
+	id = "report_to_burke",
+	leftDialog = "@conversation/naboo_rebel_tier4:s_de5265b4",
+	stopConversation = "true",
+	options = {}
+}
+v3_fx_convo:addScreen(v3_fx_convo_report_to_burke)
+
 -- Master pilot: everything finished
 v3_fx_convo_tier4_completed = ConvoScreen:new {
 	id = "tier4_completed",

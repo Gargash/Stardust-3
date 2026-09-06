@@ -64,6 +64,20 @@ function v3fxConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 			(pilotTier == 3 and isEzkiel) or (pilotTier == 4 and isExtokEvin)
 
 		if (not correctTrainer) then
+			if (pilotTier == 2) then
+				return convoTemplate:getScreen("report_to_fazoll")
+			elseif (pilotTier == 3) then
+				return convoTemplate:getScreen("tier2_completed")
+			elseif (pilotTier == 4) then
+				return convoTemplate:getScreen("tier3_completed")
+			elseif (pilotTier >= 5) then
+				if (getQuestStatus(playerID .. "VortexSquadronScreenplay:reportToBurke") == "1") then
+					return convoTemplate:getScreen("report_to_burke")
+				end
+
+				return convoTemplate:getScreen("master_mission")
+			end
+
 			return convoTemplate:getScreen("go_to_next")
 		end
 	end
@@ -151,7 +165,6 @@ function v3fxConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 			if (ghost:getPilotTier() <= 4) then
 				-- Increment pilot to Tier 5!
 				ghost:incrementPilotTier()
-				SpaceHelpers:addWillhamBurkeWaypoint(pPlayer)
 			end
 
 			-- Player has not earned the master box yet
@@ -473,7 +486,7 @@ function v3fxConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 		return convoTemplate:getScreen("first_quest_active")
 	-- Player has already finished and been sent to the next trainer
 	elseif (getQuestStatus(playerID .. "VortexSquadronScreenplay:v3fx_finished") == "1") then
-		return convoTemplate:getScreen("go_to_next")
+		return convoTemplate:getScreen("report_to_fazoll")
 	-- Check if players have all the tier1 skill boxes, send them to next trainer.
 	elseif (SpaceHelpers:hasCompletedPilotTier(pPlayer, "rebel_navy", 1)) then
 		return convoTemplate:getScreen("completed_sinkko")
@@ -932,7 +945,6 @@ function v3fxConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, select
 		if (ghost:getPilotTier() <= 4 and SpaceHelpers:hasCompletedPilotTier(pPlayer, "rebel_navy", 4)) then
 			-- If player has all of the Tier 4 skills, increment their pilot tier
 			ghost:incrementPilotTier()
-			SpaceHelpers:addWillhamBurkeWaypoint(pPlayer)
 		end
 
 		-- Either the player is ready to train again or they have all of the missions finished, so send them back to the main screen
