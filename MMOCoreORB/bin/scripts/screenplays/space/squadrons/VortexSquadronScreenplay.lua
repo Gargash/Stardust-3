@@ -242,7 +242,7 @@ escort_duty_naboo_rebel_7 = SpaceDutyEscortScreenplay:new {
 	sideQuestType = "",
 
 	escortShips = {"reb_transport_tier1", "reb_freightermedium_tier1", "reb_freighterlight_tier1", "reb_freighterheavy_tier1"},
-	escortSpeed = 60,
+	escortSpeed = 30,
 	orderedEscortRoute = true,
 
 	escortPoints = {

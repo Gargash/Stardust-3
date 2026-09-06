@@ -9,11 +9,20 @@ SpaceNabooSpawner = SpaceSpawnerScreenPlay:new {
 		{spawnName = "inquisition_mission_2_droids_1", spawnType = SHIP_SPAWN_SINGLE, x = 590, z = -3500, y = -6000, patrolType = SHIP_AI_RANDOM_PATROL, minRespawn = 60, maxRespawn = 120, minSpawnDistance = 16, maxSpawnDistance = 48, minPatrol = 40, maxPatrol = 160, totalSpawns = 4,
 			shipSpawns = {"rogue_droid_fighter_tier1_naboo"}
 		},
+		{spawnName = "vortex_mission_2_ties_1", spawnType = SHIP_SPAWN_SINGLE, x = 590, z = -3500, y = -6000, patrolType = SHIP_AI_RANDOM_PATROL, minRespawn = 60, maxRespawn = 120, minSpawnDistance = 16, maxSpawnDistance = 48, minPatrol = 40, maxPatrol = 160, totalSpawns = 3,
+			shipSpawns = {"imp_tie_fighter_tier1"}
+		},
 		{spawnName = "inquisition_mission_2_droids_2", spawnType = SHIP_SPAWN_SINGLE, x = -2500, z = 4000, y = 3500, patrolType = SHIP_AI_RANDOM_PATROL, minRespawn = 60, maxRespawn = 120, minSpawnDistance = 16, maxSpawnDistance = 48, minPatrol = 40, maxPatrol = 160, totalSpawns = 4,
 			shipSpawns = {"rogue_droid_fighter_tier1_naboo"}
 		},
+		{spawnName = "vortex_mission_2_ties_2", spawnType = SHIP_SPAWN_SINGLE, x = -2500, z = 4000, y = 3500, patrolType = SHIP_AI_RANDOM_PATROL, minRespawn = 60, maxRespawn = 120, minSpawnDistance = 16, maxSpawnDistance = 48, minPatrol = 40, maxPatrol = 160, totalSpawns = 3,
+			shipSpawns = {"imp_tie_fighter_tier1"}
+		},
 		{spawnName = "inquisition_mission_2_droids_3", spawnType = SHIP_SPAWN_SINGLE, x = -3800, z = 2500, y = 5000, patrolType = SHIP_AI_RANDOM_PATROL, minRespawn = 60, maxRespawn = 120, minSpawnDistance = 16, maxSpawnDistance = 48, minPatrol = 40, maxPatrol = 160, totalSpawns = 4,
 			shipSpawns = {"rogue_droid_fighter_tier1_naboo"}
+		},
+		{spawnName = "vortex_mission_2_ties_3", spawnType = SHIP_SPAWN_SINGLE, x = -3800, z = 2500, y = 5000, patrolType = SHIP_AI_RANDOM_PATROL, minRespawn = 60, maxRespawn = 120, minSpawnDistance = 16, maxSpawnDistance = 48, minPatrol = 40, maxPatrol = 160, totalSpawns = 3,
+			shipSpawns = {"imp_tie_fighter_tier1"}
 		},
 		{spawnName = "rogue_droid_generator", spawnType = SHIP_SPAWN_SINGLE, x = -7133, z = 1932, y = -977, patrolType = SHIP_AI_FIXED_PATROL, minRespawn = 60, maxRespawn = 120, minSpawnDistance = 10, maxSpawnDistance = 20, totalSpawns = 5,
 			patrolsToAssign = 5, fixedPatrolPoints = {"rogue_droid_generator_00", "rogue_droid_generator_01", "rogue_droid_generator_02", "rogue_droid_generator_03", "rogue_droid_generator_04", "rogue_droid_generator_05", "rogue_droid_generator_06", "rogue_droid_generator_07", "rogue_droid_generator_08", "rogue_droid_generator_09", "rogue_droid_generator_10", "rogue_droid_generator_11", "rogue_droid_generator_12", "rogue_droid_generator_13", "rogue_droid_generator_14", "rogue_droid_generator_15", "rogue_droid_generator_16", "rogue_droid_generator_17", "rogue_droid_generator_18"},
