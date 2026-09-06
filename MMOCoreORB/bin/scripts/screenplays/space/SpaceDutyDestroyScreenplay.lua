@@ -23,7 +23,7 @@ SpaceDutyDestroyScreenplay = SpaceQuestLogic:new {
 	parentQuestName = "",
 
 	-- Screenplay Specific Variables
-	totalLevels = 0, -- Amount of levels a player has to complete to finish mission
+	totalLevels = 0, -- Amount of levels before the duty cycle repeats
 	totalRounds = 0, -- Total Rounds for each of the levels
 	totalWaves = 0, -- Total waves at each location
 
@@ -137,7 +137,7 @@ function SpaceDutyDestroyScreenplay:failQuest(pPlayer, notifyClient)
 	if (pQuestArea ~= nil and SceneObject(pQuestArea):isActiveArea()) then
 		dropObserver(ENTEREDAREA, self.className, "notifyEnteredQuestArea", pQuestArea)
 
-		destroyObjectFromWorld(pQuestArea)
+		SceneObject(pQuestArea):destroyObjectFromWorld()
 	end
 
 	-- Remove any remaining ships
@@ -157,6 +157,7 @@ function SpaceDutyDestroyScreenplay:failQuest(pPlayer, notifyClient)
 	deleteData(playerID .. ":" .. self.className .. ":CurrentWave:")
 	deleteData(playerID .. ":" .. self.className .. ":CurrentRound:")
 	deleteData(playerID .. ":" .. self.className .. ":CurrentLevel:")
+	deleteData(playerID .. ":" .. self.className .. ":bossLevel:")
 	deleteData(playerID .. ":" .. self.className .. ":DestroyKillCount:")
 end
 
@@ -190,7 +191,7 @@ function SpaceDutyDestroyScreenplay:resetQuest(pPlayer)
 	if (pQuestArea ~= nil and SceneObject(pQuestArea):isActiveArea()) then
 		dropObserver(ENTEREDAREA, self.className, "notifyEnteredQuestArea", pQuestArea)
 
-		destroyObjectFromWorld(pQuestArea)
+		SceneObject(pQuestArea):destroyObjectFromWorld()
 	end
 
 	-- Remove any remaining ships
@@ -200,6 +201,7 @@ function SpaceDutyDestroyScreenplay:resetQuest(pPlayer)
 	deleteData(playerID .. ":" .. self.className .. ":CurrentWave:")
 	deleteData(playerID .. ":" .. self.className .. ":CurrentRound:")
 	deleteData(playerID .. ":" .. self.className .. ":CurrentLevel:")
+	deleteData(playerID .. ":" .. self.className .. ":bossLevel:")
 	deleteData(playerID .. ":" .. self.className .. ":DestroyKillCount:")
 end
 
@@ -239,7 +241,7 @@ function SpaceDutyDestroyScreenplay:completeQuest(pPlayer, notifyClient)
 	if (pQuestArea ~= nil and SceneObject(pQuestArea):isActiveArea()) then
 		dropObserver(ENTEREDAREA, self.className, "notifyEnteredQuestArea", pQuestArea)
 
-		destroyObjectFromWorld(pQuestArea)
+		SceneObject(pQuestArea):destroyObjectFromWorld()
 	end
 
 	-- Remove any remaining ships
@@ -249,6 +251,7 @@ function SpaceDutyDestroyScreenplay:completeQuest(pPlayer, notifyClient)
 	deleteData(playerID .. ":" .. self.className .. ":CurrentWave:")
 	deleteData(playerID .. ":" .. self.className .. ":CurrentRound:")
 	deleteData(playerID .. ":" .. self.className .. ":CurrentLevel:")
+	deleteData(playerID .. ":" .. self.className .. ":bossLevel:")
 	deleteData(playerID .. ":" .. self.className .. ":DestroyKillCount:")
 
 	-- Complete System Message
@@ -548,8 +551,9 @@ function SpaceDutyDestroyScreenplay:removeAttackShips(pPlayer)
 			goto continue
 		end
 
-		-- Remove the kill observer
+		-- Remove the kill observers
 		dropObserver(SHIPDESTROYED, self.className, "notifyAttackShipDestroyed", pAttackShip)
+		dropObserver(SHIPDESTROYED, self.className, "notifyBossShipDestroyed", pAttackShip)
 
 		-- Make ship fly away first
 		ShipObject(pAttackShip):setHyperspacing(true);
@@ -691,6 +695,10 @@ function SpaceDutyDestroyScreenplay:notifyBossShipDestroyed(pBossShip, pKillerSh
 		return 1
 	end
 
+	if (not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
+		return 1
+	end
+
 	local agentID = SceneObject(pBossShip):getObjectID()
 
 	-- Remove as Mission Object
@@ -707,7 +715,7 @@ function SpaceDutyDestroyScreenplay:notifyBossShipDestroyed(pBossShip, pKillerSh
 	local pQuestArea = getSceneObject(playerAreaID)
 
 	if (pQuestArea ~= nil) then
-		destroyObjectFromWorld(pQuestArea)
+		SceneObject(pQuestArea):destroyObjectFromWorld()
 	end
 
 	-- Remove from Attack Ships Vector
@@ -750,14 +758,13 @@ function SpaceDutyDestroyScreenplay:notifyBossShipDestroyed(pBossShip, pKillerSh
 		-- Calculate Reward
 		local rewardCredits = self.creditReward * 3
 
-		-- Duty Mission is complete
-		if (currentLevel == self.totalLevels) then
+		-- Repeat the duty cycle after the final level
+		if (currentLevel >= self.totalLevels) then
 			if (self.DEBUG_SPACE_DUTY_DESTROY) then
-				print(self.className .. ":notifyBossShipDestroyed - Duty Mission Complete")
+				print(self.className .. ":notifyBossShipDestroyed - Duty Cycle Complete, Starting Next Cycle")
 			end
 
-			-- Set Quest Complete
-			self:completeQuest(pPlayer, true)
+			-- CurrentLevel was cleared above, so the next cycle starts at level one.
 
 			-- Calculate reward
 			rewardCredits = rewardCredits * 25
@@ -770,6 +777,8 @@ function SpaceDutyDestroyScreenplay:notifyBossShipDestroyed(pBossShip, pKillerSh
 
 			-- Give completion reward credits
 			SpaceHelpers:spaceCreditReward(pPlayer, rewardCredits)
+
+			createEvent(6000, self.className, "getTargetLocation", pPlayer, "false")
 
 		-- Start next level of rounds
 		else
@@ -815,6 +824,10 @@ function SpaceDutyDestroyScreenplay:notifyAttackShipDestroyed(pShipAgent, pKille
 	local pPlayer = getSceneObject(missionOwnerID)
 
 	if (pPlayer == nil or not SceneObject(pPlayer):isPlayerCreature()) then
+		return 1
+	end
+
+	if (not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
 		return 1
 	end
 
@@ -911,7 +924,7 @@ function SpaceDutyDestroyScreenplay:notifyAttackShipDestroyed(pShipAgent, pKille
 			local pQuestArea = getSceneObject(playerAreaID)
 
 			if (pQuestArea ~= nil) then
-				destroyObjectFromWorld(pQuestArea)
+				SceneObject(pQuestArea):destroyObjectFromWorld()
 			end
 
 			-- Remove waypoint
