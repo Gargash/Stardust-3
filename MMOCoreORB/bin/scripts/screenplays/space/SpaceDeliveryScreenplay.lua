@@ -115,6 +115,10 @@ function SpaceDeliveryScreenplay:completeQuest(pPlayer, notifyClient)
 		return
 	end
 
+	if (not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
+		return
+	end
+
 	if (self.DEBUG_SPACE_DELIVERY) then
 		print(self.className .. ":completeQuest called -- QuestType: " .. self.questType .. " Quest Name: " .. self.questName)
 	end
@@ -542,6 +546,10 @@ function SpaceDeliveryScreenplay:finishLeg(pPlayer, legName)
 
 	if (legName == "pickup") then
 		createEvent(2000, self.className, "startDeliveryLeg", pPlayer, "")
+		return
+	end
+
+	if (not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
 		return
 	end
 

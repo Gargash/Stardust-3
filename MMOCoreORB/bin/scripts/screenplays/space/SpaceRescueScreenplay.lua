@@ -125,6 +125,10 @@ function SpaceRescueScreenplay:completeQuest(pPlayer, notifyClient)
 		return
 	end
 
+	if (not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
+		return
+	end
+
 	if (self.DEBUG_SPACE_RESCUE) then
 		print(self.className .. ":completeQuest called -- QuestType: " .. self.questType .. " Quest Name: " .. self.questName)
 	end
@@ -216,7 +220,7 @@ function SpaceRescueScreenplay:failQuest(pPlayer, notifyClient)
 		createEvent(200, self.sideQuestType .. "_" .. self.sideQuestName, "failQuest", pPlayer, "false")
 	end
 
-	if (self.sideQuest and (self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.FAILURE or self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.BIDIRECTIONAL)) then
+	if (self.sideQuest and (not self.failureSplitOnObjectiveOnly or notifyClient == "objective") and (self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.FAILURE or self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.BIDIRECTIONAL)) then
 		local alertMessage = "@spacequest/" .. self.questType .. "/" .. self.questName .. ":split_quest_alert_fail"
 
 		-- Split Quest Alert
@@ -854,7 +858,7 @@ function SpaceRescueScreenplay:handleTargetDestroyed(pRescueShip, pKiller)
 	end
 
 	-- Fail the quest
-	self:failQuest(pPlayer, "true")
+	self:failQuest(pPlayer, self.failureSplitOnObjectiveOnly and "objective" or "true")
 
 	return 1
 end

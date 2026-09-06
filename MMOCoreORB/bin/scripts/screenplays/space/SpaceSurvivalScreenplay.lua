@@ -21,6 +21,7 @@ SpaceSurvivalScreenplay = SpaceQuestLogic:new {
 
 	survivalPoint = "",
 	survivalAreaRadius = 400,
+	survivalMaxDistance = 0, -- 0 disables defending-distance checks
 
 	survivalTime = 600, -- In Seconds, 0 runs the quest on survivalWaves instead
 	survivalWaves = 0, -- Number of waves that must be survived, 0 runs the quest on survivalTime
@@ -90,6 +91,10 @@ end
 function SpaceSurvivalScreenplay:completeQuest(pPlayer, notifyClient)
 	if (pPlayer == nil) then
 		Logger:log("Quest: " .. self.questName .. " Type: " .. self.questType .. " -- Failed to completeQuest due to pPlayer being nil.", LT_ERROR)
+		return
+	end
+
+	if (not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
 		return
 	end
 
@@ -163,7 +168,7 @@ function SpaceSurvivalScreenplay:failQuest(pPlayer, notifyClient)
 		createEvent(200, self.sideQuestType .. "_" .. self.sideQuestName, "failQuest", pPlayer, "false")
 	end
 
-	if (self.sideQuest and (self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.FAILURE or self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.BIDIRECTIONAL)) then
+	if (self.sideQuest and (not self.failureSplitOnObjectiveOnly or notifyClient == "objective") and (self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.FAILURE or self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.BIDIRECTIONAL)) then
 		self:triggerFailureSplitQuest(pPlayer)
 	end
 end
@@ -192,6 +197,13 @@ end
 
 function SpaceSurvivalScreenplay:cleanUpQuestData(playerID)
 	local pPlayer = getSceneObject(playerID)
+
+	cancelEvent(self.className, "setupSurvival", pPlayer)
+	cancelEvent(self.className, "startSurvival", pPlayer)
+	cancelEvent(self.className, "spawnAttackWave", pPlayer)
+	cancelEvent(self.className, "endSurvival", pPlayer)
+	cancelEvent(self.className, "checkSurvivalDistance", pPlayer)
+	deleteData(playerID .. ":" .. self.className .. ":distanceWarnings:")
 
 	-- Despawn anything still flying for this player
 	self:despawnShips(pPlayer)
@@ -351,6 +363,10 @@ function SpaceSurvivalScreenplay:startSurvival(pPlayer)
 	local survivalRunID = getRandomNumber(1, 2147483646)
 	writeData(playerID .. ":" .. self.className .. ":survivalRunID:", survivalRunID)
 
+	if (self.survivalMaxDistance > 0) then
+		createEvent(10000, self.className, "checkSurvivalDistance", pPlayer, tostring(survivalRunID))
+	end
+
 	if (self.DEBUG_SPACE_SURVIVAL) then
 		print(self.className .. ":startSurvival -- Survival Time: " .. self.survivalTime .. " Total Waves: " .. totalWaves .. " Wave Delay: " .. self:getWaveDelay())
 	end
@@ -371,6 +387,42 @@ function SpaceSurvivalScreenplay:startSurvival(pPlayer)
 			end
 		end
 	end
+end
+
+function SpaceSurvivalScreenplay:checkSurvivalDistance(pPlayer, runID)
+	if (pPlayer == nil or not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
+		return
+	end
+
+	local playerID = SceneObject(pPlayer):getObjectID()
+	if (readData(playerID .. ":" .. self.className .. ":survivalRunning:") ~= 1 or
+		readData(playerID .. ":" .. self.className .. ":survivalRunID:") ~= tonumber(runID)) then
+		return
+	end
+
+	local location = self:getSurvivalLocation()
+	local pShip = SceneObject(pPlayer):getRootParent()
+	if (location == nil or pShip == nil or not SceneObject(pShip):isShipObject() or SceneObject(pShip):getZoneName() ~= self.questZone) then
+		return
+	end
+
+	local dx = SceneObject(pShip):getWorldPositionX() - location.x
+	local dz = SceneObject(pShip):getWorldPositionZ() - location.z
+	local dy = SceneObject(pShip):getWorldPositionY() - location.y
+	local warningKey = playerID .. ":" .. self.className .. ":distanceWarnings:"
+	if (dx * dx + dz * dz + dy * dy > self.survivalMaxDistance * self.survivalMaxDistance) then
+		local warnings = readData(warningKey) + 1
+		if (warnings >= 3) then
+			CreatureObject(pPlayer):sendSystemMessage("@spacequest/" .. self.questType .. "/" .. self.questName .. ":outofrange_failed")
+			self:failQuest(pPlayer, "objective")
+			return
+		end
+		writeData(warningKey, warnings)
+		CreatureObject(pPlayer):sendSystemMessage("@spacequest/" .. self.questType .. "/" .. self.questName .. ":outofrange")
+	else
+		deleteData(warningKey)
+	end
+	createEvent(10000, self.className, "checkSurvivalDistance", pPlayer, runID)
 end
 
 function SpaceSurvivalScreenplay:getSurvivalTimeText(remainingTime)
@@ -637,8 +689,6 @@ function SpaceSurvivalScreenplay:notifyEnteredQuestArea(pActiveArea, pShip)
 	if (self.DEBUG_SPACE_SURVIVAL) then
 		print(self.className .. ":notifyEnteredQuestArea -- Player Ship: " .. SceneObject(pShip):getDisplayedName())
 	end
-
-	deleteData(playerID .. ":" .. self.className .. ":survivalArea:")
 
 	SpaceHelpers:clearQuestWaypoint(pPilot, self.className)
 

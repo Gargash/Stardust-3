@@ -35,6 +35,10 @@ function SpaceSurpriseAttackScreenplay:completeQuest(pPlayer, notifyClient)
 		return
 	end
 
+	if (not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
+		return
+	end
+
 	if (self.DEBUG_SPACE_SURPRISE_ATTACK) then
 		print(self.className .. ":completeQuest called -- QuestType: " .. self.questType .. " Quest Name: " .. self.questName)
 	end
@@ -290,6 +294,10 @@ function SpaceSurpriseAttackScreenplay:notifyShipDestroyed(pShipAgent, pKillerSh
 	local pPlayer = getSceneObject(missionOwnerID)
 
 	if (pPlayer == nil or not SceneObject(pPlayer):isPlayerCreature()) then
+		return 1
+	end
+
+	if (not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
 		return 1
 	end
 

@@ -1077,577 +1077,354 @@ registerScreenPlay("delivery_naboo_rebel_tier3_4_d", true)
 	Tier 4 -- naboo_rebel_tier4 Main Missions
 ]]
 
--- Mission 1: Survival (Space Dathomir - Hold off Black Sun assault on Nym miners)
+-- Mission 1: Hold the Imperial interception route while Vortex personnel escape.
 survival_naboo_rebel_tier4_1 = SpaceSurvivalScreenplay:new {
 	className = "survival_naboo_rebel_tier4_1",
-
 	questName = "naboo_rebel_tier4_1",
 	questType = "survival",
-
-	questZone = "space_dathomir",
-
-	creditReward = 0,
+	questZone = "space_endor",
+	creditReward = 10000,
+	itemReward = {
+		{species = {-1}, item = "object/tangible/ship/components/shield_generator/shd_mission_reward_rebel_taim_military_grade.iff"},
+	},
 
 	sideQuest = true,
-	sideQuestType = "space_battle",
+	sideQuestType = "assassinate",
 	sideQuestName = "naboo_rebel_tier4_1_a",
-	sideQuestType2 = "space_battle",
-	sideQuestName2 = "naboo_rebel_tier4_1_b",
-
-	-- sideQuestSplitType = "both",
-
+	sideQuestSplitType = SpaceQuestLogic.SIDE_QUEST_SPLIT_TYPES.BIDIRECTIONAL,
+	sideFailQuestType = "escort",
+	sideFailQuestName = "naboo_rebel_tier4_1_b",
+	failureSplitOnObjectiveOnly = true,
 	survivalTime = 300,
-	survivalPoint = "space_dathomir:naboo_rebel_tier4_1_survival_point",
+	survivalPoint = {x = -4407, z = 1109, y = -1180},
+	survivalMaxDistance = 1500,
 	delayToFirstAttack = 5,
-
 	attackDelay = 60,
-
 	attackShips = {
-		{"blacksun_fighter_s03_tier4", "blacksun_bomber_s03_tier4", "blacksun_fighter_s03_tier4", "blacksun_fighter_s03_tier4"},
-		{"blacksun_fighter_s03_tier4", "blacksun_fighter_s03_tier4", "blacksun_fighter_s03_tier4", "blacksun_fighter_s03_tier4"},
-		{"blacksun_fighter_s03_tier4", "blacksun_fighter_s03_tier4", "blacksun_marauder_tier4", "blacksun_vehement_tier4"},
-		{"blacksun_fighter_s03_tier4", "blacksun_fighter_s03_tier4", "blacksun_fighter_s03_tier4", "blacksun_fighter_s03_tier4"},
+		{"imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4"},
 	},
 }
 
 registerScreenPlay("survival_naboo_rebel_tier4_1", true)
 
--- Mission 1 Side Quest A: Space Battle (Space Dathomir - Counter attack against Black Sun)
-space_battle_naboo_rebel_tier4_1_a = SpaceBattleScreenplay:new {
-	className = "space_battle_naboo_rebel_tier4_1_a",
-
+-- Mission 1 success: Eliminate the escaping Inquisitor.
+assassinate_naboo_rebel_tier4_1_a = SpaceAssassinateScreenplay:new {
+	className = "assassinate_naboo_rebel_tier4_1_a",
 	questName = "naboo_rebel_tier4_1_a",
-	questType = "space_battle",
-
-	questZone = "space_dathomir",
-
-	creditReward = 0,
-
-	sideQuest = false,
-	sideQuestType = "",
-
-	parentQuest = "survival_naboo_rebel_tier4_1",
-	parentQuestType = "survival",
-	parentQuestName = "naboo_rebel_tier4_1",
-
-	battlePoint = "space_dathomir:naboo_rebel_tier4_1_a_battle_point",
-	allyArrivalDelay = 85,
-	enemyArrivalDelay = 60,
-	allyOriginDist = 600,
-	enemyOriginDist = -850,
-	allyArrivalDist = 50,
-	enemyArrivalDist = -100,
-
-	alliedShips = {
-		{"nym_enforcer_tier4"},
-		{"nym_enforcer_tier4"},
-		{"nym_enforcer_tier4"},
-		{"reb_xwing_tier4"},
-		{"reb_xwing_tier4"},
-	},
-
-	enemyShips = {
-		{"blacksun_fighter_s02_tier4"},
-		{"blacksun_fighter_s02_tier4"},
-		{"blacksun_fighter_s02_tier4"},
-		{"blacksun_fighter_s03_tier4"},
-		{"blacksun_fighter_s03_tier4"},
-		{"blacksun_fighter_s03_tier4"},
-		{"blacksun_marauder_tier4"},
-		{"blacksun_vehement_tier4"},
-		{"blacksun_marauder_tier4"},
-	},
-}
-
-registerScreenPlay("space_battle_naboo_rebel_tier4_1_a", true)
-
--- Mission 1 Side Quest B: Space Battle (Space Dathomir - Save Nym freighters from Black Sun)
-space_battle_naboo_rebel_tier4_1_b = SpaceBattleScreenplay:new {
-	className = "space_battle_naboo_rebel_tier4_1_b",
-
-	questName = "naboo_rebel_tier4_1_b",
-	questType = "space_battle",
-
-	questZone = "space_dathomir",
-
-	creditReward = 0,
-
-	sideQuest = false,
-	sideQuestType = "",
-
-	parentQuest = "survival_naboo_rebel_tier4_1",
-	parentQuestType = "survival",
-	parentQuestName = "naboo_rebel_tier4_1",
-
-	battlePoint = "space_dathomir:corellia_rebe_tier4_1_b_battle_point",
-	allyArrivalDelay = 30,
-	enemyArrivalDelay = 45,
-	allyOriginDist = 600,
-	enemyOriginDist = -850,
-	allyArrivalDist = 50,
-	enemyArrivalDist = -100,
-
-	alliedShips = {
-		{"nym_fighter_tier4"},
-		{"nym_fighter_tier4"},
-		{"nym_fighter_tier4"},
-		{"nym_freighterheavy_tier4"},
-		{"nym_freighterlight_tier4"},
-		{"nym_freightermedium_tier4"},
-	},
-
-	enemyShips = {
-		{"blacksun_fighter_s02_tier4"},
-		{"blacksun_fighter_s02_tier4"},
-		{"blacksun_fighter_s02_tier4"},
-		{"blacksun_fighter_s02_tier4"},
-		{"blacksun_fighter_s02_tier4"},
-		{"blacksun_gunship_tier4"},
-	},
-}
-
-registerScreenPlay("space_battle_naboo_rebel_tier4_1_b", true)
-
--- Mission 2: Assassinate (Space Dathomir - Terminate Imperial Inquisitor before he reaches the fleet)
-assassinate_naboo_rebel_tier4_2 = SpaceAssassinateScreenplay:new {
-	className = "assassinate_naboo_rebel_tier4_2",
-
 	questType = "assassinate",
-	questName = "naboo_rebel_tier4_2",
-
-	questZone = "space_dathomir",
-
+	questZone = "space_endor",
 	creditReward = 0,
-	itemReward = {},
 
-	sideQuest = true,
-	sideQuestType = "delivery_no_pickup",
-	sideQuestName = "naboo_rebel_tier4_2_a",
-	sideQuestType2 = "rescue",
-	sideQuestName2 = "naboo_rebel_tier4_2_b",
-
-	-- sideQuestSplitType = "both",
-
+	parentQuest = "survival_naboo_rebel_tier4_1",
+	parentQuestType = "survival",
+	parentQuestName = "naboo_rebel_tier4_1",
 	arrivalDelay = 5,
 	failTimer = 20,
+	assassinateSpawns = {target = "tieadvanced_inquisitor_tier4", escorts = {}},
+	targetPatrols = {
+		{patrolPointName = "naboo_rebel_tier4_1_a_assassin_1", zoneName = "space_endor", x = -4168, z = 520, y = -2148},
+		{patrolPointName = "naboo_rebel_tier4_1_a_assassin_2", zoneName = "space_endor", x = -4981, z = 745, y = -1652},
+		{patrolPointName = "naboo_rebel_tier4_1_a_assassin_3", zoneName = "space_endor", x = -5612, z = 919, y = -1266},
+		{patrolPointName = "naboo_rebel_tier4_1_a_assassin_4", zoneName = "space_endor", x = -6259, z = 1098, y = -871},
+		{patrolPointName = "naboo_rebel_tier4_1_a_assassin_5", zoneName = "space_endor", x = -7155, z = 1345, y = -324},
+		{patrolPointName = "naboo_rebel_tier4_1_a_assassin_6", zoneName = "space_endor", x = -7584, z = 1596, y = 263},
+	},
+}
 
-	assassinateSpawns = {
-		target = "tieadvanced_inquisitor_tier4",
-		escorts = {"tieinterceptor_inquisitor_guard", "tieinterceptor_inquisitor_guard", "tieinterceptor_inquisitor_guard", "tieinterceptor_inquisitor_guard", "tieinterceptor_inquisitor_guard", "tieinterceptor_inquisitor_guard"},
+registerScreenPlay("assassinate_naboo_rebel_tier4_1_a", true)
+
+-- Mission 1 fallback: Protect a personnel freighter while its hyperdrive is repaired.
+escort_naboo_rebel_tier4_1_b = SpaceEscortScreenplay:new {
+	className = "escort_naboo_rebel_tier4_1_b",
+	questName = "naboo_rebel_tier4_1_b",
+	questType = "escort",
+	questZone = "space_endor",
+	creditReward = 0,
+
+	parentQuest = "survival_naboo_rebel_tier4_1",
+	parentQuestType = "survival",
+	parentQuestName = "naboo_rebel_tier4_1",
+	escortShip = "reb_freightermedium_tier4",
+	escortSpeed = 60,
+	orderedEscortRoute = true,
+	escortPoints = {
+		{patrolPointName = "naboo_rebel_tier4_1_b_escort_1", zoneName = "space_endor", x = -2189, z = 336, y = -2467, escortNumber = 1, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_b_escort_2", zoneName = "space_endor", x = -1044, z = 316, y = -2733, escortNumber = 2, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_b_escort_3", zoneName = "space_endor", x = -132, z = 297, y = -2943, escortNumber = 3, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_b_escort_4", zoneName = "space_endor", x = 1357, z = 265, y = -3286, escortNumber = 4, radius = 250},
+	},
+	attackDelay = 50,
+	attackShips = {
+		{"imp_tie_fighter_tier4", "imp_tie_interceptor_tier4", "imp_tie_fighter_tier4"},
+	},
+}
+
+registerScreenPlay("escort_naboo_rebel_tier4_1_b", true)
+
+-- Mission 2: Intercept Master Inquisitor Uvqolo in Yavin.
+assassinate_naboo_rebel_tier4_2 = SpaceAssassinateScreenplay:new {
+	className = "assassinate_naboo_rebel_tier4_2",
+	questName = "naboo_rebel_tier4_2",
+	questType = "assassinate",
+	questZone = "space_yavin4",
+	creditReward = 10000,
+	itemReward = {
+		{species = {-1}, item = "object/tangible/ship/components/droid_interface/ddi_mission_reward_rebel_novaldex_low_latency.iff"},
 	},
 
+	sideQuest = true,
+	sideQuestType = "space_battle",
+	sideQuestName = "naboo_rebel_tier4_2_a",
+	sideQuestSplitType = SpaceQuestLogic.SIDE_QUEST_SPLIT_TYPES.BIDIRECTIONAL,
+	sideFailQuestType = "destroy_surpriseattack",
+	sideFailQuestName = "naboo_rebel_tier4_2_b",
+	failureSplitOnObjectiveOnly = true,
+	arrivalDelay = 5,
+	failTimer = 20,
+	assassinateSpawns = {target = "tieaggressor_uvqolo", escorts = {"imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_advanced_tier4", "imp_tie_advanced_tier4"}},
 	targetPatrols = {
-		{patrolPointName = "naboo_rebel_tier4_2_assassin_1", zoneName = "space_dathomir"},
-		{patrolPointName = "naboo_rebel_tier4_2_assassin_2", zoneName = "space_dathomir"},
-		{patrolPointName = "naboo_rebel_tier4_2_assassin_3", zoneName = "space_dathomir"},
-		{patrolPointName = "naboo_rebel_tier4_2_assassin_4", zoneName = "space_dathomir"},
-		{patrolPointName = "naboo_rebel_tier4_2_assassin_5", zoneName = "space_dathomir"},
-		{patrolPointName = "naboo_rebel_tier4_2_assassin_6", zoneName = "space_dathomir"},
+		{patrolPointName = "naboo_rebel_tier4_2_assassin_1", zoneName = "space_yavin4", x = 3918, z = 4348, y = -3225},
+		{patrolPointName = "naboo_rebel_tier4_2_assassin_2", zoneName = "space_yavin4", x = 2563, z = 4412, y = -3307},
+		{patrolPointName = "naboo_rebel_tier4_2_assassin_3", zoneName = "space_yavin4", x = 1131, z = 4477, y = -2086},
+		{patrolPointName = "naboo_rebel_tier4_2_assassin_4", zoneName = "space_yavin4", x = -48, z = 4539, y = -344},
+		{patrolPointName = "naboo_rebel_tier4_2_assassin_5", zoneName = "space_yavin4", x = -1519, z = 4604, y = 2034},
+		{patrolPointName = "naboo_rebel_tier4_2_assassin_6", zoneName = "space_yavin4", x = -6830, z = 4677, y = 3510},
 	},
 }
 
 registerScreenPlay("assassinate_naboo_rebel_tier4_2", true)
 
--- Mission 2 Side Quest A: Delivery No Pickup (Space Dathomir - Deliver Inquisitor wreck data)
-delivery_no_pickup_naboo_rebel_tier4_2_a = SpaceDeliveryNoPickupScreenplay:new {
-	className = "delivery_no_pickup_naboo_rebel_tier4_2_a",
-
+-- Mission 2 success: Assist Rebel fighters against the experimental TIE force.
+space_battle_naboo_rebel_tier4_2_a = SpaceBattleScreenplay:new {
+	className = "space_battle_naboo_rebel_tier4_2_a",
 	questName = "naboo_rebel_tier4_2_a",
-	questType = "delivery_no_pickup",
-
-	questZone = "space_dathomir",
-
+	questType = "space_battle",
+	questZone = "space_yavin4",
 	creditReward = 0,
-
-	sideQuest = false,
-	sideQuestType = "",
 
 	parentQuest = "assassinate_naboo_rebel_tier4_2",
 	parentQuestType = "assassinate",
 	parentQuestName = "naboo_rebel_tier4_2",
-
-	deliveryShip = "rebel_smuggler_tier3",
-	deliveryPoint = "space_dathomir:naboo_rebel_tier4_2_a_delivery",
-
-	attackDelay = 45,
-
-	attackShips = {
-		{"imp_tie_interceptor_tier4", "imp_tie_advanced_tier4", "imp_tie_fighter_tier4"},
-		{"imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_fighter_tier4"},
-		{"imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_fighter_tier4"},
-		{"imp_tie_fighter_tier3", "imp_tie_fighter_tier3", "imp_tie_fighter_tier4"},
-		{"imp_tie_fighter_tier3", "imp_tie_fighter_tier3", "imp_tie_fighter_tier4"},
-		{"imp_tie_fighter_tier3", "imp_tie_fighter_tier3", "imp_tie_fighter_tier4"},
+	battleLocation = {x = 2234, z = 4412, y = -2915},
+	allyArrivalDelay = 1,
+	enemyArrivalDelay = 5,
+	protectAlliedShips = true,
+	alliedShips = {
+		{"reb_xwing_tier4", "reb_xwing_tier4", "reb_xwing_tier4", "reb_xwing_tier4"},
+	},
+	enemyShips = {
+		{"imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_oppressor_tier4"},
 	},
 }
 
-registerScreenPlay("delivery_no_pickup_naboo_rebel_tier4_2_a", true)
+registerScreenPlay("space_battle_naboo_rebel_tier4_2_a", true)
 
--- Mission 2 Side Quest B: Rescue (Space Dathomir - Rescue Rebel diplomat ambushed by Imperials)
-rescue_naboo_rebel_tier4_2_b = SpaceRescueScreenplay:new {
-	className = "rescue_naboo_rebel_tier4_2_b",
-
+-- Mission 2 fallback: Defeat the Interceptor ambush before pursuing Uvqolo.
+destroy_surpriseattack_naboo_rebel_tier4_2_b = SpaceSurpriseAttackScreenplay:new {
+	className = "destroy_surpriseattack_naboo_rebel_tier4_2_b",
 	questName = "naboo_rebel_tier4_2_b",
-	questType = "rescue",
-
-	questZone = "space_dathomir",
-
+	questType = "destroy_surpriseattack",
+	questZone = "space_yavin4",
 	creditReward = 0,
-
-	sideQuest = false,
-	sideQuestType = "",
 
 	parentQuest = "assassinate_naboo_rebel_tier4_2",
 	parentQuestType = "assassinate",
 	parentQuestName = "naboo_rebel_tier4_2",
-
-	rescueShip = "reb_diplomat_tier4",
-	rescueArrivalDelay = 3,
-
-	escortPoints = {
-		{patrolPointName = "naboo_rebel_tier4_2_b_rescue_1", zoneName = "space_dathomir", x = 3872, z = 4158, y = -2791, escortNumber = 1, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_2_b_rescue_2", zoneName = "space_dathomir", x = 2827, z = 3579, y = -4145, escortNumber = 2, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_2_b_rescue_3", zoneName = "space_dathomir", x = 2103, z = 3204, y = -5079, escortNumber = 3, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_2_b_rescue_4", zoneName = "space_dathomir", x = 1424, z = 2853, y = -5956, escortNumber = 4, radius = 250},
-	},
-
-	attackDelay = 50,
-
-	attackShips = {
-		{"imp_tie_fighter_tier4", "imp_tie_interceptor_tier4", "imp_tie_bomber_tier4"},
-		{"imp_tie_fighter_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4"},
-		{"imp_tie_fighter_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4"},
-		{"imp_tie_fighter_tier3", "imp_tie_fighter_tier3", "imp_tie_fighter_tier3"},
-		{"imp_tie_fighter_tier3", "imp_tie_fighter_tier3", "imp_tie_fighter_tier3"},
-		{"imp_tie_fighter_tier3", "imp_tie_fighter_tier3", "imp_tie_fighter_tier3"},
-	},
-}
-
-registerScreenPlay("rescue_naboo_rebel_tier4_2_b", true)
-
--- Mission 3: Space Battle (Space Dathomir - Guerilla strike on Imperial space station)
-space_battle_naboo_rebel_tier4_3 = SpaceBattleScreenplay:new {
-	className = "space_battle_naboo_rebel_tier4_3",
-
-	questName = "naboo_rebel_tier4_3",
-	questType = "space_battle",
-
-	questZone = "space_dathomir",
-
-	creditReward = 0,
-
 	sideQuest = true,
-	sideQuestType = "space_battle",
-	sideQuestName = "naboo_rebel_tier4_3_a",
-	sideQuestType2 = "survival",
-	sideQuestName2 = "naboo_rebel_tier4_3_b",
-
-	-- sideQuestSplitType = "both",
-
-	battlePoint = "space_dathomir:naboo_rebel_tier4_3_battle_point",
-	allyArrivalDelay = 60,
-	enemyArrivalDelay = 30,
-	allyOriginDist = 600,
-	enemyOriginDist = -1100,
-	allyArrivalDist = 50,
-	enemyArrivalDist = -200,
-
-	alliedShips = {
-		{"nym_fighter_tier4"},
-		{"nym_fighter_tier4"},
-		{"nym_fighter_tier4"},
-		{"nym_fighter_tier4"},
-		{"nym_enforcer_tier5"},
-	},
-
-	enemyShips = {
-		{"imp_imperial_gunboat_tier4"},
-		{"imp_tie_fighter_tier4"},
-		{"imp_tie_fighter_tier4"},
-		{"imp_tie_fighter_tier4"},
-		{"imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4"},
-		{"imp_tie_fighter_tier4"},
-		{"imp_tie_fighter_tier4"},
-		{"imp_tie_fighter_tier4"},
-	},
-}
-
-registerScreenPlay("space_battle_naboo_rebel_tier4_3", true)
-
--- Mission 3 Side Quest A: Space Battle (Space Dathomir - Help ambushed B-Wing squadrons)
-space_battle_naboo_rebel_tier4_3_a = SpaceBattleScreenplay:new {
-	className = "space_battle_naboo_rebel_tier4_3_a",
-
-	questName = "naboo_rebel_tier4_3_a",
-	questType = "space_battle",
-
-	questZone = "space_dathomir",
-
-	creditReward = 0,
-
-	sideQuest = false,
-	sideQuestType = "",
-
-	parentQuest = "space_battle_naboo_rebel_tier4_3",
-	parentQuestType = "space_battle",
-	parentQuestName = "naboo_rebel_tier4_3",
-
-	battlePoint = "space_dathomir:naboo_rebel_tier4_3_a_battle_point",
-	allyArrivalDelay = 30,
-	enemyArrivalDelay = 45,
-	allyOriginDist = 600,
-	enemyOriginDist = -700,
-	allyArrivalDist = 50,
-	enemyArrivalDist = -150,
-
-	alliedShips = {
-		{"reb_bwing_tier4"},
-		{"reb_bwing_tier4"},
-		{"reb_bwing_tier4"},
-	},
-
-	enemyShips = {
-		{"imp_tie_aggressor_tier4"},
-		{"imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4"},
-	},
-}
-
-registerScreenPlay("space_battle_naboo_rebel_tier4_3_a", true)
-
--- Mission 3 Side Quest B: Survival (Space Dathomir - Defend Rebel bombers retreat after failed station attack)
-survival_naboo_rebel_tier4_3_b = SpaceSurvivalScreenplay:new {
-	className = "survival_naboo_rebel_tier4_3_b",
-
-	questName = "naboo_rebel_tier4_3_b",
-	questType = "survival",
-
-	questZone = "space_dathomir",
-
-	creditReward = 0,
-
-	sideQuest = false,
-	sideQuestType = "",
-
-	parentQuest = "space_battle_naboo_rebel_tier4_3",
-	parentQuestType = "space_battle",
-	parentQuestName = "naboo_rebel_tier4_3",
-
-	survivalTime = 480,
-	survivalPoint = "space_dathomir:naboo_rebel_tier4_3_b_survival",
-	delayToFirstAttack = 5,
-
-	attackDelay = 45,
-
-	attackShips = {
-		{"imp_tie_fighter_tier4", "imp_tie_interceptor_tier4", "imp_tie_advanced_tier4", "imp_tie_aggressor_tier4"},
-		{"imp_tie_fighter_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4"},
-		{"imp_tie_fighter_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4"},
-		{"imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4"},
-		{"imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4"},
-	},
-}
-
-registerScreenPlay("survival_naboo_rebel_tier4_3_b", true)
-
--- Mission 4: Recovery (Space Dantooine - Kidnap Imperial technician building space station)
-recovery_naboo_rebel_tier4_4 = SpaceRecoveryScreenplay:new {
-	className = "recovery_naboo_rebel_tier4_4",
-
-	questName = "naboo_rebel_tier4_4",
-	questType = "recovery",
-
-	questZone = "space_dantooine",
-
-	creditReward = 0,
-
-	sideQuest = true,
-	-- The leg parentQuest chain is strictly serial here: _b's parent is this head,
-	-- _a's parent is _b, and _c's parent is _a. So this head hands off to _b, and
-	-- _b already COMPLETION-splits onto _a. The head previously pointed at _a with
-	-- no split type at all (default NONE), so no leg ever started.
-	sideQuestType = "rescue",
-	sideQuestName = "naboo_rebel_tier4_4_b",
-
+	sideQuestType = "assassinate",
+	sideQuestName = "naboo_rebel_tier4_2_c",
 	sideQuestSplitType = SpaceQuestLogic.SIDE_QUEST_SPLIT_TYPES.COMPLETION,
-
-	arrivalDelay = 10,
-	recoveryDelay = 30,
-
-	recoverShip = "imp_lambda_shuttle_tier4",
-	recoveryConversationMobile = "object/mobile/dressed_rebel_commando_moncal_male_01.iff",
-
-	escortShips = {"imp_tie_aggressor_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4"},
-
-	preRecoveryPoints = {
-		{patrolPointName = "naboo_rebel_tier4_4_recovery_1", zoneName = "space_dantooine", x = -4000, z = 3100, y = 2700, escortNumber = 1, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_4_recovery_2", zoneName = "space_dantooine", x = -4400, z = 4410, y = 3481, escortNumber = 2, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_4_recovery_3", zoneName = "space_dantooine", x = -4742, z = 5529, y = 4148, escortNumber = 3, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_4_recovery_4", zoneName = "space_dantooine", x = -5049, z = 6532, y = 4746, escortNumber = 4, radius = 250},
-	},
-
-	recoveryPoints = {
-		{patrolPointName = "naboo_rebel_tier4_4_recovery_5", zoneName = "space_dantooine", x = -5330, z = 5655, y = 5488, escortNumber = 1, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_4_recovery_6", zoneName = "space_dantooine", x = -5758, z = 5051, y = 6420, escortNumber = 2, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_4_recovery_7", zoneName = "space_dantooine", x = -6046, z = 4645, y = 7048, escortNumber = 3, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_4_recovery_8", zoneName = "space_dantooine", x = -7031, z = 4120, y = 6583, escortNumber = 4, radius = 250},
-	},
-
-	attackDelay = 50,
-
-	attackShips = {
-		{"imp_tie_advanced_tier4", "imp_tie_aggressor_tier4", "imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4", "imp_tie_fighter_tier4", "imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4", "imp_tie_fighter_tier4", "imp_tie_oppressor_tier4"},
-	},
+	surpriseAttackShips = {zone = "space_yavin4", spawns = {{count = 6, shipName = "imp_tie_interceptor_tier4"}}},
 }
 
-registerScreenPlay("recovery_naboo_rebel_tier4_4", true)
+registerScreenPlay("destroy_surpriseattack_naboo_rebel_tier4_2_b", true)
 
--- Mission 4 Side Quest A: Assassinate (Space Endor - Destroy Imperial freighters carrying station materials)
-assassinate_naboo_rebel_tier4_4_a = SpaceAssassinateScreenplay:new {
-	className = "assassinate_naboo_rebel_tier4_4_a",
-
+-- Mission 2 second chance: Intercept Uvqolo before he reaches the Imperial fleet.
+assassinate_naboo_rebel_tier4_2_c = SpaceAssassinateScreenplay:new {
+	className = "assassinate_naboo_rebel_tier4_2_c",
+	questName = "naboo_rebel_tier4_2_c",
 	questType = "assassinate",
-	questName = "naboo_rebel_tier4_4_a",
-
-	questZone = "space_endor",
-
+	questZone = "space_dathomir",
 	creditReward = 0,
-	itemReward = {},
 
-	sideQuest = true,
-	sideQuestType = "space_battle",
-	sideQuestName = "naboo_rebel_tier4_4_c",
-	sideQuestSplitType = SpaceQuestLogic.SIDE_QUEST_SPLIT_TYPES.COMPLETION,
-
-	sideQuestDelay = 0,
-
-	parentQuest = "rescue_naboo_rebel_tier4_4_b",
-	parentQuestType = "rescue",
-	parentQuestName = "naboo_rebel_tier4_4_b",
-
-	arrivalDelay = 10,
+	parentQuest = "destroy_surpriseattack_naboo_rebel_tier4_2_b",
+	parentQuestType = "destroy_surpriseattack",
+	parentQuestName = "naboo_rebel_tier4_2_b",
+	arrivalDelay = 5,
 	failTimer = 20,
-
-	assassinateSpawns = {
-		target = "imp_freighterheavy_tier4",
-		escorts = {"imp_tie_aggressor_tier4", "imp_tie_aggressor_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_oppressor_tier4", "imp_tie_aggressor_tier4", "freighterlight_naboo_rebel_mission", "freightermedium_naboo_rebel_mission"},
-	},
-
+	assassinateSpawns = {target = "tieaggressor_uvqolo", escorts = {"imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_advanced_tier4", "imp_tie_advanced_tier4"}},
 	targetPatrols = {
-		{patrolPointName = "naboo_rebel_tier4_4_a_assassinate_1", zoneName = "space_endor", x = 19, z = 5591, y = 1371},
-		{patrolPointName = "naboo_rebel_tier4_4_a_assassinate_2", zoneName = "space_endor", x = 552, z = 5543, y = -5},
-		{patrolPointName = "naboo_rebel_tier4_4_a_assassinate_3", zoneName = "space_endor", x = 2059, z = 5543, y = -1021},
-		{patrolPointName = "naboo_rebel_tier4_4_a_assassinate_4", zoneName = "space_endor", x = 2632, z = 5518, y = -2724},
-		{patrolPointName = "naboo_rebel_tier4_4_a_assassinate_5", zoneName = "space_endor", x = 4049, z = 5491, y = -4471},
-		{patrolPointName = "naboo_rebel_tier4_4_a_assassinate_6", zoneName = "space_endor", x = 7162, z = 5467, y = -4481},
+		{patrolPointName = "naboo_rebel_tier4_2_c_assassin_1", zoneName = "space_dathomir", x = 5935, z = -4229, y = 6447},
+		{patrolPointName = "naboo_rebel_tier4_2_c_assassin_2", zoneName = "space_dathomir", x = 4649, z = -3485, y = 5120},
+		{patrolPointName = "naboo_rebel_tier4_2_c_assassin_3", zoneName = "space_dathomir", x = 3833, z = -3015, y = 4226},
+		{patrolPointName = "naboo_rebel_tier4_2_c_assassin_4", zoneName = "space_dathomir", x = 1810, z = -1822, y = 2258},
+		{patrolPointName = "naboo_rebel_tier4_2_c_assassin_5", zoneName = "space_dathomir", x = 834, z = -1249, y = 1313},
 	},
 }
 
-registerScreenPlay("assassinate_naboo_rebel_tier4_4_a", true)
+registerScreenPlay("assassinate_naboo_rebel_tier4_2_c", true)
 
--- Mission 4 Side Quest B: Rescue (Space Endor - Escort SpyNet operative to safety for freighter route intel)
-rescue_naboo_rebel_tier4_4_b = SpaceRescueScreenplay:new {
-	className = "rescue_naboo_rebel_tier4_4_b",
-
-	questName = "naboo_rebel_tier4_4_b",
+-- Mission 3: Repair the Vortex spy and escort him to safety.
+rescue_naboo_rebel_tier4_3 = SpaceRescueScreenplay:new {
+	className = "rescue_naboo_rebel_tier4_3",
+	questName = "naboo_rebel_tier4_3",
 	questType = "rescue",
-
-	questZone = "space_endor",
-
-	creditReward = 0,
+	questZone = "space_dathomir",
+	creditReward = 10000,
+	itemReward = {
+		{species = {-1}, item = "object/tangible/ship/components/booster/bst_mission_reward_rebel_qualdex_halcyon.iff"},
+	},
 
 	sideQuest = true,
 	sideQuestType = "assassinate",
-	sideQuestName = "naboo_rebel_tier4_4_a",
-	sideQuestSplitType = SpaceQuestLogic.SIDE_QUEST_SPLIT_TYPES.COMPLETION,
-
-	sideQuestDelay = 0,
-
-	parentQuest = "recovery_naboo_rebel_tier4_4",
-	parentQuestType = "recovery",
-	parentQuestName = "naboo_rebel_tier4_4",
-
-	rescueShip = "spynet_spy_tier4",
-	rescueArrivalDelay = 5,
-
+	sideQuestName = "naboo_rebel_tier4_3_a",
+	sideQuestSplitType = SpaceQuestLogic.SIDE_QUEST_SPLIT_TYPES.BIDIRECTIONAL,
+	sideFailQuestType = "delivery_no_pickup",
+	sideFailQuestName = "naboo_rebel_tier4_3_b",
+	failureSplitOnObjectiveOnly = true,
+	rescueShip = "tie_vortex_spy",
+	rescueLocation = {x = -3747, z = 6334, y = 4875},
+	arrivalDelay = 5,
+	repairDelay = 30,
+	escortSpeed = 60,
 	escortPoints = {
-		{patrolPointName = "naboo_rebel_tier4_4_b_rescue_1", zoneName = "space_endor", x = -961, z = -5548, y = 513, escortNumber = 1, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_4_b_rescue_2", zoneName = "space_endor", x = -1637, z = -5535, y = 354, escortNumber = 2, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_4_b_rescue_3", zoneName = "space_endor", x = -2330, z = -5523, y = 191, escortNumber = 3, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_4_b_rescue_4", zoneName = "space_endor", x = -3110, z = -5509, y = 7, escortNumber = 4, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_4_b_rescue_5", zoneName = "space_endor", x = -3915, z = -5494, y = -182, escortNumber = 5, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_4_b_rescue_6", zoneName = "space_endor", x = -4794, z = -5884, y = -52, escortNumber = 6, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_3_rescue_2", zoneName = "space_dathomir", x = -2601, z = 4856, y = 4692, escortNumber = 1, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_3_rescue_3", zoneName = "space_dathomir", x = -2093, z = 4201, y = 4610, escortNumber = 2, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_3_rescue_4", zoneName = "space_dathomir", x = -636, z = 2507, y = 4629, escortNumber = 3, radius = 250},
 	},
-
-	attackDelay = 50,
-
-	attackShips = {
-		{"imp_tie_advanced_tier4", "imp_tie_aggressor_tier4", "imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_oppressor_tier4"},
-		{"imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4"},
-		{"imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4"},
-		{"imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4"},
-	},
+	attackShips = {},
+	escortAttackDelay = 10,
+	escortAttackShips = {{"imp_tie_fighter_tier4"}},
 }
 
-registerScreenPlay("rescue_naboo_rebel_tier4_4_b", true)
+registerScreenPlay("rescue_naboo_rebel_tier4_3", true)
 
--- Mission 4 Side Quest C: Space Battle (Space Endor - Imperial retaliation for freighter attack)
-space_battle_naboo_rebel_tier4_4_c = SpaceBattleScreenplay:new {
-	className = "space_battle_naboo_rebel_tier4_4_c",
-
-	questName = "naboo_rebel_tier4_4_c",
-	questType = "space_battle",
-
-	questZone = "space_endor",
-
+-- Mission 3 success: Stop the Inquisitor and every escort from following the spy.
+assassinate_naboo_rebel_tier4_3_a = SpaceAssassinateScreenplay:new {
+	className = "assassinate_naboo_rebel_tier4_3_a",
+	questName = "naboo_rebel_tier4_3_a",
+	questType = "assassinate",
+	questZone = "space_dathomir",
 	creditReward = 0,
 
-	sideQuest = false,
-	sideQuestType = "",
-
-	parentQuest = "assassinate_naboo_rebel_tier4_4_a",
-	parentQuestType = "assassinate",
-	parentQuestName = "naboo_rebel_tier4_4_a",
-
-	battlePoint = "space_endor:naboo_rebel_tier4_4_c_battle_point",
-	allyArrivalDelay = 60,
-	enemyArrivalDelay = 85,
-	allyOriginDist = 800,
-	enemyOriginDist = -850,
-	allyArrivalDist = 150,
-	enemyArrivalDist = -200,
-
-	alliedShips = {
-		{"reb_xwing_tier4"},
-		{"reb_xwing_tier4"},
-		{"reb_bwing_tier4"},
-		{"nym_fighter_tier4"},
-		{"nym_fighter_tier4"},
-	},
-
-	enemyShips = {
-		{"imp_decimator_tier4"},
-		{"imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4"},
-		{"imp_tie_interceptor_tier4"},
-		{"imp_tie_oppressor_tier4"},
-		{"imp_tie_advanced_tier4"},
+	parentQuest = "rescue_naboo_rebel_tier4_3",
+	parentQuestType = "rescue",
+	parentQuestName = "naboo_rebel_tier4_3",
+	arrivalDelay = 5,
+	failTimer = 20,
+	assassinateSpawns = {target = "tiedecimator_inquisitor", escorts = {"imp_tie_advanced_tier4", "imp_tie_advanced_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4"}},
+	targetPatrols = {
+		{patrolPointName = "naboo_rebel_tier4_3_a_assassin_1", zoneName = "space_dathomir", x = 1567, z = -1644, y = 1303},
+		{patrolPointName = "naboo_rebel_tier4_3_a_assassin_2", zoneName = "space_dathomir", x = 870, z = -374, y = 2393},
+		{patrolPointName = "naboo_rebel_tier4_3_a_assassin_3", zoneName = "space_dathomir", x = 506, z = 287, y = 2962},
+		{patrolPointName = "naboo_rebel_tier4_3_a_assassin_4", zoneName = "space_dathomir", x = 130, z = 975, y = 3552},
+		{patrolPointName = "naboo_rebel_tier4_3_a_assassin_5", zoneName = "space_dathomir", x = -433, z = 2277, y = 4639},
 	},
 }
 
-registerScreenPlay("space_battle_naboo_rebel_tier4_4_c", true)
+registerScreenPlay("assassinate_naboo_rebel_tier4_3_a", true)
+
+-- Mission 3 fallback: Deliver the lost operative's recovered data.
+delivery_no_pickup_naboo_rebel_tier4_3_b = SpaceDeliveryNoPickupScreenplay:new {
+	className = "delivery_no_pickup_naboo_rebel_tier4_3_b",
+	questName = "naboo_rebel_tier4_3_b",
+	questType = "delivery_no_pickup",
+	questZone = "space_dathomir",
+	creditReward = 0,
+
+	parentQuest = "rescue_naboo_rebel_tier4_3",
+	parentQuestType = "rescue",
+	parentQuestName = "naboo_rebel_tier4_3",
+	deliveryShip = "rebel_smuggler_tier3",
+	deliveryPoint = {x = -1832, z = -709, y = -4430},
+	attackDelay = 45,
+	attackShips = {
+		{"imp_tie_fighter_tier4", "imp_tie_interceptor_tier4"},
+	},
+}
+
+registerScreenPlay("delivery_no_pickup_naboo_rebel_tier4_3_b", true)
+
+-- Mission 4: Clear the Inquisition base defenses for the Rebel bombers.
+space_battle_naboo_rebel_tier4_4 = SpaceBattleScreenplay:new {
+	className = "space_battle_naboo_rebel_tier4_4",
+	questName = "naboo_rebel_tier4_4",
+	questType = "space_battle",
+	questZone = "space_dathomir",
+	creditReward = 10000,
+	itemReward = {
+		{species = {-1}, item = "object/tangible/ship/components/weapon/wpn_mission_reward_rebel_incom_tricannon.iff"},
+	},
+
+	sideQuest = true,
+	sideQuestType = "space_battle",
+	sideQuestName = "naboo_rebel_tier4_4_a",
+	sideQuestSplitType = SpaceQuestLogic.SIDE_QUEST_SPLIT_TYPES.BIDIRECTIONAL,
+	sideFailQuestType = "survival",
+	sideFailQuestName = "naboo_rebel_tier4_4_b",
+	failureSplitOnObjectiveOnly = true,
+	battleLocation = {x = 6902, z = 3546, y = -3489},
+	allyArrivalDelay = 1,
+	enemyArrivalDelay = 5,
+	protectAlliedShips = true,
+	alliedShips = {
+		{"reb_xwing_tier4", "reb_xwing_tier4", "reb_xwing_tier4", "reb_xwing_tier4"},
+	},
+	enemyShips = {
+		{"tiedecimator_inquisitor", "tieaggressor_inquisitor", "tieinterceptor_inquisitor_guard", "tieinterceptor_inquisitor_guard", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4"},
+	},
+}
+
+registerScreenPlay("space_battle_naboo_rebel_tier4_4", true)
+
+-- Mission 4 success: Save the ambushed B-Wing squadron.
+space_battle_naboo_rebel_tier4_4_a = SpaceBattleScreenplay:new {
+	className = "space_battle_naboo_rebel_tier4_4_a",
+	questName = "naboo_rebel_tier4_4_a",
+	questType = "space_battle",
+	questZone = "space_dathomir",
+	creditReward = 0,
+
+	parentQuest = "space_battle_naboo_rebel_tier4_4",
+	parentQuestType = "space_battle",
+	parentQuestName = "naboo_rebel_tier4_4",
+	battleLocation = {x = 5171, z = 2634, y = -6196},
+	allyArrivalDelay = 1,
+	enemyArrivalDelay = 5,
+	protectAlliedShips = true,
+	alliedShips = {
+		{"reb_bwing_tier4", "reb_bwing_tier4", "reb_bwing_tier4"},
+	},
+	enemyShips = {
+		{"imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_interceptor_tier4", "tieinterceptor_inquisitor_guard", "tieinterceptor_inquisitor_guard", "tieaggressor_inquisitor", "imp_tie_advanced_tier4"},
+	},
+}
+
+registerScreenPlay("space_battle_naboo_rebel_tier4_4_a", true)
+
+-- Mission 4 fallback: Cover the B-Wing flank through the Imperial counterattack.
+survival_naboo_rebel_tier4_4_b = SpaceSurvivalScreenplay:new {
+	className = "survival_naboo_rebel_tier4_4_b",
+	questName = "naboo_rebel_tier4_4_b",
+	questType = "survival",
+	questZone = "space_dathomir",
+	creditReward = 0,
+
+	parentQuest = "space_battle_naboo_rebel_tier4_4",
+	parentQuestType = "space_battle",
+	parentQuestName = "naboo_rebel_tier4_4",
+	survivalTime = 480,
+	survivalPoint = {x = 2743, z = 6727, y = -6701},
+	survivalMaxDistance = 1500,
+	delayToFirstAttack = 5,
+	attackDelay = 45,
+	attackShips = {
+		{"imp_tie_fighter_tier4", "imp_tie_interceptor_tier4", "imp_tie_advanced_tier4", "imp_tie_aggressor_tier4"},
+		{"imp_tie_fighter_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4", "imp_tie_interceptor_tier4"},
+	},
+}
+
+registerScreenPlay("survival_naboo_rebel_tier4_4_b", true)
 
 -- Master Mission (two-stage Kessel encounter): destroy_master_rebel_1 (Kessel: destroy
 -- 30 Imperial fighters) and destroy_master_rebel_2 (Kessel: destroy the Imperial
@@ -1656,14 +1433,14 @@ registerScreenPlay("space_battle_naboo_rebel_tier4_4_c", true)
 
 -- Tier 4 Duty Missions
 
--- Escort Duty (Space Dathomir - Escort Nym freighters carrying loot from Imperial outpost raid)
+-- Escort Duty (Space Yavin - Escort evacuating Vortex personnel)
 escort_duty_naboo_rebel_tier4_1 = SpaceDutyEscortScreenplay:new {
 	className = "escort_duty_naboo_rebel_tier4_1",
 
 	questName = "naboo_rebel_tier4_1",
 	questType = "escort_duty",
 
-	questZone = "space_dathomir",
+	questZone = "space_yavin4",
 
 	creditReward = 5000,
 	creditKillBonus = 300,
@@ -1673,15 +1450,16 @@ escort_duty_naboo_rebel_tier4_1 = SpaceDutyEscortScreenplay:new {
 	sideQuest = false,
 	sideQuestType = "",
 
-	escortShips = {"nym_freighterheavy_tier4", "nym_freighterlight_tier4", "nym_freightermedium_tier4"},
+	escortShips = {"reb_freighterheavy_tier4", "reb_freighterlight_tier4", "reb_freightermedium_tier4"},
 	escortSpeed = 70,
 	orderedEscortRoute = true,
 
 	escortPoints = {
-		{patrolPointName = "naboo_rebel_tier4_1_escort_duty_1", zoneName = "space_dathomir", x = 2096, z = 3236, y = -6065, escortNumber = 1, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_1_escort_duty_2", zoneName = "space_dathomir", x = 2494, z = 3767, y = -5614, escortNumber = 2, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_1_escort_duty_3", zoneName = "space_dathomir", x = 3491, z = 4797, y = -4904, escortNumber = 3, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_1_escort_duty_4", zoneName = "space_dathomir", x = 4619, z = 5351, y = -4806, escortNumber = 4, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_escort_duty_1", zoneName = "space_yavin4", x = 2096, z = 3236, y = -6065, escortNumber = 1, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_escort_duty_2", zoneName = "space_yavin4", x = 2494, z = 3767, y = -5614, escortNumber = 2, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_escort_duty_3", zoneName = "space_yavin4", x = 3491, z = 4797, y = -4904, escortNumber = 3, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_escort_duty_4", zoneName = "space_yavin4", x = 4619, z = 5351, y = -4806, escortNumber = 4, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_escort_duty_5", zoneName = "space_yavin4", x = 5626, z = 6460, y = -4707, escortNumber = 5, radius = 250},
 	},
 
 	attackDelay = 50,
@@ -1696,7 +1474,7 @@ escort_duty_naboo_rebel_tier4_1 = SpaceDutyEscortScreenplay:new {
 
 registerScreenPlay("escort_duty_naboo_rebel_tier4_1", true)
 
--- Rescue Duty (Space Dantooine - Rescue disabled Rebel ships left after Imperial attack)
+-- Rescue Duty (Space Dantooine - Rescue civilian transports disabled by Imperial raids)
 rescue_duty_naboo_rebel_tier4_1 = SpaceDutyRescueScreenplay:new {
 	className = "rescue_duty_naboo_rebel_tier4_1",
 
@@ -1711,7 +1489,7 @@ rescue_duty_naboo_rebel_tier4_1 = SpaceDutyRescueScreenplay:new {
 	sideQuest = false,
 	sideQuestType = "",
 
-	rescueShip = "reb_transport_tier4",
+	rescueShip = "freighterheavy_civilian_transport",
 	rescueLocation = {x = 2685, z = 6536, y = -6727},
 	arrivalDelay = 3,
 	repairDelay = 20,
@@ -1727,7 +1505,7 @@ rescue_duty_naboo_rebel_tier4_1 = SpaceDutyRescueScreenplay:new {
 	attackDelay = 60,
 
 	attackShips = {
-		{"imp_lambda_shuttle_tier4", "imp_lambda_shuttle_tier4", "imp_lambda_shuttle_tier4"},
+		{"imp_tie_fighter_tier4", "imp_tie_fighter_tier4", "imp_tie_fighter_tier4"},
 		{"imp_tie_fighter_tier4", "imp_tie_interceptor_tier4", "imp_tie_advanced_tier4"},
 		{"imp_tie_fighter_tier4", "imp_tie_interceptor_tier4", "imp_tie_advanced_tier4"},
 	},
@@ -1735,7 +1513,7 @@ rescue_duty_naboo_rebel_tier4_1 = SpaceDutyRescueScreenplay:new {
 
 registerScreenPlay("rescue_duty_naboo_rebel_tier4_1", true)
 
--- Recovery Duty (Space Endor - Nym pirates infiltrate Imperial troop transports)
+-- Recovery Duty (Space Endor - Capture Inquisition data shuttles using assault droids)
 recovery_duty_naboo_rebel_tier4_1 = SpaceDutyRecoveryScreenplay:new {
 	className = "recovery_duty_naboo_rebel_tier4_1",
 
@@ -1750,28 +1528,30 @@ recovery_duty_naboo_rebel_tier4_1 = SpaceDutyRecoveryScreenplay:new {
 	sideQuest = false,
 	sideQuestType = "",
 
-	recoverShip = "lambdashuttle_troop_transport_ace",
+	recoverShip = "lambdashuttle_inquisition_data_vessel",
 	arrivalDelay = 10,
 	recoveryDelay = 30,
 
-	recoveryFaction = "nym",
-	recoveryConversationMobile = "object/mobile/dressed_nym_brawler_tran_m.iff",
+	recoveryFaction = "rebel",
+	recoveryConversationMobile = "object/mobile/ig_assassin_droid.iff",
 
 	escortShips = {"imp_tie_interceptor_tier4"},
 	escortSpeed = 70,
 
 	preRecoveryPoints = {
-		{patrolPointName = "naboo_rebel_tier4_1_recovery_duty_1", zoneName = "space_endor", x = -3500, z = 4500, y = -3500, escortNumber = 1, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_1_recovery_duty_2", zoneName = "space_endor", x = -2500, z = 5000, y = -2500, escortNumber = 2, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_1_recovery_duty_3", zoneName = "space_endor", x = -1500, z = 5500, y = -1500, escortNumber = 3, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_1_recovery_duty_4", zoneName = "space_endor", x = -500, z = 6000, y = -500, escortNumber = 4, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_recovery_1", zoneName = "space_endor", x = -242, z = 237, y = -2454, escortNumber = 1, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_recovery_2", zoneName = "space_endor", x = -222, z = 392, y = -3760, escortNumber = 2, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_recovery_3", zoneName = "space_endor", x = -160, z = 535, y = -5022, escortNumber = 3, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_recovery_4", zoneName = "space_endor", x = -112, z = 608, y = -5705, escortNumber = 4, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_recovery_5", zoneName = "space_endor", x = -1362, z = 677, y = -6811, escortNumber = 5, radius = 250},
 	},
 
 	recoveryPoints = {
-		{patrolPointName = "naboo_rebel_tier4_1_recovery_duty_5", zoneName = "space_endor", x = 500, z = 5500, y = 500, escortNumber = 1, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_1_recovery_duty_6", zoneName = "space_endor", x = 1500, z = 5000, y = 1500, escortNumber = 2, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_1_recovery_duty_7", zoneName = "space_endor", x = 2500, z = 4500, y = 2500, escortNumber = 3, radius = 250},
-		{patrolPointName = "naboo_rebel_tier4_1_recovery_duty_8", zoneName = "space_endor", x = 3500, z = 4000, y = 3500, escortNumber = 4, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_recovery_6", zoneName = "space_endor", x = -3357, z = 757, y = -7033, escortNumber = 1, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_recovery_7", zoneName = "space_endor", x = -813, z = 568, y = -5794, escortNumber = 2, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_recovery_8", zoneName = "space_endor", x = -1677, z = 471, y = -4636, escortNumber = 3, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_recovery_9", zoneName = "space_endor", x = -2068, z = 365, y = -3800, escortNumber = 4, radius = 250},
+		{patrolPointName = "naboo_rebel_tier4_1_recovery_10", zoneName = "space_endor", x = -3517, z = 274, y = -2248, escortNumber = 5, radius = 250},
 	},
 
 	attackDelay = 45,
@@ -1785,7 +1565,7 @@ recovery_duty_naboo_rebel_tier4_1 = SpaceDutyRecoveryScreenplay:new {
 
 registerScreenPlay("recovery_duty_naboo_rebel_tier4_1", true)
 
--- Destroy Duty (Space Dantooine - Nym/Rebel alliance putting the squeeze on the Black Sun)
+-- Destroy Duty (Space Dantooine - Attack Imperial candidates serving the Inquisition)
 destroy_duty_naboo_rebel_tier4_1 = SpaceDutyDestroyScreenplay:new {
 	className = "destroy_duty_naboo_rebel_tier4_1",
 
@@ -1806,13 +1586,13 @@ destroy_duty_naboo_rebel_tier4_1 = SpaceDutyDestroyScreenplay:new {
 	minDistance = 12500,
 	maxDistance = 17500,
 
-	bossShip = "blacksun_marauder_tier4",
+	bossShip = "tieadvanced_inquisitor_tier4",
 	shipTypes = {
-		{"blacksun_fighter_s01_tier4", "blacksun_fighter_s01_tier4"},
-		{"blacksun_fighter_s01_tier4", "blacksun_fighter_s01_tier4"},
-		{"blacksun_fighter_s01_tier4", "blacksun_fighter_s01_tier4"},
-		{"blacksun_fighter_s01_tier4"},
-		{"blacksun_vehement_tier4"},
+		{"imp_tie_fighter_tier4", "imp_tie_fighter_tier4"},
+		{"imp_tie_fighter_tier4", "imp_tie_fighter_tier4"},
+		{"imp_tie_fighter_tier4", "imp_tie_fighter_tier4"},
+		{"imp_tie_fighter_tier4"},
+		{"imp_tie_interceptor_tier4"},
 	},
 }
 
@@ -1868,20 +1648,27 @@ VortexSquadronScreenplay = ScreenPlay:new {
 	TIER3_QUEST_STRING_4_SIDE3 = {type = "recovery", name = "naboo_rebel_tier3_4_c"},
 	TIER3_QUEST_STRING_4_SIDE4 = {type = "delivery", name = "naboo_rebel_tier3_4_d"},
 
+	TIER4_MISSION_CHAINS = {
+		{survival_naboo_rebel_tier4_1, assassinate_naboo_rebel_tier4_1_a, escort_naboo_rebel_tier4_1_b},
+		{assassinate_naboo_rebel_tier4_2, space_battle_naboo_rebel_tier4_2_a, destroy_surpriseattack_naboo_rebel_tier4_2_b, assassinate_naboo_rebel_tier4_2_c},
+		{rescue_naboo_rebel_tier4_3, assassinate_naboo_rebel_tier4_3_a, delivery_no_pickup_naboo_rebel_tier4_3_b},
+		{space_battle_naboo_rebel_tier4_4, space_battle_naboo_rebel_tier4_4_a, survival_naboo_rebel_tier4_4_b},
+	},
+
 	-- Tier 4
 	TIER4_QUEST_STRING_1 = {type = "survival", name = "naboo_rebel_tier4_1"},
-	TIER4_QUEST_STRING_1_SIDE1 = {type = "space_battle", name = "naboo_rebel_tier4_1_a"},
-	TIER4_QUEST_STRING_1_SIDE2 = {type = "space_battle", name = "naboo_rebel_tier4_1_b"},
+	TIER4_QUEST_STRING_1_SIDE1 = {type = "assassinate", name = "naboo_rebel_tier4_1_a"},
+	TIER4_QUEST_STRING_1_SIDE2 = {type = "escort", name = "naboo_rebel_tier4_1_b"},
 	TIER4_QUEST_STRING_2 = {type = "assassinate", name = "naboo_rebel_tier4_2"},
-	TIER4_QUEST_STRING_2_SIDE1 = {type = "delivery_no_pickup", name = "naboo_rebel_tier4_2_a"},
-	TIER4_QUEST_STRING_2_SIDE2 = {type = "rescue", name = "naboo_rebel_tier4_2_b"},
-	TIER4_QUEST_STRING_3 = {type = "space_battle", name = "naboo_rebel_tier4_3"},
-	TIER4_QUEST_STRING_3_SIDE1 = {type = "space_battle", name = "naboo_rebel_tier4_3_a"},
-	TIER4_QUEST_STRING_3_SIDE2 = {type = "survival", name = "naboo_rebel_tier4_3_b"},
-	TIER4_QUEST_STRING_4 = {type = "recovery", name = "naboo_rebel_tier4_4"},
-	TIER4_QUEST_STRING_4_SIDE1 = {type = "assassinate", name = "naboo_rebel_tier4_4_a"},
-	TIER4_QUEST_STRING_4_SIDE2 = {type = "rescue", name = "naboo_rebel_tier4_4_b"},
-	TIER4_QUEST_STRING_4_SIDE3 = {type = "space_battle", name = "naboo_rebel_tier4_4_c"},
+	TIER4_QUEST_STRING_2_SIDE1 = {type = "space_battle", name = "naboo_rebel_tier4_2_a"},
+	TIER4_QUEST_STRING_2_SIDE2 = {type = "destroy_surpriseattack", name = "naboo_rebel_tier4_2_b"},
+	TIER4_QUEST_STRING_2_SIDE3 = {type = "assassinate", name = "naboo_rebel_tier4_2_c"},
+	TIER4_QUEST_STRING_3 = {type = "rescue", name = "naboo_rebel_tier4_3"},
+	TIER4_QUEST_STRING_3_SIDE1 = {type = "assassinate", name = "naboo_rebel_tier4_3_a"},
+	TIER4_QUEST_STRING_3_SIDE2 = {type = "delivery_no_pickup", name = "naboo_rebel_tier4_3_b"},
+	TIER4_QUEST_STRING_4 = {type = "space_battle", name = "naboo_rebel_tier4_4"},
+	TIER4_QUEST_STRING_4_SIDE1 = {type = "space_battle", name = "naboo_rebel_tier4_4_a"},
+	TIER4_QUEST_STRING_4_SIDE2 = {type = "survival", name = "naboo_rebel_tier4_4_b"},
 	TIER4_QUEST_STRING_MASTER = {type = "destroy", name = "master_rebel_1"},
 	TIER4_QUEST_STRING_MASTER_2 = {type = "destroy", name = "master_rebel_2"},
 	TIER4_QUEST_STRING_DUTY_1 = {type = "escort_duty", name = "naboo_rebel_tier4_1"},
@@ -1907,6 +1694,103 @@ function VortexSquadronScreenplay:prepareMissionChainAttempt(pPlayer, missionScr
 	for i = 1, #missionQuests do
 		SpaceHelpers:clearSpaceQuest(pPlayer, missionQuests[i].type, missionQuests[i].name, false)
 	end
+end
+
+
+function VortexSquadronScreenplay:isTier4MissionComplete(pPlayer, missionNumber)
+	local chain = self.TIER4_MISSION_CHAINS[missionNumber]
+	local key = SceneObject(pPlayer):getObjectID() .. chain[1].questName
+
+	if (getQuestStatus(key .. ":reward") == "1" or getQuestStatus(key .. ":legacyComplete") == "1") then
+		return true
+	end
+
+	-- Both the normal and fallback terminal objectives advance the trainer.
+	local last = chain[#chain]
+	return SpaceHelpers:isSpaceQuestComplete(pPlayer, chain[2].questType, chain[2].questName) or
+		SpaceHelpers:isSpaceQuestComplete(pPlayer, last.questType, last.questName)
+end
+
+function VortexSquadronScreenplay:isTier4MissionActive(pPlayer, missionNumber)
+	local chain = self.TIER4_MISSION_CHAINS[missionNumber]
+	for i = 1, #chain do
+		if (SpaceHelpers:isSpaceQuestActive(pPlayer, chain[i].questType, chain[i].questName)) then
+			return true
+		end
+	end
+	return false
+end
+
+function VortexSquadronScreenplay:prepareTier4MissionAttempt(pPlayer, missionNumber)
+	local chain = self.TIER4_MISSION_CHAINS[missionNumber]
+	local quests = {}
+	local pendingCallbacks = {"startQuest", "completeQuest", "failQuest", "setupEscort", "spawnEscortShip", "checkEnteredZone", "setupRescue", "spawnAttackers", "repairsComplete", "spawnEscortAttackers", "startFirstLeg"}
+	for i = 1, #chain do
+		-- A pending handoff must not start an old branch during a retry.
+		for j = 1, #pendingCallbacks do
+			cancelEvent(chain[i].className, pendingCallbacks[j], pPlayer)
+		end
+		quests[i] = {type = chain[i].questType, name = chain[i].questName}
+	end
+	self:prepareMissionChainAttempt(pPlayer, chain, quests)
+end
+
+function VortexSquadronScreenplay:migrateTier4Quests(pPlayer)
+	local playerID = SceneObject(pPlayer):getObjectID()
+	local migrationKey = playerID .. "VortexSquadronScreenplay:tier4ClientObjectives"
+	if (getQuestStatus(migrationKey) == "1") then
+		return
+	end
+
+	-- Retain earned progress from the old chains before clearing invalid journal types.
+	local legacyTerminals = {
+		{type = "space_battle", name = "naboo_rebel_tier4_1_b"},
+		{type = "rescue", name = "naboo_rebel_tier4_2_b"},
+		{type = "survival", name = "naboo_rebel_tier4_3_b"},
+		{type = "space_battle", name = "naboo_rebel_tier4_4_c"},
+	}
+	for i = 1, #legacyTerminals do
+		local quest = legacyTerminals[i]
+		if (SpaceHelpers:isSpaceQuestComplete(pPlayer, quest.type, quest.name)) then
+			setQuestStatus(playerID .. self.TIER4_MISSION_CHAINS[i][1].questName .. ":legacyComplete", 1)
+		end
+	end
+
+	local legacyQuests = {
+		{type = "space_battle", name = "naboo_rebel_tier4_1_a"},
+		{type = "space_battle", name = "naboo_rebel_tier4_1_b"},
+		{type = "delivery_no_pickup", name = "naboo_rebel_tier4_2_a"},
+		{type = "rescue", name = "naboo_rebel_tier4_2_b"},
+		{type = "space_battle", name = "naboo_rebel_tier4_3"},
+		{type = "space_battle", name = "naboo_rebel_tier4_3_a"},
+		{type = "survival", name = "naboo_rebel_tier4_3_b"},
+		{type = "recovery", name = "naboo_rebel_tier4_4"},
+		{type = "assassinate", name = "naboo_rebel_tier4_4_a"},
+		{type = "rescue", name = "naboo_rebel_tier4_4_b"},
+		{type = "space_battle", name = "naboo_rebel_tier4_4_c"},
+	}
+	for i = 1, #legacyQuests do
+		local quest = legacyQuests[i]
+		SpaceHelpers:clearQuestWaypoint(pPlayer, quest.type .. "_" .. quest.name)
+		SpaceHelpers:clearSpaceQuest(pPlayer, quest.type, quest.name, false)
+	end
+
+	-- These two roots kept their IDs but changed systems. Restart unfinished attempts.
+	for i = 1, 2 do
+		local quest = self.TIER4_MISSION_CHAINS[i][1]
+		if (SpaceHelpers:isSpaceQuestActive(pPlayer, quest.questType, quest.questName)) then
+			self:prepareTier4MissionAttempt(pPlayer, i)
+		end
+	end
+	local duties = {escort_duty_naboo_rebel_tier4_1, rescue_duty_naboo_rebel_tier4_1, recovery_duty_naboo_rebel_tier4_1, destroy_duty_naboo_rebel_tier4_1}
+	for i = 1, #duties do
+		local duty = duties[i]
+		if (SpaceHelpers:isSpaceQuestActive(pPlayer, duty.questType, duty.questName)) then
+			duty:resetQuest(pPlayer)
+			SpaceHelpers:clearSpaceQuest(pPlayer, duty.questType, duty.questName, false)
+		end
+	end
+	setQuestStatus(migrationKey, 1)
 end
 
 -- Reset functions for quest clearing
@@ -2063,39 +1947,12 @@ function VortexSquadronScreenplay:resetTier4Quests(pPlayer)
 		return
 	end
 
-	-- Mission 1
-	survival_naboo_rebel_tier4_1:resetQuest(pPlayer)
-	space_battle_naboo_rebel_tier4_1_a:resetQuest(pPlayer)
-	space_battle_naboo_rebel_tier4_1_b:resetQuest(pPlayer)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER4_QUEST_STRING_1.type, self.TIER4_QUEST_STRING_1.name, false)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER4_QUEST_STRING_1_SIDE1.type, self.TIER4_QUEST_STRING_1_SIDE1.name, false)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER4_QUEST_STRING_1_SIDE2.type, self.TIER4_QUEST_STRING_1_SIDE2.name, false)
+	self:migrateTier4Quests(pPlayer)
 
-	-- Mission 2
-	assassinate_naboo_rebel_tier4_2:resetQuest(pPlayer)
-	delivery_no_pickup_naboo_rebel_tier4_2_a:resetQuest(pPlayer)
-	rescue_naboo_rebel_tier4_2_b:resetQuest(pPlayer)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER4_QUEST_STRING_2.type, self.TIER4_QUEST_STRING_2.name, false)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER4_QUEST_STRING_2_SIDE1.type, self.TIER4_QUEST_STRING_2_SIDE1.name, false)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER4_QUEST_STRING_2_SIDE2.type, self.TIER4_QUEST_STRING_2_SIDE2.name, false)
-
-	-- Mission 3
-	space_battle_naboo_rebel_tier4_3:resetQuest(pPlayer)
-	space_battle_naboo_rebel_tier4_3_a:resetQuest(pPlayer)
-	survival_naboo_rebel_tier4_3_b:resetQuest(pPlayer)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER4_QUEST_STRING_3.type, self.TIER4_QUEST_STRING_3.name, false)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER4_QUEST_STRING_3_SIDE1.type, self.TIER4_QUEST_STRING_3_SIDE1.name, false)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER4_QUEST_STRING_3_SIDE2.type, self.TIER4_QUEST_STRING_3_SIDE2.name, false)
-
-	-- Mission 4
-	recovery_naboo_rebel_tier4_4:resetQuest(pPlayer)
-	assassinate_naboo_rebel_tier4_4_a:resetQuest(pPlayer)
-	rescue_naboo_rebel_tier4_4_b:resetQuest(pPlayer)
-	space_battle_naboo_rebel_tier4_4_c:resetQuest(pPlayer)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER4_QUEST_STRING_4.type, self.TIER4_QUEST_STRING_4.name, false)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER4_QUEST_STRING_4_SIDE1.type, self.TIER4_QUEST_STRING_4_SIDE1.name, false)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER4_QUEST_STRING_4_SIDE2.type, self.TIER4_QUEST_STRING_4_SIDE2.name, false)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER4_QUEST_STRING_4_SIDE3.type, self.TIER4_QUEST_STRING_4_SIDE3.name, false)
+	for i = 1, #self.TIER4_MISSION_CHAINS do
+		self:prepareTier4MissionAttempt(pPlayer, i)
+		removeQuestStatus(SceneObject(pPlayer):getObjectID() .. self.TIER4_MISSION_CHAINS[i][1].questName .. ":legacyComplete")
+	end
 
 	-- Master (two-stage Kessel corvette encounter)
 	destroy_master_rebel_1:resetQuest(pPlayer)

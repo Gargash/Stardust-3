@@ -50,6 +50,8 @@ SpaceQuestLogic = ScreenPlay:new {
 	sideFailQuestType = "",
 	-- Fail Side Quest Name String
 	sideFailQuestName = "",
+	-- Opt in when only an objective loss, not abandonment, should start a fallback.
+	failureSplitOnObjectiveOnly = false,
 
 	-- Patrol point to start side quest for PATROL_POINT split type
 	sideQuestPatrolStart = 0,
@@ -133,6 +135,9 @@ end
 
 function SpaceQuestLogic:triggerFailureSplitQuest(pPlayer)
 	local alertMessage = "@spacequest/" .. self.questType .. "/" .. self.questName .. ":split_quest_alert"
+	if (self.failureSplitOnObjectiveOnly) then
+		alertMessage = "@spacequest/" .. self.questType .. "/" .. self.questName .. ":split_quest_alert_fail"
+	end
 
 	-- Split Quest Alert
 	createEvent(self.sideQuestDelay * 1000, "SpaceHelpers", "sendQuestAlert", pPlayer, alertMessage)

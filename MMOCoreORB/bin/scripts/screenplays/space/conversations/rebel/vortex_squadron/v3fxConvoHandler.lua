@@ -109,24 +109,17 @@ function v3fxConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 	--]]
 
 	if (ghost:getPilotTier() >= 4) then
-		local t4QuestOneStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_1.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_1.name) or
-								SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_1_SIDE1.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_1_SIDE1.name) or
-								SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_1_SIDE2.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_1_SIDE2.name)
-		local t4QuestTwoStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_2.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_2.name) or
-								SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_2_SIDE1.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_2_SIDE1.name) or
-								SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_2_SIDE2.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_2_SIDE2.name)
-		local t4QuestThreeStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_3.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_3.name) or
-								SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_3_SIDE1.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_3_SIDE1.name) or
-								SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_3_SIDE2.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_3_SIDE2.name)
-		local t4QuestFourStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_4.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_4.name) or
-								SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_4_SIDE1.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_4_SIDE1.name) or
-								SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_4_SIDE2.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_4_SIDE2.name) or
-								SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_4_SIDE3.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_4_SIDE3.name)
+		VortexSquadronScreenplay:migrateTier4Quests(pPlayer)
 
-		local t4QuestOneComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_1_SIDE2.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_1_SIDE2.name)
-		local t4QuestTwoComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_2_SIDE2.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_2_SIDE2.name)
-		local t4QuestThreeComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_3_SIDE2.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_3_SIDE2.name)
-		local t4QuestFourComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_4_SIDE3.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_4_SIDE3.name)
+		local t4QuestOneStarted = VortexSquadronScreenplay:isTier4MissionActive(pPlayer, 1)
+		local t4QuestTwoStarted = VortexSquadronScreenplay:isTier4MissionActive(pPlayer, 2)
+		local t4QuestThreeStarted = VortexSquadronScreenplay:isTier4MissionActive(pPlayer, 3)
+		local t4QuestFourStarted = VortexSquadronScreenplay:isTier4MissionActive(pPlayer, 4)
+
+		local t4QuestOneComplete = VortexSquadronScreenplay:isTier4MissionComplete(pPlayer, 1)
+		local t4QuestTwoComplete = VortexSquadronScreenplay:isTier4MissionComplete(pPlayer, 2)
+		local t4QuestThreeComplete = VortexSquadronScreenplay:isTier4MissionComplete(pPlayer, 3)
+		local t4QuestFourComplete = VortexSquadronScreenplay:isTier4MissionComplete(pPlayer, 4)
 
 		local t4Duty1Started = SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_DUTY_1.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_DUTY_1.name)
 		local t4Duty2Started = SpaceHelpers:isSpaceQuestActive(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_DUTY_2.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_DUTY_2.name)
@@ -944,7 +937,7 @@ function v3fxConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, select
 
 		-- Either the player is ready to train again or they have all of the missions finished, so send them back to the main screen
 		if (SpaceHelpers:hasExperienceForTraining(pPlayer, 4) or
-				SpaceHelpers:isSpaceQuestComplete(pPlayer, VortexSquadronScreenplay.TIER4_QUEST_STRING_4_SIDE3.type, VortexSquadronScreenplay.TIER4_QUEST_STRING_4_SIDE3.name)) then
+				VortexSquadronScreenplay:isTier4MissionComplete(pPlayer, 4)) then
 			return self:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 		end
 
@@ -962,44 +955,52 @@ function v3fxConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, select
 	elseif (screenID == "tier4_fourth_mission_success") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 		setQuestStatus(playerID .. VortexSquadronScreenplay.TIER4_QUEST_STRING_4.name .. ":reward", 1)
-		recovery_naboo_rebel_tier4_4:rewardPlayer(pPlayer)
+		space_battle_naboo_rebel_tier4_4:rewardPlayer(pPlayer)
+		PlayerObject(pGhost):increaseFactionStanding("rebel", 165)
 	elseif (screenID == "tier4_third_mission_success") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 		setQuestStatus(playerID .. VortexSquadronScreenplay.TIER4_QUEST_STRING_3.name .. ":reward", 1)
-		space_battle_naboo_rebel_tier4_3:rewardPlayer(pPlayer)
+		rescue_naboo_rebel_tier4_3:rewardPlayer(pPlayer)
+		PlayerObject(pGhost):increaseFactionStanding("rebel", 150)
 	elseif (screenID == "tier4_second_mission_success") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 		setQuestStatus(playerID .. VortexSquadronScreenplay.TIER4_QUEST_STRING_2.name .. ":reward", 1)
 		assassinate_naboo_rebel_tier4_2:rewardPlayer(pPlayer)
+		PlayerObject(pGhost):increaseFactionStanding("rebel", 150)
 	elseif (screenID == "tier4_first_mission_success") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 		setQuestStatus(playerID .. VortexSquadronScreenplay.TIER4_QUEST_STRING_1.name .. ":reward", 1)
 		survival_naboo_rebel_tier4_1:rewardPlayer(pPlayer)
+		PlayerObject(pGhost):increaseFactionStanding("rebel", 165)
 
 	-- Give Tier 4 Missions
 	elseif (screenID == "accept_tier4_fourth_mission" or screenID == "failed_tier4_fourth_mission") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 		setQuestStatus(playerID .. VortexSquadronScreenplay.TIER4_QUEST_STRING_4.name .. ":attempted", 1)
 
-		VortexSquadronScreenplay:prepareMissionChainAttempt(pPlayer, {recovery_naboo_rebel_tier4_4, assassinate_naboo_rebel_tier4_4_a, rescue_naboo_rebel_tier4_4_b, space_battle_naboo_rebel_tier4_4_c}, {{type="recovery", name="naboo_rebel_tier4_4"}, {type="assassinate", name="naboo_rebel_tier4_4_a"}, {type="rescue", name="naboo_rebel_tier4_4_b"}, {type="space_battle", name="naboo_rebel_tier4_4_c"}})
-		recovery_naboo_rebel_tier4_4:startQuest(pPlayer, pNpc)
+		VortexSquadronScreenplay:migrateTier4Quests(pPlayer)
+		VortexSquadronScreenplay:prepareTier4MissionAttempt(pPlayer, 4)
+		space_battle_naboo_rebel_tier4_4:startQuest(pPlayer, pNpc)
 	elseif (screenID == "accept_tier4_third_mission" or screenID == "failed_tier4_third_mission") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 		setQuestStatus(playerID .. VortexSquadronScreenplay.TIER4_QUEST_STRING_3.name .. ":attempted", 1)
 
-		VortexSquadronScreenplay:prepareMissionChainAttempt(pPlayer, {space_battle_naboo_rebel_tier4_3, space_battle_naboo_rebel_tier4_3_a, survival_naboo_rebel_tier4_3_b}, {{type="space_battle", name="naboo_rebel_tier4_3"}, {type="space_battle", name="naboo_rebel_tier4_3_a"}, {type="survival", name="naboo_rebel_tier4_3_b"}})
-		space_battle_naboo_rebel_tier4_3:startQuest(pPlayer, pNpc)
+		VortexSquadronScreenplay:migrateTier4Quests(pPlayer)
+		VortexSquadronScreenplay:prepareTier4MissionAttempt(pPlayer, 3)
+		rescue_naboo_rebel_tier4_3:startQuest(pPlayer, pNpc)
 	elseif (screenID == "accept_tier4_second_mission" or screenID == "failed_tier4_second_mission") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 		setQuestStatus(playerID .. VortexSquadronScreenplay.TIER4_QUEST_STRING_2.name .. ":attempted", 1)
 
-		VortexSquadronScreenplay:prepareMissionChainAttempt(pPlayer, {assassinate_naboo_rebel_tier4_2, delivery_no_pickup_naboo_rebel_tier4_2_a, rescue_naboo_rebel_tier4_2_b}, {{type="assassinate", name="naboo_rebel_tier4_2"}, {type="delivery_no_pickup", name="naboo_rebel_tier4_2_a"}, {type="rescue", name="naboo_rebel_tier4_2_b"}})
+		VortexSquadronScreenplay:migrateTier4Quests(pPlayer)
+		VortexSquadronScreenplay:prepareTier4MissionAttempt(pPlayer, 2)
 		assassinate_naboo_rebel_tier4_2:startQuest(pPlayer, pNpc)
 	elseif (screenID == "accept_tier4_first_mission" or screenID == "failed_tier4_first_mission") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 		setQuestStatus(playerID .. VortexSquadronScreenplay.TIER4_QUEST_STRING_1.name .. ":attempted", 1)
 
-		VortexSquadronScreenplay:prepareMissionChainAttempt(pPlayer, {survival_naboo_rebel_tier4_1, space_battle_naboo_rebel_tier4_1_a, space_battle_naboo_rebel_tier4_1_b}, {{type="survival", name="naboo_rebel_tier4_1"}, {type="space_battle", name="naboo_rebel_tier4_1_a"}, {type="space_battle", name="naboo_rebel_tier4_1_b"}})
+		VortexSquadronScreenplay:migrateTier4Quests(pPlayer)
+		VortexSquadronScreenplay:prepareTier4MissionAttempt(pPlayer, 1)
 		survival_naboo_rebel_tier4_1:startQuest(pPlayer, pNpc)
 
 	-- Master mission hand-off

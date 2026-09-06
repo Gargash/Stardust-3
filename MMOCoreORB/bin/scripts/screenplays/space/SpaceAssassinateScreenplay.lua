@@ -50,6 +50,10 @@ function SpaceAssassinateScreenplay:completeQuest(pPlayer, notifyClient)
 		return
 	end
 
+	if (not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
+		return
+	end
+
 	if (self.DEBUG_SPACE_ASSASSINATE) then
 		print(self.className .. ":completeQuest called -- QuestType: " .. self.questType .. " Quest Name: " .. self.questName)
 	end
@@ -133,7 +137,7 @@ function SpaceAssassinateScreenplay:failQuest(pPlayer, notifyClient)
 		createEvent(200, self.sideQuestType .. "_" .. self.sideQuestName, "failQuest", pPlayer, "false")
 	end
 
-	if (self.sideQuest and (self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.FAILURE or self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.BIDIRECTIONAL)) then
+	if (self.sideQuest and (not self.failureSplitOnObjectiveOnly or notifyClient == "objective") and (self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.FAILURE or self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.BIDIRECTIONAL)) then
 		self:triggerFailureSplitQuest(pPlayer)
 	end
 end
@@ -147,6 +151,12 @@ function SpaceAssassinateScreenplay:resetQuest(pPlayer)
 	if (self.DEBUG_SPACE_ASSASSINATE) then
 		print(self.className .. ":resetQuest called -- QuestType: " .. self.questType .. " Quest Name: " .. self.questName)
 	end
+
+	cancelEvent(self.className, "deployTargets", pPlayer)
+	cancelEvent(self.className, "updateTargetLocation", pPlayer)
+	local playerID = SceneObject(pPlayer):getObjectID()
+	deleteData(playerID .. ":" .. self.className .. ":TotalKills:")
+	deleteData(playerID .. ":" .. self.className .. ":EscortKills:")
 
 	-- Set Quest failed
 	SpaceHelpers:failSpaceQuest(pPlayer, self.questType, self.questName, false)
@@ -183,11 +193,15 @@ function SpaceAssassinateScreenplay:failAssassination(pPlayer)
 	CreatureObject(pPlayer):sendSystemMessage("@spacequest/" .. self.questType .. "/" ..  self.questName .. ":failed_escape")
 
 	-- Fail the quest for the player
-	createEvent(1000, self.className, "failQuest", pPlayer, "true")
+	createEvent(1000, self.className, "failQuest", pPlayer, self.failureSplitOnObjectiveOnly and "objective" or "true")
 end
 
 function SpaceAssassinateScreenplay:deployTargets(pPlayer)
 	if (pPlayer == nil) then
+		return
+	end
+
+	if (not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
 		return
 	end
 

@@ -27,6 +27,7 @@ SpaceBattleScreenplay = SpaceQuestLogic:new {
 	enemyShipsDelay = 90,
 
 	supportShips = {},
+	protectAlliedShips = false,
 	enemyShips = {},
 
 	DEBUG_SPACE_BATTLE = false,
@@ -88,6 +89,10 @@ end
 function SpaceBattleScreenplay:completeQuest(pPlayer, notifyClient)
 	if (pPlayer == nil) then
 		Logger:log("Quest: " .. self.questName .. " Type: " .. self.questType .. " -- Failed to completeQuest due to pPlayer being nil.", LT_ERROR)
+		return
+	end
+
+	if (not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
 		return
 	end
 
@@ -161,7 +166,7 @@ function SpaceBattleScreenplay:failQuest(pPlayer, notifyClient)
 		createEvent(200, self.sideQuestType .. "_" .. self.sideQuestName, "failQuest", pPlayer, "false")
 	end
 
-	if (self.sideQuest and (self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.FAILURE or self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.BIDIRECTIONAL)) then
+	if (self.sideQuest and (not self.failureSplitOnObjectiveOnly or notifyClient == "objective") and (self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.FAILURE or self.sideQuestSplitType == self.SIDE_QUEST_SPLIT_TYPES.BIDIRECTIONAL)) then
 		self:triggerFailureSplitQuest(pPlayer)
 	end
 end
@@ -190,6 +195,12 @@ end
 
 function SpaceBattleScreenplay:cleanUpQuestData(playerID)
 	local pPlayer = getSceneObject(playerID)
+
+	cancelEvent(self.className, "setupBattle", pPlayer)
+	cancelEvent(self.className, "startBattle", pPlayer)
+	cancelEvent(self.className, "spawnSupportShips", pPlayer)
+	cancelEvent(self.className, "spawnEnemyShips", pPlayer)
+	cancelEvent(self.className, "completeQuest", pPlayer)
 
 	-- Despawn anything still flying for this player
 	self:despawnShips(pPlayer)
@@ -421,6 +432,10 @@ function SpaceBattleScreenplay:spawnSupportShips(pPlayer)
 
 		local agentID = SceneObject(pShipAgent):getObjectID()
 
+		if (self.protectAlliedShips) then
+			createObserver(SHIPDESTROYED, self.className, "notifySupportShipDestroyed", pShipAgent)
+		end
+
 		-- Set as space mission object
 		CreatureObject(pPlayer):addSpaceMissionObject(agentID, (i == #supportShips))
 
@@ -437,6 +452,11 @@ function SpaceBattleScreenplay:spawnSupportShips(pPlayer)
 	end
 
 	writeStringVectorSharedMemory(playerID .. ":" .. self.className .. ":supportShips:", shipIDs)
+
+	if (self.protectAlliedShips and #shipIDs ~= #supportShips) then
+		self:failQuest(pPlayer, "true")
+		return
+	end
 
 	CreatureObject(pPlayer):sendSystemMessage("@spacequest/" .. self.questType .. "/" .. self.questName .. ":allies_arrived")
 end
@@ -534,6 +554,11 @@ function SpaceBattleScreenplay:spawnEnemyShips(pPlayer)
 	if (spawnedCount == 0) then
 		Logger:log(self.className .. ":spawnEnemyShips -- No enemy ship agents could be spawned.", LT_ERROR)
 
+		if (self.protectAlliedShips) then
+			self:failQuest(pPlayer, "true")
+			return
+		end
+
 		createEvent(1000, self.className, "completeQuest", pPlayer, "true")
 		return
 	end
@@ -579,6 +604,7 @@ function SpaceBattleScreenplay:despawnShips(pPlayer)
 
 		-- Remove the kill observer
 		dropObserver(SHIPDESTROYED, self.className, "notifyEnemyShipDestroyed", pShipAgent)
+		dropObserver(SHIPDESTROYED, self.className, "notifySupportShipDestroyed", pShipAgent)
 
 		-- Make ship fly away first
 		ShipObject(pShipAgent):setHyperspacing(true);
@@ -630,12 +656,22 @@ function SpaceBattleScreenplay:notifyEnteredQuestArea(pActiveArea, pShip)
 		print(self.className .. ":notifyEnteredQuestArea -- Player Ship: " .. SceneObject(pShip):getDisplayedName())
 	end
 
-	deleteData(playerID .. ":" .. self.className .. ":battleArea:")
-
 	SpaceHelpers:clearQuestWaypoint(pPilot, self.className)
 
 	createEvent(1000, self.className, "startBattle", pPilot, "")
 
+	return 1
+end
+
+function SpaceBattleScreenplay:notifySupportShipDestroyed(pShipAgent, pKillerShip)
+	if (pShipAgent == nil or not self.protectAlliedShips) then
+		return 1
+	end
+
+	local pPlayer = getSceneObject(ShipAiAgent(pShipAgent):getMissionOwnerID())
+	if (pPlayer ~= nil and SceneObject(pPlayer):isPlayerCreature() and SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
+		self:failQuest(pPlayer, "objective")
+	end
 	return 1
 end
 

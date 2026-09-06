@@ -100,6 +100,10 @@ function SpaceEscortScreenplay:completeQuest(pPlayer, notifyClient)
 		return
 	end
 
+	if (not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
+		return
+	end
+
 	if (self.DEBUG_SPACE_ESCORT) then
 		print(self.className .. ":completeQuest called -- QuestType: " .. self.questType .. " Quest Name: " .. self.questName)
 	end
@@ -491,6 +495,10 @@ end
 
 function SpaceEscortScreenplay:updateEscortWaypoint(pShipAgent)
 	if (pShipAgent == nil) then
+		return
+	end
+
+	if (not SpaceHelpers:isSpaceQuestActive(pPlayer, self.questType, self.questName)) then
 		return
 	end
 
