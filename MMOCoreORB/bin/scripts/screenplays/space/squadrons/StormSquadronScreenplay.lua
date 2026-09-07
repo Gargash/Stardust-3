@@ -472,6 +472,16 @@ escort_duty_tatooine_imperial_tier2_escortduty = SpaceDutyEscortScreenplay:new {
 
 registerScreenPlay("escort_duty_tatooine_imperial_tier2_escortduty", true)
 
+-- Mission abort callbacks are resolved from the client quest path as
+-- <questType>_<questName>. Keep the descriptive screenplay globals above and
+-- expose the SOE quest-table names used by the mission objects.
+inspect_imperial_ss_1 = inspect_tatooine_imperial_tier2_1
+recovery_imperial_ss_2 = recovery_tatooine_imperial_tier2_2
+assassinate_imperial_ss_3 = assassinate_tatooine_imperial_tier2_3
+destroy_duty_lok_imperial_ss_1a = destroy_duty_tatooine_imperial_tier2_destroyduty
+recovery_duty_lok_imperial_ss_1b = recovery_duty_tatooine_imperial_tier2_recoveryduty
+escort_duty_lok_imperial_ss_1c = escort_duty_tatooine_imperial_tier2_escortduty
+
 --[[
 	Tier 3 -- tatooine_imperial_tier3 Main Missions (missions-only tier)
 ]]
