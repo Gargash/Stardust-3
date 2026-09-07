@@ -744,6 +744,10 @@ space_lok = SpacePatrolPointTable:new {
 	{patrolPointName = "storm_vortex_mission_1_1", x = 2241, z = -1210, y = -2943},	-- squadron-isolated: StormSquadronScreenplay.lua:459
 	{patrolPointName = "storm_vortex_mission_1_4", x = -1009, z = -1075, y = -2900},	-- squadron-isolated: StormSquadronScreenplay.lua:457
 	{patrolPointName = "storm_vortex_mission_1_5", x = -2464, z = -1051, y = -2900},	-- squadron-isolated: StormSquadronScreenplay.lua:460
+	{patrolPointName = "storm_tier2_hostage_capture", x = -5500, z = 3900, y = 3600},	-- src: StormSquadronScreenplay.lua:preRecoveryPoints
+	{patrolPointName = "storm_tier2_hostage_escort_1", x = -4775, z = 3294, y = 3140},	-- src: StormSquadronScreenplay.lua:recoveryPoints
+	{patrolPointName = "storm_tier2_hostage_escort_2", x = -3923, z = 2964, y = 2395},	-- src: StormSquadronScreenplay.lua:recoveryPoints
+	{patrolPointName = "storm_tier2_hostage_escort_3", x = -3191, z = 2904, y = 1706},	-- src: StormSquadronScreenplay.lua:recoveryPoints
 	{patrolPointName = "vortex_lok_imp_pirate_9", x = 1492, z = 662, y = -2814},	-- squadron-isolated: VortexSquadronScreenplay.lua:531
 	{patrolPointName = "vortex_vortex_mission_1_1", x = 2241, z = -1210, y = -2943},	-- squadron-isolated: VortexSquadronScreenplay.lua:532
 	{patrolPointName = "vortex_vortex_mission_1_4", x = -1009, z = -1075, y = -2900},	-- squadron-isolated: VortexSquadronScreenplay.lua:530
