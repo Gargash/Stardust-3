@@ -400,7 +400,16 @@ function akalColzetConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 		local t2QuestTwoStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, StormSquadronScreenplay.TIER2_QUEST_STRING_2.type, StormSquadronScreenplay.TIER2_QUEST_STRING_2.name)
 		local t2QuestThreeStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, StormSquadronScreenplay.TIER2_QUEST_STRING_3.type, StormSquadronScreenplay.TIER2_QUEST_STRING_3.name)
 
-		local t2QuestOneComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, StormSquadronScreenplay.TIER2_QUEST_STRING_1.type, StormSquadronScreenplay.TIER2_QUEST_STRING_1.name) or getQuestStatus(playerID .. StormSquadronScreenplay.TIER2_QUEST_STRING_1.name .. ":reward") == "1"
+		local t2QuestOneComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, StormSquadronScreenplay.TIER2_QUEST_STRING_1.type, StormSquadronScreenplay.TIER2_QUEST_STRING_1.name)
+
+		-- Recover characters whose docking task completed but whose delayed quest
+		-- completion did not run. Oberhaur can then process and clear the journal entry.
+		if (t2QuestOneStarted and not t2QuestOneComplete and SpaceHelpers:isSpaceQuestTaskComplete(pPlayer, StormSquadronScreenplay.TIER2_QUEST_STRING_1.type, StormSquadronScreenplay.TIER2_QUEST_STRING_1.name, 2)) then
+			inspect_tatooine_imperial_tier2_1:completeQuest(pPlayer, "false")
+			t2QuestOneComplete = true
+		end
+
+		t2QuestOneComplete = t2QuestOneComplete or getQuestStatus(playerID .. StormSquadronScreenplay.TIER2_QUEST_STRING_1.name .. ":reward") == "1"
 		local t2QuestTwoComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, StormSquadronScreenplay.TIER2_QUEST_STRING_2.type, StormSquadronScreenplay.TIER2_QUEST_STRING_2.name) or getQuestStatus(playerID .. StormSquadronScreenplay.TIER2_QUEST_STRING_2.name .. ":reward") == "1"
 		local t2QuestThreeComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, StormSquadronScreenplay.TIER2_QUEST_STRING_3.type, StormSquadronScreenplay.TIER2_QUEST_STRING_3.name) or getQuestStatus(playerID .. StormSquadronScreenplay.TIER2_QUEST_STRING_3.name .. ":reward") == "1"
 
