@@ -171,8 +171,8 @@ assassinate_naboo_imperial_4 = SpaceAssassinateScreenplay:new {
 
 	creditReward = 1000,
 	itemReward = {
-		{species = {-1}, item = "object/tangible/ship/components/armor/arm_mission_reward_rebel_incom_ultralight.iff"},
-	},
+    {species = {-1}, item = "object/tangible/wearables/helmet/helmet_tie_fighter.iff"},
+  },
 
 	sideQuest = false,
 	sideQuestType = "",

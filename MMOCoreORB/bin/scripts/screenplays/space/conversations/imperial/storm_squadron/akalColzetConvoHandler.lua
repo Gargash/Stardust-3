@@ -41,6 +41,7 @@ function akalColzetConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 		return convoTemplate:getScreen("no_jtl")
 	end
 
+	local isColzet = SceneObject(pNpc):getTemplateObjectPath() == "object/mobile/dressed_imperial_trainer_space_01.iff"
 	local isOberhaur = SceneObject(pNpc):getTemplateObjectPath() == "object/mobile/space_imperial_tier2_tatooine_oberhaur.iff"
 	local isAlozen = SceneObject(pNpc):getTemplateObjectPath() == "object/mobile/space_imperial_tier2_tatooine_alozen.iff"
 	local isDenner = SceneObject(pNpc):getTemplateObjectPath() == "object/mobile/space_imperial_tier3_yavin.iff"
@@ -57,7 +58,9 @@ function akalColzetConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 		return convoTemplate:getScreen("neutral_pilot")
 	end
 
-	if (SpaceHelpers:isStormSquadron(pPlayer) and ghost:getPilotTier() == 2 and not isOberhaur) then
+	if (isColzet and SpaceHelpers:isStormSquadron(pPlayer) and ghost:getPilotTier() == 2 and getQuestStatus(playerID .. "StormSquadronScreenplay:colzet_finished") ~= "1") then
+		return convoTemplate:getScreen("completed_sinkko")
+	elseif (SpaceHelpers:isStormSquadron(pPlayer) and ghost:getPilotTier() == 2 and not isOberhaur) then
 		return convoTemplate:getScreen("go_to_next")
 	elseif (isOberhaur and SpaceHelpers:isStormSquadron(pPlayer) and ghost:getPilotTier() >= 3) then
 		return convoTemplate:getScreen("tier2_completed")
