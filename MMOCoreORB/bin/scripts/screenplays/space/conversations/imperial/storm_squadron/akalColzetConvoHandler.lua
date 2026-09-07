@@ -72,6 +72,9 @@ function akalColzetConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 		return convoTemplate:getScreen("go_to_next")
 	elseif (isDenner and (not SpaceHelpers:isStormSquadron(pPlayer) or ghost:getPilotTier() < 3)) then
 		return convoTemplate:getScreen("go_to_next")
+	elseif (isDenner and SpaceHelpers:isStormSquadron(pPlayer) and ghost:getPilotTier() >= 4) then
+		SpaceHelpers:addStormTier4Waypoint(pPlayer)
+		return convoTemplate:getScreen("tier3_completed")
 	elseif (isKilnstrider and (not SpaceHelpers:isStormSquadron(pPlayer) or ghost:getPilotTier() < 4)) then
 		return convoTemplate:getScreen("go_to_next")
 	elseif (not isDenner and not isKilnstrider and SpaceHelpers:isStormSquadron(pPlayer) and ghost:getPilotTier() >= 3) then

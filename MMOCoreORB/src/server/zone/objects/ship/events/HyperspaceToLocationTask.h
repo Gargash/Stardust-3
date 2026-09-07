@@ -103,6 +103,7 @@ public:
 			location.setY(location.getY() + System::random(100.f));
 
 			shipObject->sendMembersHyperspaceBeginMessage(zoneName, location);
+			shipObject->sendShipMembersMusicMessage("sound/mus_enter_hyperspace.snd");
 
 			reschedule(6000);
 			return;
