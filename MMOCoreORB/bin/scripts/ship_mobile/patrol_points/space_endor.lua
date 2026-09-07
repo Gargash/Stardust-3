@@ -251,7 +251,7 @@ space_endor = SpacePatrolPointTable:new {
 	{patrolPointName = "corellia_rebel_tier4_4_b_rescue_2", x = -1637, z = -5535, y = 354},
 	{patrolPointName = "corellia_rebel_tier4_4_b_rescue_3", x = -2330, z = -5523, y = 191},
 	{patrolPointName = "tatooine_rebel_tier4_3_b_assassin_4", x = 452, z = -6758, y = 2306},
-	{patrolPointName = "tatooine_imperial_tier3_rescue1_1", x = 1000, z = -4000, y = -1500},
+	{patrolPointName = "tatooine_imperial_tier3_rescue1_1", x = 3000, z = -3500, y = -2000},
 	{patrolPointName = "corellia_rebel_tier3_4_c_battlepoint", x = 1900, z = -5650, y = 2550},
 	{patrolPointName = "tatooine_rebel_tier4_3_b_assassin_6", x = -1819, z = -6799, y = -1968},
 	{patrolPointName = "tatooine_rebel_tier4_3_b_assassin_5", x = 518, z = -7514, y = 6},

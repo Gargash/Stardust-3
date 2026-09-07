@@ -102,7 +102,7 @@ rescue_tatooine_imperial_tier3_1_c = stormTier3Quest("rescue_tatooine_imperial_t
 	sideQuest = true, sideQuestType = "delivery_no_pickup", sideQuestName = "tatooine_imperial_tier3_1_d",
 	sideQuestSplitType = SpaceQuestLogic.SIDE_QUEST_SPLIT_TYPES.COMPLETION, sideQuestDelay = 5,
 	parentQuest = "inspect_tatooine_imperial_tier3_1_b", parentQuestType = "inspect", parentQuestName = "tatooine_imperial_tier3_1_b",
-	arrivalDelay = 5, rescueShip = "imp_freightermedium_tier3", rescueLocation = {x = 1000, z = -4000, y = -1500},
+	arrivalDelay = 5, rescueShip = "imp_freightermedium_tier3", rescueLocation = {x = 3000, z = -3500, y = -2000},
 	repairDelay = 20, escortSpeed = 70,
 	escortPoints = {
 		{patrolPointName = "tatooine_imperial_tier3_rescue1_2", zoneName = "space_endor", x = 4054, z = -6049, y = -3682, escortNumber = 1, radius = 250},
