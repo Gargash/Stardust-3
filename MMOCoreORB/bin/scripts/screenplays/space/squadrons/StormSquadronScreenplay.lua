@@ -269,7 +269,7 @@ registerScreenPlay("escort_duty_tatooine_imperial_7", true)
 inspect_tatooine_imperial_tier2_1 = SpaceInspectScreenplay:new {
 	className = "inspect_tatooine_imperial_tier2_1",
 
-	questName = "tatooine_imperial_tier2_1",
+	questName = "imperial_ss_1",
 	questType = "inspect",
 
 	questZone = "space_lok",
@@ -293,7 +293,7 @@ registerScreenPlay("inspect_tatooine_imperial_tier2_1", true)
 recovery_tatooine_imperial_tier2_2 = SpaceRecoveryScreenplay:new {
 	className = "recovery_tatooine_imperial_tier2_2",
 
-	questName = "tatooine_imperial_tier2_2",
+	questName = "imperial_ss_2",
 	-- Preserve the Live client quest table name; the gameplay is a capture/recovery.
 	questType = "escort",
 
@@ -333,7 +333,7 @@ registerScreenPlay("recovery_tatooine_imperial_tier2_2", true)
 assassinate_tatooine_imperial_tier2_3 = SpaceAssassinateScreenplay:new {
 	className = "assassinate_tatooine_imperial_tier2_3",
 
-	questName = "tatooine_imperial_tier2_3",
+	questName = "imperial_ss_3",
 	-- Preserve the Live client quest table name; this final leg is an assassination.
 	questType = "recovery",
 
