@@ -294,8 +294,7 @@ recovery_tatooine_imperial_tier2_2 = SpaceRecoveryScreenplay:new {
 	className = "recovery_tatooine_imperial_tier2_2",
 
 	questName = "imperial_ss_2",
-	-- Preserve the Live client quest table name; the gameplay is a capture/recovery.
-	questType = "escort",
+	questType = "recovery",
 
 	questZone = "space_lok",
 
@@ -334,8 +333,7 @@ assassinate_tatooine_imperial_tier2_3 = SpaceAssassinateScreenplay:new {
 	className = "assassinate_tatooine_imperial_tier2_3",
 
 	questName = "imperial_ss_3",
-	-- Preserve the Live client quest table name; this final leg is an assassination.
-	questType = "recovery",
+	questType = "assassinate",
 
 	questZone = "space_lok",
 
@@ -1921,12 +1919,12 @@ StormSquadronScreenplay = ScreenPlay:new {
 	QUEST_STRING_DUTY_2 = {type = "escort_duty", name = "tatooine_imperial_7"},
 
 	-- Tier 2
-	TIER2_QUEST_STRING_1 = {type = "inspect", name = "tatooine_imperial_tier2_1"},
-	TIER2_QUEST_STRING_2 = {type = "escort", name = "tatooine_imperial_tier2_2"},
-	TIER2_QUEST_STRING_3 = {type = "recovery", name = "tatooine_imperial_tier2_3"},
-	TIER2_QUEST_STRING_DUTY_1 = {type = "destroy_duty", name = "tatooine_imperial_tier2_destroyduty"},
-	TIER2_QUEST_STRING_DUTY_2 = {type = "recovery_duty", name = "tatooine_imperial_tier2_recoveryduty"},
-	TIER2_QUEST_STRING_DUTY_3 = {type = "escort_duty", name = "tatooine_imperial_tier2_escortduty"},
+	TIER2_QUEST_STRING_1 = {type = "inspect", name = "imperial_ss_1"},
+	TIER2_QUEST_STRING_2 = {type = "recovery", name = "imperial_ss_2"},
+	TIER2_QUEST_STRING_3 = {type = "assassinate", name = "imperial_ss_3"},
+	TIER2_QUEST_STRING_DUTY_1 = {type = "destroy_duty", name = "lok_imperial_ss_1a"},
+	TIER2_QUEST_STRING_DUTY_2 = {type = "recovery_duty", name = "lok_imperial_ss_1b"},
+	TIER2_QUEST_STRING_DUTY_3 = {type = "escort_duty", name = "lok_imperial_ss_1c"},
 
 	-- Tier 3
 	TIER3_QUEST_STRING_1 = {type = "escort", name = "tatooine_imperial_tier3_1"},
@@ -1994,6 +1992,20 @@ function StormSquadronScreenplay:prepareMissionChainAttempt(pPlayer, missionScre
 	for i = 1, #missionQuests do
 		SpaceHelpers:clearSpaceQuest(pPlayer, missionQuests[i].type, missionQuests[i].name, false)
 	end
+end
+
+function StormSquadronScreenplay:clearTier2DutyQuests(pPlayer)
+	if (pPlayer == nil) then
+		return
+	end
+
+	destroy_duty_tatooine_imperial_tier2_destroyduty:resetQuest(pPlayer)
+	recovery_duty_tatooine_imperial_tier2_recoveryduty:resetQuest(pPlayer)
+	escort_duty_tatooine_imperial_tier2_escortduty:resetQuest(pPlayer)
+
+	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER2_QUEST_STRING_DUTY_1.type, self.TIER2_QUEST_STRING_DUTY_1.name, false)
+	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER2_QUEST_STRING_DUTY_2.type, self.TIER2_QUEST_STRING_DUTY_2.name, false)
+	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER2_QUEST_STRING_DUTY_3.type, self.TIER2_QUEST_STRING_DUTY_3.name, false)
 end
 
 function StormSquadronScreenplay:resetColzetQuests(pPlayer)
