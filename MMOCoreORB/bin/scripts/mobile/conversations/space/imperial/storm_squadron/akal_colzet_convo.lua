@@ -853,7 +853,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_accept_tier2_duty3)
 -- Tier 3 - Active Mission
 akal_colzet_convo_tier3_on_mission = ConvoScreen:new {
 	id = "tier3_on_mission",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_c9911c0f",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_430701b",
 	stopConversation = "true",
 	options = {}
 }
@@ -862,28 +862,27 @@ akal_colzet_convo:addScreen(akal_colzet_convo_tier3_on_mission)
 -- Tier 3 - Mission 1
 akal_colzet_convo_tier3_first_mission = ConvoScreen:new {
 	id = "tier3_first_mission",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_51edad38",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_e5e51881",
 	stopConversation = "false",
 	options = {
-		{"@conversation/tatooine_imperial_tier3:s_d70dba34", "tier3_first_mission_details"},
-		{"@conversation/tatooine_imperial_tier3:s_f8e71988", "accept_tier3_first_mission"},
+		{"@conversation/tatooine_imperial_tier3:s_386b16a5", "tier3_first_mission_details"},
 	}
 }
 akal_colzet_convo:addScreen(akal_colzet_convo_tier3_first_mission)
 
 akal_colzet_convo_tier3_first_mission_details = ConvoScreen:new {
 	id = "tier3_first_mission_details",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_d2a2c5a9",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_5c298649",
 	stopConversation = "false",
 	options = {
-		{"@conversation/tatooine_imperial_tier3:s_f8e71988", "accept_tier3_first_mission"},
+		{"@conversation/tatooine_imperial_tier3:s_e82e2f2d", "accept_tier3_first_mission"},
 	}
 }
 akal_colzet_convo:addScreen(akal_colzet_convo_tier3_first_mission_details)
 
 akal_colzet_convo_accept_tier3_first_mission = ConvoScreen:new {
 	id = "accept_tier3_first_mission",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_f64e0998",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_c183fa1a",
 	stopConversation = "true",
 	options = {}
 }
@@ -891,7 +890,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_accept_tier3_first_mission)
 
 akal_colzet_convo_failed_tier3_first_mission = ConvoScreen:new {
 	id = "failed_tier3_first_mission",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_5a9c71e2",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_24315068",
 	stopConversation = "true",
 	options = {}
 }
@@ -899,7 +898,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_failed_tier3_first_mission)
 
 akal_colzet_convo_tier3_first_mission_success = ConvoScreen:new {
 	id = "tier3_first_mission_success",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_4b5066f2",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_1d7c7ed2",
 	stopConversation = "false",
 	options = {
 		-- Training options added dynamically via handler
@@ -910,28 +909,27 @@ akal_colzet_convo:addScreen(akal_colzet_convo_tier3_first_mission_success)
 -- Tier 3 - Mission 2
 akal_colzet_convo_tier3_second_mission = ConvoScreen:new {
 	id = "tier3_second_mission",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_47424e40",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_ea1cf0eb",
 	stopConversation = "false",
 	options = {
-		{"@conversation/tatooine_imperial_tier3:s_d70dba34", "tier3_second_mission_details"},
-		{"@conversation/tatooine_imperial_tier3:s_f8e71988", "accept_tier3_second_mission"},
+		{"@conversation/tatooine_imperial_tier3:s_44bd3318", "tier3_second_mission_details"},
 	}
 }
 akal_colzet_convo:addScreen(akal_colzet_convo_tier3_second_mission)
 
 akal_colzet_convo_tier3_second_mission_details = ConvoScreen:new {
 	id = "tier3_second_mission_details",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_b49d8273",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_6802fe45",
 	stopConversation = "false",
 	options = {
-		{"@conversation/tatooine_imperial_tier3:s_f8e71988", "accept_tier3_second_mission"},
+		{"@conversation/tatooine_imperial_tier3:s_25042a7a", "accept_tier3_second_mission"},
 	}
 }
 akal_colzet_convo:addScreen(akal_colzet_convo_tier3_second_mission_details)
 
 akal_colzet_convo_accept_tier3_second_mission = ConvoScreen:new {
 	id = "accept_tier3_second_mission",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_6ffd0979",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_421f0679",
 	stopConversation = "true",
 	options = {}
 }
@@ -939,7 +937,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_accept_tier3_second_mission)
 
 akal_colzet_convo_failed_tier3_second_mission = ConvoScreen:new {
 	id = "failed_tier3_second_mission",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_53d34239",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_f2bc2a81",
 	stopConversation = "true",
 	options = {}
 }
@@ -947,7 +945,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_failed_tier3_second_mission)
 
 akal_colzet_convo_tier3_second_mission_success = ConvoScreen:new {
 	id = "tier3_second_mission_success",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_89772a9c",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_cb3f07d5",
 	stopConversation = "false",
 	options = {
 		-- Training options added dynamically via handler
@@ -958,28 +956,27 @@ akal_colzet_convo:addScreen(akal_colzet_convo_tier3_second_mission_success)
 -- Tier 3 - Mission 3
 akal_colzet_convo_tier3_third_mission = ConvoScreen:new {
 	id = "tier3_third_mission",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_5400c2b8",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_3e08af61",
 	stopConversation = "false",
 	options = {
-		{"@conversation/tatooine_imperial_tier3:s_d70dba34", "tier3_third_mission_details"},
-		{"@conversation/tatooine_imperial_tier3:s_f8e71988", "accept_tier3_third_mission"},
+		{"@conversation/tatooine_imperial_tier3:s_38a75f0", "tier3_third_mission_details"},
 	}
 }
 akal_colzet_convo:addScreen(akal_colzet_convo_tier3_third_mission)
 
 akal_colzet_convo_tier3_third_mission_details = ConvoScreen:new {
 	id = "tier3_third_mission_details",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_28876e4d",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_be28f7e0",
 	stopConversation = "false",
 	options = {
-		{"@conversation/tatooine_imperial_tier3:s_f8e71988", "accept_tier3_third_mission"},
+		{"@conversation/tatooine_imperial_tier3:s_bb9e4a63", "accept_tier3_third_mission"},
 	}
 }
 akal_colzet_convo:addScreen(akal_colzet_convo_tier3_third_mission_details)
 
 akal_colzet_convo_accept_tier3_third_mission = ConvoScreen:new {
 	id = "accept_tier3_third_mission",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_b8302127",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_1b1b59fd",
 	stopConversation = "true",
 	options = {}
 }
@@ -987,7 +984,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_accept_tier3_third_mission)
 
 akal_colzet_convo_failed_tier3_third_mission = ConvoScreen:new {
 	id = "failed_tier3_third_mission",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_a425b892",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_c0cba601",
 	stopConversation = "true",
 	options = {}
 }
@@ -995,7 +992,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_failed_tier3_third_mission)
 
 akal_colzet_convo_tier3_third_mission_success = ConvoScreen:new {
 	id = "tier3_third_mission_success",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_596a67f0",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_41ecd1f",
 	stopConversation = "false",
 	options = {
 		-- Training options added dynamically via handler
@@ -1006,28 +1003,27 @@ akal_colzet_convo:addScreen(akal_colzet_convo_tier3_third_mission_success)
 -- Tier 3 - Mission 4
 akal_colzet_convo_tier3_fourth_mission = ConvoScreen:new {
 	id = "tier3_fourth_mission",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_ee64b80a",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_b196e01f",
 	stopConversation = "false",
 	options = {
-		{"@conversation/tatooine_imperial_tier3:s_c142d50f", "tier3_fourth_mission_details"},
-		{"@conversation/tatooine_imperial_tier3:s_180340a", "accept_tier3_fourth_mission"},
+		{"@conversation/tatooine_imperial_tier3:s_39a5745d", "tier3_fourth_mission_details"},
 	}
 }
 akal_colzet_convo:addScreen(akal_colzet_convo_tier3_fourth_mission)
 
 akal_colzet_convo_tier3_fourth_mission_details = ConvoScreen:new {
 	id = "tier3_fourth_mission_details",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_3bd0f63e",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_b9bfd3a8",
 	stopConversation = "false",
 	options = {
-		{"@conversation/tatooine_imperial_tier3:s_180340a", "accept_tier3_fourth_mission"},
+		{"@conversation/tatooine_imperial_tier3:s_25042a7a", "accept_tier3_fourth_mission"},
 	}
 }
 akal_colzet_convo:addScreen(akal_colzet_convo_tier3_fourth_mission_details)
 
 akal_colzet_convo_accept_tier3_fourth_mission = ConvoScreen:new {
 	id = "accept_tier3_fourth_mission",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_6905c6b2",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_266e8481",
 	stopConversation = "true",
 	options = {}
 }
@@ -1035,7 +1031,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_accept_tier3_fourth_mission)
 
 akal_colzet_convo_failed_tier3_fourth_mission = ConvoScreen:new {
 	id = "failed_tier3_fourth_mission",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_1530dc31",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_fae9ce56",
 	stopConversation = "true",
 	options = {}
 }
@@ -1043,7 +1039,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_failed_tier3_fourth_mission)
 
 akal_colzet_convo_tier3_fourth_mission_success = ConvoScreen:new {
 	id = "tier3_fourth_mission_success",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_5df75ba2",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_d837376f",
 	stopConversation = "false",
 	options = {
 		-- Training options added dynamically via handler
@@ -1054,7 +1050,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_tier3_fourth_mission_success)
 -- Tier 3 - Training
 akal_colzet_convo_tier3_train_fighters = ConvoScreen:new {
 	id = "tier3_train_fighters",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_4c42a50e",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_c4f3b92c",
 	stopConversation = "true",
 	options = {}
 }
@@ -1062,7 +1058,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_tier3_train_fighters)
 
 akal_colzet_convo_tier3_train_component = ConvoScreen:new {
 	id = "tier3_train_component",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_4c42a50e",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_c4f3b92c",
 	stopConversation = "true",
 	options = {}
 }
@@ -1070,7 +1066,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_tier3_train_component)
 
 akal_colzet_convo_tier3_train_procedures = ConvoScreen:new {
 	id = "tier3_train_procedures",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_4c42a50e",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_c4f3b92c",
 	stopConversation = "true",
 	options = {}
 }
@@ -1078,7 +1074,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_tier3_train_procedures)
 
 akal_colzet_convo_tier3_train_droid = ConvoScreen:new {
 	id = "tier3_train_droid",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_4c42a50e",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_c4f3b92c",
 	stopConversation = "true",
 	options = {}
 }
@@ -1087,7 +1083,7 @@ akal_colzet_convo:addScreen(akal_colzet_convo_tier3_train_droid)
 -- Tier 3 - Completed
 akal_colzet_convo_tier3_completed = ConvoScreen:new {
 	id = "tier3_completed",
-	leftDialog = "@conversation/tatooine_imperial_tier3:s_f50e2248",
+	leftDialog = "@conversation/tatooine_imperial_tier3:s_66506cea",
 	stopConversation = "true",
 	options = {}
 }

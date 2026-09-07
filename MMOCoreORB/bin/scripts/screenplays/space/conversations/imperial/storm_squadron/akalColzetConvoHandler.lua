@@ -273,6 +273,13 @@ function akalColzetConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 
 		-- Check if players have all the tier 3 skill boxes and finished last mission
 		if (t3QuestFourComplete and completedTier3) then
+			if (getQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_4.name .. ":reward") ~= "1") then
+				setQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_4.name .. ":reward", 1)
+				destroy_tatooine_imperial_tier3_4:rewardPlayer(pPlayer)
+			end
+
+			setQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_4.name .. ":trained", 1)
+
 			if (ghost:getPilotTier() <= 3) then
 				ghost:incrementPilotTier()
 			end
@@ -289,39 +296,55 @@ function akalColzetConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 
 		local tier3SkillCount = SpaceHelpers:getPilotTierSkillCount(pPlayer, "imperial_navy", 3)
 
-		-- Reward + Training Checks. Tier 3 grants a skill box for each mission completed
-		if (t3QuestFourComplete and tier3SkillCount == 3) then
+		-- Reward + Training Checks. Each mission offers one remaining tier 3 skill.
+		if (t3QuestFourComplete and getQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_4.name .. ":trained") ~= "1") then
 			if (getQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_4.name .. ":reward") ~= "1") then
 				setQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_4.name .. ":reward", 1)
 
 				destroy_tatooine_imperial_tier3_4:rewardPlayer(pPlayer)
 			end
 
-			return convoTemplate:getScreen("tier3_fourth_mission_success")
-		elseif (t3QuestThreeComplete and tier3SkillCount == 2) then
+			if (tier3SkillCount < 4) then
+				return convoTemplate:getScreen("tier3_fourth_mission_success")
+			end
+
+			setQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_4.name .. ":trained", 1)
+		elseif (t3QuestThreeComplete and getQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_3.name .. ":trained") ~= "1") then
 			if (getQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_3.name .. ":reward") ~= "1") then
 				setQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_3.name .. ":reward", 1)
 
 				delivery_tatooine_imperial_tier3_3:rewardPlayer(pPlayer)
 			end
 
-			return convoTemplate:getScreen("tier3_third_mission_success")
-		elseif (t3QuestTwoComplete and tier3SkillCount == 1) then
+			if (tier3SkillCount < 4) then
+				return convoTemplate:getScreen("tier3_third_mission_success")
+			end
+
+			setQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_3.name .. ":trained", 1)
+		elseif (t3QuestTwoComplete and getQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_2.name .. ":trained") ~= "1") then
 			if (getQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_2.name .. ":reward") ~= "1") then
 				setQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_2.name .. ":reward", 1)
 
 				inspect_tatooine_imperial_tier3_2:rewardPlayer(pPlayer)
 			end
 
-			return convoTemplate:getScreen("tier3_second_mission_success")
-		elseif (t3QuestOneComplete and tier3SkillCount < 1) then
+			if (tier3SkillCount < 4) then
+				return convoTemplate:getScreen("tier3_second_mission_success")
+			end
+
+			setQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_2.name .. ":trained", 1)
+		elseif (t3QuestOneComplete and getQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_1.name .. ":trained") ~= "1") then
 			if (getQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_1.name .. ":reward") ~= "1") then
 				setQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_1.name .. ":reward", 1)
 
 				escort_tatooine_imperial_tier3_1:rewardPlayer(pPlayer)
 			end
 
-			return convoTemplate:getScreen("tier3_first_mission_success")
+			if (tier3SkillCount < 4) then
+				return convoTemplate:getScreen("tier3_first_mission_success")
+			end
+
+			setQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_1.name .. ":trained", 1)
 		end
 
 		-- Quest Starters
@@ -787,6 +810,23 @@ function akalColzetConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, 
 			SpaceHelpers:grantSpaceSkill(pPlayer, "pilot_imperial_navy_starships_03", false)
 		elseif (screenID == "tier3_train_component") then
 			SpaceHelpers:grantSpaceSkill(pPlayer, "pilot_imperial_navy_weapons_03", false)
+		end
+
+		local playerID = CreatureObject(pPlayer):getObjectID()
+		local tier3TrainingQuests = {
+			StormSquadronScreenplay.TIER3_QUEST_STRING_1,
+			StormSquadronScreenplay.TIER3_QUEST_STRING_2,
+			StormSquadronScreenplay.TIER3_QUEST_STRING_3,
+			StormSquadronScreenplay.TIER3_QUEST_STRING_4,
+		}
+
+		for i = 1, #tier3TrainingQuests do
+			local quest = tier3TrainingQuests[i]
+
+			if (SpaceHelpers:isSpaceQuestComplete(pPlayer, quest.type, quest.name) and getQuestStatus(playerID .. quest.name .. ":trained") ~= "1") then
+				setQuestStatus(playerID .. quest.name .. ":trained", 1)
+				break
+			end
 		end
 
 		if (ghost:getPilotTier() <= 3 and SpaceHelpers:hasCompletedPilotTier(pPlayer, "imperial_navy", 3)) then

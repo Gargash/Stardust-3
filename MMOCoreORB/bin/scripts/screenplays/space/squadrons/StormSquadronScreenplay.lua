@@ -2126,6 +2126,10 @@ function StormSquadronScreenplay:resetTier3Quests(pPlayer)
 	removeQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_2.name .. ":reward")
 	removeQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_3.name .. ":reward")
 	removeQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_4.name .. ":reward")
+	removeQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_1.name .. ":trained")
+	removeQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_2.name .. ":trained")
+	removeQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_3.name .. ":trained")
+	removeQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_4.name .. ":trained")
 end
 
 function StormSquadronScreenplay:resetTier4Quests(pPlayer)
