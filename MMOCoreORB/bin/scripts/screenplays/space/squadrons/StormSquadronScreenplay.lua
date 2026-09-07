@@ -140,7 +140,7 @@ escort_tatooine_imperial_3 = SpaceEscortScreenplay:new {
 	parentQuestName = "tatooine_imperial_3",
 
 	escortShips = {"imp_freightermedium_tier1"},
-	escortSpeed = 60,
+	escortSpeed = 30,
 
 	escortPoints = {
 		{patrolPointName = "storm_tier1_mission3_escort_1", zoneName = "space_tatooine", x = 7188, z = 1899, y = -2831, escortNumber = 1, radius = 250},
