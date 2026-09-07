@@ -55,6 +55,18 @@ addAlozenScreen("alozen_capture_instructions", "s_9506a2bd", false, {
 })
 addAlozenScreen("accept_alozen_third_mission", "s_4fc85d67", true)
 
+addAlozenScreen("alozen_first_training", "s_2172d08a", false)
+addAlozenScreen("alozen_second_training", "s_2172d08a", false)
+
+addAlozenScreen("alozen_train_first_fighters", "s_c4880407", true)
+addAlozenScreen("alozen_train_first_component", "s_8bd72bb5", true)
+addAlozenScreen("alozen_train_first_procedures", "s_486da900", true)
+addAlozenScreen("alozen_train_first_droid", "s_31804e15", true)
+addAlozenScreen("alozen_train_second_fighters", "s_c4880407", true)
+addAlozenScreen("alozen_train_second_component", "s_8bd72bb5", true)
+addAlozenScreen("alozen_train_second_procedures", "s_486da900", true)
+addAlozenScreen("alozen_train_second_droid", "s_31804e15", true)
+
 addAlozenScreen("alozen_completed", "s_b0d3b474", false, {
 	{"@conversation/tatooine_imperial_trainer_2b:s_71bf4315", "alozen_transfer"}
 })
