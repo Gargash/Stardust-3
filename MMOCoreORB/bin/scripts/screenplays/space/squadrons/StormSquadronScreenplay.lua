@@ -240,6 +240,7 @@ escort_duty_tatooine_imperial_7 = SpaceDutyEscortScreenplay:new {
 	sideQuestType = "",
 
 	escortShips = {"imp_transport_tier1", "imp_freightermedium_tier1", "imp_freighterlight_tier1", "imp_freighterheavy_tier1"},
+	escortSpeed = 30,
 
 	escortPoints = {
 		{patrolPointName = "storm_rebel_escort_1", zoneName = "space_tatooine", x = 7188, z = 1899, y = -2831, escortNumber = 1, radius = 250},

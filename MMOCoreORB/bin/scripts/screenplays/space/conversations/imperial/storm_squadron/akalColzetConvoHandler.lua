@@ -677,7 +677,7 @@ function akalColzetConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, 
 			clonedConversation:addOption("@conversation/tatooine_imperial_trainer_2:s_594a07fa", "tier2_train_fighters")
 		end
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_weapons_02") and skillManager:fulfillsSkillPrerequisitesAndXp(pPlayer, "pilot_imperial_navy_weapons_02")) then
-			clonedConversation:addOption("@conversation/tatooine_imperial_trainer_2:s_be30f309", "tier2_train_component")
+			clonedConversation:addOption("@conversation/tatooine_imperial_trainer_2:s_dbb5bf46", "tier2_train_component")
 		end
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_procedures_02") and skillManager:fulfillsSkillPrerequisitesAndXp(pPlayer, "pilot_imperial_navy_procedures_02")) then
 			clonedConversation:addOption("@conversation/tatooine_imperial_trainer_2:s_e73e5d21", "tier2_train_basics")
