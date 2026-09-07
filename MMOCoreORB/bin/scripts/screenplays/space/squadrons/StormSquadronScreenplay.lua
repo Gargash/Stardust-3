@@ -364,7 +364,7 @@ registerScreenPlay("assassinate_tatooine_imperial_tier2_3", true)
 destroy_duty_tatooine_imperial_tier2_destroyduty = SpaceDutyDestroyScreenplay:new {
 	className = "destroy_duty_tatooine_imperial_tier2_destroyduty",
 
-	questName = "tatooine_imperial_tier2_destroyduty",
+	questName = "lok_imperial_ss_1a",
 	questType = "destroy_duty",
 
 	questZone = "space_lok",
@@ -394,7 +394,7 @@ registerScreenPlay("destroy_duty_tatooine_imperial_tier2_destroyduty", true)
 recovery_duty_tatooine_imperial_tier2_recoveryduty = SpaceDutyRecoveryScreenplay:new {
 	className = "recovery_duty_tatooine_imperial_tier2_recoveryduty",
 
-	questName = "tatooine_imperial_tier2_recoveryduty",
+	questName = "lok_imperial_ss_1b",
 	questType = "recovery_duty",
 
 	questZone = "space_lok",
@@ -440,7 +440,7 @@ registerScreenPlay("recovery_duty_tatooine_imperial_tier2_recoveryduty", true)
 escort_duty_tatooine_imperial_tier2_escortduty = SpaceDutyEscortScreenplay:new {
 	className = "escort_duty_tatooine_imperial_tier2_escortduty",
 
-	questName = "tatooine_imperial_tier2_escortduty",
+	questName = "lok_imperial_ss_1c",
 	questType = "escort_duty",
 
 	questZone = "space_lok",
