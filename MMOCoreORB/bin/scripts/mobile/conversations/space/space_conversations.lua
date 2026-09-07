@@ -160,3 +160,4 @@ includeFile("conversations/space/imperial/inquisition_squadron/barlow_inquisitio
 
 -- Storm Squadron
 includeFile("conversations/space/imperial/storm_squadron/akal_colzet_convo.lua")
+includeFile("conversations/space/imperial/storm_squadron/alozen_convo.lua")

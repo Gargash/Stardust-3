@@ -43,7 +43,6 @@ function akalColzetConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 
 	local isColzet = SceneObject(pNpc):getTemplateObjectPath() == "object/mobile/dressed_imperial_trainer_space_01.iff"
 	local isOberhaur = SceneObject(pNpc):getTemplateObjectPath() == "object/mobile/space_imperial_tier2_tatooine_oberhaur.iff"
-	local isAlozen = SceneObject(pNpc):getTemplateObjectPath() == "object/mobile/space_imperial_tier2_tatooine_alozen.iff"
 	local isDenner = SceneObject(pNpc):getTemplateObjectPath() == "object/mobile/space_imperial_tier3_yavin.iff"
 	local isKilnstrider = SceneObject(pNpc):getTemplateObjectPath() == "object/mobile/space_imperial_tier4_tatooine_kilnstrider.iff"
 
@@ -71,41 +70,6 @@ function akalColzetConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 		return convoTemplate:getScreen("tier2_completed")
 	elseif (isOberhaur and (not SpaceHelpers:isStormSquadron(pPlayer) or ghost:getPilotTier() < 2)) then
 		return convoTemplate:getScreen("go_to_next")
-	elseif (isAlozen and SpaceHelpers:isStormSquadron(pPlayer) and ghost:getPilotTier() >= 3) then
-		local alozenOneActive = SpaceHelpers:isSpaceQuestActive(pPlayer, "inspect", "imperial_ss_4")
-		local alozenTwoActive = SpaceHelpers:isSpaceQuestActive(pPlayer, "escort", "imperial_ss_5")
-		local alozenThreeActive = SpaceHelpers:isSpaceQuestActive(pPlayer, "recovery", "imperial_ss_6")
-		local alozenOneComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, "inspect", "imperial_ss_4")
-		local alozenTwoComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, "escort", "imperial_ss_5")
-		local alozenThreeComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, "recovery", "imperial_ss_6")
-
-		if (alozenOneActive or alozenTwoActive or alozenThreeActive) then
-			return convoTemplate:getScreen("tier3_on_mission")
-		elseif (alozenThreeComplete) then
-			if (getQuestStatus(playerID .. "imperial_ss_6:reward") ~= "1") then
-				setQuestStatus(playerID .. "imperial_ss_6:reward", 1)
-				recovery_imperial_ss_6:rewardPlayer(pPlayer)
-				ghost:increaseFactionStanding("imperial", 50)
-			end
-			SpaceHelpers:addStormDennerWaypoint(pPlayer)
-			return convoTemplate:getScreen("tier3_completed")
-		elseif (alozenTwoComplete) then
-			if (getQuestStatus(playerID .. "imperial_ss_5:reward") ~= "1") then
-				setQuestStatus(playerID .. "imperial_ss_5:reward", 1)
-				escort_imperial_ss_5:rewardPlayer(pPlayer)
-				ghost:increaseFactionStanding("imperial", 50)
-			end
-			return convoTemplate:getScreen("tier3_third_mission")
-		elseif (alozenOneComplete) then
-			if (getQuestStatus(playerID .. "imperial_ss_4:reward") ~= "1") then
-				setQuestStatus(playerID .. "imperial_ss_4:reward", 1)
-				inspect_imperial_ss_4:rewardPlayer(pPlayer)
-				ghost:increaseFactionStanding("imperial", 75)
-			end
-			return convoTemplate:getScreen("tier3_second_mission")
-		else
-			return convoTemplate:getScreen("tier3_first_mission")
-		end
 	elseif (isDenner and (not SpaceHelpers:isStormSquadron(pPlayer) or ghost:getPilotTier() < 3)) then
 		return convoTemplate:getScreen("go_to_next")
 	elseif (isKilnstrider and (not SpaceHelpers:isStormSquadron(pPlayer) or ghost:getPilotTier() < 4)) then
@@ -834,14 +798,6 @@ function akalColzetConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, 
 	-- Tier 3 mission starters
 	elseif (screenID == "accept_tier3_first_mission" or screenID == "failed_tier3_first_mission") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
-		local isAlozen = SceneObject(pNpc):getTemplateObjectPath() == "object/mobile/space_imperial_tier2_tatooine_alozen.iff"
-
-		if (isAlozen) then
-			inspect_imperial_ss_4:resetQuest(pPlayer)
-			SpaceHelpers:clearSpaceQuest(pPlayer, "inspect", "imperial_ss_4", false)
-			inspect_imperial_ss_4:startQuest(pPlayer, pNpc)
-			return pClonedScreen
-		end
 
 		setQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_1.name .. ":attempted", 1)
 
@@ -851,14 +807,6 @@ function akalColzetConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, 
 		escort_tatooine_imperial_tier3_1:startQuest(pPlayer, pNpc)
 	elseif (screenID == "accept_tier3_second_mission" or screenID == "failed_tier3_second_mission") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
-		local isAlozen = SceneObject(pNpc):getTemplateObjectPath() == "object/mobile/space_imperial_tier2_tatooine_alozen.iff"
-
-		if (isAlozen) then
-			escort_imperial_ss_5:resetQuest(pPlayer)
-			SpaceHelpers:clearSpaceQuest(pPlayer, "escort", "imperial_ss_5", false)
-			escort_imperial_ss_5:startQuest(pPlayer, pNpc)
-			return pClonedScreen
-		end
 
 		setQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_2.name .. ":attempted", 1)
 
@@ -868,14 +816,6 @@ function akalColzetConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, 
 		inspect_tatooine_imperial_tier3_2:startQuest(pPlayer, pNpc)
 	elseif (screenID == "accept_tier3_third_mission" or screenID == "failed_tier3_third_mission") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
-		local isAlozen = SceneObject(pNpc):getTemplateObjectPath() == "object/mobile/space_imperial_tier2_tatooine_alozen.iff"
-
-		if (isAlozen) then
-			recovery_imperial_ss_6:resetQuest(pPlayer)
-			SpaceHelpers:clearSpaceQuest(pPlayer, "recovery", "imperial_ss_6", false)
-			recovery_imperial_ss_6:startQuest(pPlayer, pNpc)
-			return pClonedScreen
-		end
 
 		setQuestStatus(playerID .. StormSquadronScreenplay.TIER3_QUEST_STRING_3.name .. ":attempted", 1)
 
