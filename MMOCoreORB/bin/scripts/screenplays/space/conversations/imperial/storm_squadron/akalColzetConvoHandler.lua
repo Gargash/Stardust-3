@@ -63,6 +63,11 @@ function akalColzetConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 	elseif (SpaceHelpers:isStormSquadron(pPlayer) and ghost:getPilotTier() == 2 and not isOberhaur) then
 		return convoTemplate:getScreen("go_to_next")
 	elseif (isOberhaur and SpaceHelpers:isStormSquadron(pPlayer) and ghost:getPilotTier() >= 3) then
+		if (getQuestStatus(playerID .. "StormSquadronScreenplay:oberhaur_finished") ~= "1") then
+			setQuestStatus(playerID .. "StormSquadronScreenplay:oberhaur_finished", 1)
+			SpaceHelpers:addStormTier3Waypoint(pPlayer)
+		end
+
 		return convoTemplate:getScreen("tier2_completed")
 	elseif (isOberhaur and (not SpaceHelpers:isStormSquadron(pPlayer) or ghost:getPilotTier() < 2)) then
 		return convoTemplate:getScreen("go_to_next")

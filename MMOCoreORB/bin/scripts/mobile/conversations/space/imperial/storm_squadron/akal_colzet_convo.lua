@@ -738,10 +738,30 @@ akal_colzet_convo:addScreen(akal_colzet_convo_tier2_train_droid)
 akal_colzet_convo_tier2_completed = ConvoScreen:new {
 	id = "tier2_completed",
 	leftDialog = "@conversation/tatooine_imperial_trainer_2:s_48636f93",
+	stopConversation = "false",
+	options = {
+		{"@conversation/tatooine_imperial_trainer_2:s_a78a4ac3", "tier2_report_to_alozen"},
+	}
+}
+akal_colzet_convo:addScreen(akal_colzet_convo_tier2_completed)
+
+akal_colzet_convo_tier2_report_to_alozen = ConvoScreen:new {
+	id = "tier2_report_to_alozen",
+	leftDialog = "@conversation/tatooine_imperial_trainer_2:s_1e3ab8f3",
+	stopConversation = "false",
+	options = {
+		{"@conversation/tatooine_imperial_trainer_2:s_b6b25f13", "tier2_alozen_warning"},
+	}
+}
+akal_colzet_convo:addScreen(akal_colzet_convo_tier2_report_to_alozen)
+
+akal_colzet_convo_tier2_alozen_warning = ConvoScreen:new {
+	id = "tier2_alozen_warning",
+	leftDialog = "@conversation/tatooine_imperial_trainer_2:s_ca6a5e04",
 	stopConversation = "true",
 	options = {}
 }
-akal_colzet_convo:addScreen(akal_colzet_convo_tier2_completed)
+akal_colzet_convo:addScreen(akal_colzet_convo_tier2_alozen_warning)
 
 -- Tier 2 - Duty missions
 akal_colzet_convo_tier2_duty_repeat = ConvoScreen:new {
