@@ -267,8 +267,12 @@ function HraccaMonsterIsland:start()
 		return
 	end
 
-	self:spawnPoachers()
-	self:spawnExitTerminal()
+	local poachersLoaded = self:spawnPoachers()
+	local terminalLoaded = self:spawnExitTerminal()
+
+	if (poachersLoaded and terminalLoaded) then
+		print("HraccaMonsterIsland: screenplay loaded successfully")
+	end
 end
 
 function HraccaMonsterIsland:worldFromBuildout(px, py, pz)
@@ -299,7 +303,7 @@ function HraccaMonsterIsland:spawnPoachers()
 
 	writeData("HraccaMonsterIsland:remaining", spawned)
 	writeData("HraccaMonsterIsland:boss", 0)
-	print("HraccaMonsterIsland: " .. spawned .. " Chiss poachers placed on copy #0")
+	return spawned == #self.poachers
 end
 
 function HraccaMonsterIsland:spawnExitTerminal()
@@ -309,11 +313,12 @@ function HraccaMonsterIsland:spawnExitTerminal()
 
 	if (pTerminal == nil) then
 		print("HraccaMonsterIsland: failed to spawn the exit terminal at hracca.tab row 242")
-		return
+		return false
 	end
 
 	createObserver(OBJECTRADIALUSED, "HraccaMonsterIsland", "notifyExitUsed", pTerminal)
 	writeData("HraccaMonsterIsland:terminal", SceneObject(pTerminal):getObjectID())
+	return true
 end
 
 function HraccaMonsterIsland:notifyExitUsed(pTerminal, pPlayer)

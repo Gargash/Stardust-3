@@ -172,11 +172,7 @@ function KashyyykWebweaverPopulation:start()
 		return
 	end
 
-	local wx = SceneObject(pBuilding):getWorldPositionX()
-	local wz = SceneObject(pBuilding):getWorldPositionZ()
-	local wy = SceneObject(pBuilding):getWorldPositionY()
-	print("KashyyykWebweaverPopulation: building " .. self.buildingID .. " world (" .. wx .. ", " .. wz .. ", " .. wy .. ")")
-
+	self.loadFailed = false
 	local cells = self:buildCellMap(pBuilding)
 	local reported = {}
 
@@ -188,6 +184,7 @@ function KashyyykWebweaverPopulation:start()
 		if (cellId == nil or cellId == 0) then
 			if (reported[cellName] == nil) then
 				print("KashyyykWebweaverPopulation: no cell named '" .. cellName .. "'; its rows are skipped")
+				self.loadFailed = true
 				reported[cellName] = true
 			end
 		else
@@ -195,14 +192,14 @@ function KashyyykWebweaverPopulation:start()
 		end
 	end
 
-	print("KashyyykWebweaverPopulation: " .. self.spawnedCount .. " creatures placed in the Webweaver cave")
+	if (not self.loadFailed) then
+		print("KashyyykWebweaverPopulation: screenplay loaded successfully")
+	end
 end
 
 function KashyyykWebweaverPopulation:buildCellMap(pBuilding)
 	local cells = {}
 	local total = BuildingObject(pBuilding):getTotalCellNumber()
-
-	print("KashyyykWebweaverPopulation: " .. total .. " cells")
 
 	for i = 1, total do
 		local pCell = BuildingObject(pBuilding):getCell(i)
@@ -215,8 +212,6 @@ function KashyyykWebweaverPopulation:buildCellMap(pBuilding)
 			if (cellName == nil) then
 				cellName = ""
 			end
-
-			print("KashyyykWebweaverPopulation: cell index " .. i .. " number=" .. cellNum .. " name='" .. cellName .. "' id=" .. cellId)
 
 			if (cellName ~= "") then
 				cells[cellName] = cellId
@@ -262,6 +257,7 @@ function KashyyykWebweaverPopulation:spawnIfMissing(row, cellId)
 
 	if (pMobile == nil) then
 		print("KashyyykWebweaverPopulation: failed to spawn " .. template .. " in " .. cellName)
+		self.loadFailed = true
 		return
 	end
 

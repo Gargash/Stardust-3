@@ -68,8 +68,8 @@ CELL NAMES
 		hall58  58  encounter                  lock.java:23
 		hall59  59  exit_cell                  lock.java:19
 
-	printCellMap walks getCellName(i) at boot, records the live table, and
-	prints those five. Spawn-tab rooms prove hall55 / hall57 / hall58.
+	buildCellMap walks getCellName(i) at boot and records the live table.
+	Spawn-tab rooms prove hall55 / hall57 / hall58.
 	hall56 and hall59 are layout-only warp cells (no spawn row).
 --]]
 
@@ -188,16 +188,20 @@ function MyyydrilGrievous:start()
 		return
 	end
 
-	self:printCellMap(pBuilding)
+	local cellsLoaded = self:buildCellMap(pBuilding)
 	self:resetEncounter()
-	self:spawnRetrieveObjects(pBuilding)
-	self:setupCantina(pBuilding)
+	local objectsLoaded = self:spawnRetrieveObjects(pBuilding)
+	local cantinaLoaded = self:setupCantina(pBuilding)
 	self:attachWirartuAttack()
 
 	createObserver(ENTEREDBUILDING, "MyyydrilGrievous", "notifyEnteredBuilding", pBuilding)
+
+	if (cellsLoaded and objectsLoaded and cantinaLoaded) then
+		print("MyyydrilGrievous: screenplay loaded successfully")
+	end
 end
 
-function MyyydrilGrievous:printCellMap(pBuilding)
+function MyyydrilGrievous:buildCellMap(pBuilding)
 	local total = BuildingObject(pBuilding):getTotalCellNumber()
 	self.cellIndex = {}
 
@@ -212,20 +216,21 @@ function MyyydrilGrievous:printCellMap(pBuilding)
 			self.cellIndex[name] = i
 		end
 
-		print("MyyydrilGrievous: cell index " .. i .. " name '" .. name .. "' node " .. (self.buildingID + i))
 	end
 
 	local names = { "hall55", "hall56", "hall57", "hall58", "hall59" }
+	local loaded = true
 
 	for i = 1, #names do
 		local idx = self.cellIndex[names[i]]
 
 		if (idx == nil) then
 			print("MyyydrilGrievous: name->index '" .. names[i] .. "' MISSING")
-		else
-			print("MyyydrilGrievous: name->index '" .. names[i] .. "' = " .. idx)
+			loaded = false
 		end
 	end
+
+	return loaded
 end
 
 function MyyydrilGrievous:resolveCell(pBuilding, cellName)
@@ -979,23 +984,29 @@ function MyyydrilGrievous:destroyTracked(key)
 end
 
 function MyyydrilGrievous:spawnRetrieveObjects(pBuilding)
+	local loaded = true
+
 	for i = 1, #self.retrieveObjects do
 		local row = self.retrieveObjects[i]
 		local cellID = self:resolveCell(pBuilding, row.cell)
 
 		if (cellID == 0) then
 			print("MyyydrilGrievous: no cell named '" .. row.cell .. "'; tab line " .. row.line .. " skipped")
+			loaded = false
 		else
 			local qw, qx, qy, qz = self:headingToQuat(row.yaw)
 			local pObject = spawnSceneObject(self.zoneName, row.template, row.x, row.z, row.y, cellID, qw, qx, qy, qz)
 
 			if (pObject == nil) then
 				print("MyyydrilGrievous: failed to spawn " .. row.template .. " from tab line " .. row.line)
+				loaded = false
 			else
-				self:attachRetrieveObject(pObject, row.arc, row.line)
+				loaded = self:attachRetrieveObject(pObject, row.arc, row.line) and loaded
 			end
 		end
 	end
+
+	return loaded
 end
 
 function MyyydrilGrievous:attachRetrieveObject(pObject, arcName, line)
@@ -1003,8 +1014,10 @@ function MyyydrilGrievous:attachRetrieveObject(pObject, arcName, line)
 
 	if (arc ~= nil and arc.attachObject ~= nil) then
 		arc:attachObject(pObject)
+		return true
 	else
 		print("myyydril_grievous.lua: " .. arcName .. " absent; attachObject not raised for tab line " .. line)
+		return false
 	end
 end
 
@@ -1015,11 +1028,11 @@ function MyyydrilGrievous:setupCantina(pBuilding)
 
 	if (cellID == 0) then
 		print("MyyydrilGrievous: no cell named 'lightningroom34'; cantina_setup skipped")
-		return
+		return false
 	end
 
 	writeData(self:dataKey("cantina"), cellID)
-	print("MyyydrilGrievous: OPEN healing.canhealshock on lightningroom34 (no Lua binding)")
+	return true
 end
 
 -- wirartu_attack.java is the creatures.tab script on ep3_forest_wirartu.

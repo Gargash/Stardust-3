@@ -222,7 +222,9 @@ function AvatarPlatform:start()
 		return
 	end
 
-	self:setupBuilding()
+	if (self:setupBuilding()) then
+		print("AvatarPlatform: screenplay loaded successfully")
+	end
 end
 
 function AvatarPlatform:setupBuilding()
@@ -230,32 +232,19 @@ function AvatarPlatform:setupBuilding()
 
 	if (pBuilding == nil or not SceneObject(pBuilding):isBuildingObject()) then
 		print("AvatarPlatform: snapshot building " .. self.buildingID .. " is missing; object rows are not placed")
-		return
+		return false
 	end
 
-	self:printCellMap(pBuilding)
 	self:resetState()
 	self:lockAvatarDoors(pBuilding)
-	self:spawnObjectRows(pBuilding)
+	local rowsPlaced = self:spawnObjectRows(pBuilding)
 	-- KashyyykPobPopulation exposes no done flag and its population can
 	-- finish after this screenplay's start(). OURS bound retry: every 10 s,
 	-- 12 tries (120 s). Stop when all eight mobiles are adopted.
 	createEvent(10000, "AvatarPlatform", "tryAdoptScriptedMobiles", pBuilding, "1")
 	createObserver(ENTEREDBUILDING, "AvatarPlatform", "notifyEnteredBuilding", pBuilding)
-end
 
-function AvatarPlatform:printCellMap(pBuilding)
-	local total = BuildingObject(pBuilding):getTotalCellNumber()
-
-	for i = 1, total do
-		local name = BuildingObject(pBuilding):getCellName(i)
-
-		if (name == nil) then
-			name = ""
-		end
-
-		print("AvatarPlatform: cell index " .. i .. " name '" .. name .. "' node " .. (self.buildingID + i))
-	end
+	return rowsPlaced
 end
 
 function AvatarPlatform:resolveCell(pBuilding, cellName)
@@ -356,7 +345,7 @@ function AvatarPlatform:spawnObjectRows(pBuilding)
 		end
 	end
 
-	print("AvatarPlatform: " .. placed .. " of " .. #self.objectRows .. " object rows placed in snapshot " .. self.buildingID)
+	return placed == #self.objectRows
 end
 
 function AvatarPlatform:spawnObjectRow(row, cellID)
@@ -467,7 +456,6 @@ function AvatarPlatform:adoptOne(pBuilding, spec, keyOverride, quiet)
 
 	if (pMob ~= nil) then
 		writeData(self:dataKey(key), SceneObject(pMob):getObjectID())
-		print("AvatarPlatform: " .. tostring(key) .. " template " .. template .. " adopted in " .. spec.cell)
 		return pMob
 	end
 

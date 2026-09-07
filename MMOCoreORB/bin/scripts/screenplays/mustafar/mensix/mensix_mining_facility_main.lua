@@ -98,7 +98,9 @@ function mensix_mining_facility_main:start()
 		self:startMinerConvo()
 		self:startTravelerConvo()
 
-		print("MensixMiningFacility: " .. self.placedCount .. " of " .. self.expectedCount .. " som_mining_facility.tab rows placed")
+		if (self.placedCount == self.expectedCount) then
+			print("MensixMiningFacility: screenplay loaded successfully")
+		end
 	end
 end
 

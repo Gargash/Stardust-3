@@ -255,14 +255,23 @@ TrandoSlaveCamp = ScreenPlay:new {
 registerScreenPlay("TrandoSlaveCamp", true)
 
 function TrandoSlaveCamp:start()
+	local loaded = true
+	local enabled = false
+
 	if (isZoneEnabled(self.zoneDungeon)) then
-		self:populateBunker()
-		self:spawnExitTerminal()
-		self:spawnMines()
+		enabled = true
+		loaded = self:populateBunker() and loaded
+		loaded = self:spawnExitTerminal() and loaded
+		loaded = self:spawnMines() and loaded
 	end
 
 	if (isZoneEnabled(self.zoneMain)) then
-		self:spawnKachirhoGate()
+		enabled = true
+		loaded = self:spawnKachirhoGate() and loaded
+	end
+
+	if (enabled and loaded) then
+		print("TrandoSlaveCamp: screenplay loaded successfully")
 	end
 end
 
@@ -298,11 +307,10 @@ function TrandoSlaveCamp:populateBunker()
 
 	if (pBunker == nil or not SceneObject(pBunker):isBuildingObject()) then
 		print("TrandoSlaveCamp: snapshot bunker " .. self.bunkerID .. " is missing; the 31 rows are not placed")
-		return
+		return false
 	end
 
 	writeData("TrandoSlaveCamp:toskKilled", 0)
-	self:printCellMap(pBunker)
 
 	local cells = {}
 	local placed = 0
@@ -331,21 +339,7 @@ function TrandoSlaveCamp:populateBunker()
 
 	self:lockEventRooms(pBunker, cells)
 	createObserver(ENTEREDBUILDING, "TrandoSlaveCamp", "notifyEnteredBunker", pBunker)
-	print("TrandoSlaveCamp: " .. placed .. " of 31 camp_command_bunker.tab rows placed in snapshot bunker " .. self.bunkerID .. " (" .. openRows .. " berserker rows OPEN)")
-end
-
-function TrandoSlaveCamp:printCellMap(pBunker)
-	local total = BuildingObject(pBunker):getTotalCellNumber()
-
-	for i = 1, total do
-		local name = BuildingObject(pBunker):getCellName(i)
-
-		if (name == nil) then
-			name = ""
-		end
-
-		print("TrandoSlaveCamp: cell index " .. i .. " name '" .. name .. "' node " .. (self.bunkerID + i))
-	end
+	return placed + openRows == #self.bunkerRows
 end
 
 function TrandoSlaveCamp:resolveCell(pBunker, cellName)
@@ -543,11 +537,12 @@ function TrandoSlaveCamp:spawnExitTerminal()
 
 	if (pTerminal == nil) then
 		print("TrandoSlaveCamp: failed to spawn the exit terminal at slaver.tab exit_terminal door")
-		return
+		return false
 	end
 
 	createObserver(OBJECTRADIALUSED, "TrandoSlaveCamp", "notifyExitUsed", pTerminal)
 	writeData("TrandoSlaveCamp:exitTerminal", SceneObject(pTerminal):getObjectID())
+	return true
 end
 
 function TrandoSlaveCamp:notifyExitUsed(pTerminal, pPlayer)
@@ -582,12 +577,13 @@ function TrandoSlaveCamp:spawnKachirhoGate()
 
 	if (pTerminal == nil) then
 		print("TrandoSlaveCamp: failed to spawn the Kachirho gate terminal")
-		return
+		return false
 	end
 
 	SceneObject(pTerminal):setObjectName(self.gateLabelFile, self.gateLabelKey, true)
 	createObserver(OBJECTRADIALUSED, "TrandoSlaveCamp", "notifyGateUsed", pTerminal)
 	writeData("TrandoSlaveCamp:gateTerminal", SceneObject(pTerminal):getObjectID())
+	return true
 end
 
 function TrandoSlaveCamp:notifyGateUsed(pTerminal, pPlayer)
@@ -677,6 +673,7 @@ end
 
 function TrandoSlaveCamp:spawnMines()
 	local spawned = 0
+	local failed = false
 
 	for i = 1, #self.mines do
 		local row = self.mines[i]
@@ -684,12 +681,14 @@ function TrandoSlaveCamp:spawnMines()
 
 		if (spec == nil) then
 			print("TrandoSlaveCamp: unknown mineType " .. tostring(row[4]) .. " at slaver.tab mine " .. i)
+			failed = true
 		else
 			local x, z, y = self:worldFromBuildout(row[1], row[2], row[3])
 			local pMine = spawnSceneObject(self.zoneDungeon, spec.template, x, z, y, 0, 1, 0, 0, 0)
 
 			if (pMine == nil) then
 				print("TrandoSlaveCamp: failed to spawn " .. spec.template .. " at slaver.tab mine " .. i)
+				failed = true
 			else
 				local pArea = spawnActiveArea(self.zoneDungeon, "object/active_area.iff", x, z, y, spec.radius, 0)
 
@@ -705,7 +704,7 @@ function TrandoSlaveCamp:spawnMines()
 		end
 	end
 
-	print("TrandoSlaveCamp: " .. spawned .. " mine objects placed on copy #0 (one per combat_mine_spawner row)")
+	return not failed and spawned == #self.mines
 end
 
 function TrandoSlaveCamp:notifyEnteredMine(pArea, pPlayer)

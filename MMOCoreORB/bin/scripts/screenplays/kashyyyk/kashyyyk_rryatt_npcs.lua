@@ -43,7 +43,9 @@ registerScreenPlay("KashyyykRryattNpcs", true)
 
 function KashyyykRryattNpcs:start()
 	if (isZoneEnabled("kashyyyk_rryatt_trail")) then
-		self:spawnNpcs()
+		if (self:spawnNpcs()) then
+			print("KashyyykRryattNpcs: screenplay loaded successfully")
+		end
 	end
 end
 
@@ -57,8 +59,10 @@ function KashyyykRryattNpcs:spawnNpcs()
 
 		if (pNpc ~= nil) then
 			placed = placed + 1
+		else
+			print("KashyyykRryattNpcs: failed to spawn " .. npc[1])
 		end
 	end
 
-	print("KashyyykRryattNpcs: " .. placed .. " placed")
+	return placed == #npcs
 end
