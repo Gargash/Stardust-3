@@ -531,6 +531,11 @@ space_tatooine = SpacePatrolPointTable:new {
 	{patrolPointName = "smuggler_rebel_security_patrol_3", x = 3574, z = -2819, y = -4741},	-- squadron-isolated: SmugglerSquadronScreenplay.lua:121
 	{patrolPointName = "smuggler_rebel_security_patrol_4", x = 4496, z = -1657, y = -6222},	-- squadron-isolated: SmugglerSquadronScreenplay.lua:122
 	{patrolPointName = "smuggler_trade_escort_4", x = 895, z = 210, y = 695},	-- squadron-isolated: SmugglerSquadronScreenplay.lua:191
+	-- Storm Squadron tier 1 mission 3 escort route.
+	{patrolPointName = "storm_tier1_mission3_escort_1", x = 7188, z = 1899, y = -2831},
+	{patrolPointName = "storm_tier1_mission3_escort_2", x = 6446, z = 2694, y = -5694},
+	{patrolPointName = "storm_tier1_mission3_escort_3", x = 4453, z = 3127, y = -7150},
+	{patrolPointName = "storm_tier1_mission3_escort_4", x = 1085, z = 4064, y = -7316},
 	{patrolPointName = "storm_rebel_escort_1", x = 7188, z = 1899, y = -2831},	-- squadron-isolated: StormSquadronScreenplay.lua:245
 	{patrolPointName = "storm_rebel_escort_4", x = 1085, z = 4064, y = -7316},	-- squadron-isolated: StormSquadronScreenplay.lua:246
 	{patrolPointName = "storm_rebel_patrol_1", x = 6439, z = -5021, y = -2217},	-- squadron-isolated: StormSquadronScreenplay.lua:247
