@@ -1382,6 +1382,10 @@ space_dantooine = SpacePatrolPointTable:new {
 	{patrolPointName = "tatooine_rebel_tier4_4_recovery_6", x = -5758, z = 5051, y = 6420},	-- src: screenplays/space/squadrons/CrimsonPhoenixSquadronScreenplay.lua:recovery_tatooine_rebel_tier4_4:recoveryPoints
 	{patrolPointName = "tatooine_rebel_tier4_4_recovery_7", x = -6046, z = 4645, y = 7048},	-- src: screenplays/space/squadrons/CrimsonPhoenixSquadronScreenplay.lua:recovery_tatooine_rebel_tier4_4:recoveryPoints
 	{patrolPointName = "tatooine_rebel_tier4_4_recovery_8", x = -7031, z = 4120, y = 6583},	-- src: screenplays/space/squadrons/CrimsonPhoenixSquadronScreenplay.lua:recovery_tatooine_rebel_tier4_4:recoveryPoints
+
+	-- Admiral Kilnstrider's Storm Squadron Tier 4 captured transport route.
+	{patrolPointName = "storm_t4_4_b_capture", x = 1600, z = 1800, y = -4700},
+	{patrolPointName = "storm_t4_4_b_escape", x = 4200, z = 1100, y = -2200},
 }
 
 SpacePatrolPoints:addSpacePatrolPoints(space_dantooine, "space_dantooine")

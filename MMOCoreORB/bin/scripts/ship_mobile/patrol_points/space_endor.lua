@@ -837,6 +837,21 @@ space_endor = SpacePatrolPointTable:new {
 	{patrolPointName = "vortex_rebel_tier3_2_c_escort_2", x = -549, z = 3180, y = 3238},	-- squadron-isolated: VortexSquadronScreenplay.lua:875
 	{patrolPointName = "vortex_rebel_tier3_2_c_escort_3", x = -1251, z = 1477, y = 3143},	-- squadron-isolated: VortexSquadronScreenplay.lua:876
 	{patrolPointName = "vortex_rebel_tier3_2_c_escort_4", x = -1996, z = -330, y = 3042},	-- squadron-isolated: VortexSquadronScreenplay.lua:877
+
+	-- Admiral Kilnstrider's Storm Squadron Tier 4 recovery and escort routes.
+	{patrolPointName = "tatooine_imperial_tier4_2_capture", x = -6100, z = -1800, y = 4100},
+	{patrolPointName = "tatooine_imperial_tier4_2_escape", x = -3600, z = -1300, y = 2450},
+	{patrolPointName = "tatooine_imperial_tier4_2_a_capture", x = 4200, z = 800, y = 5100},
+	{patrolPointName = "tatooine_imperial_tier4_2_a_escape", x = 2100, z = 500, y = 3150},
+	{patrolPointName = "storm_t4_2_c_engineer", x = 2100, z = 500, y = 3150},
+	{patrolPointName = "storm_t4_2_c_route_1", x = 3000, z = 250, y = 1800},
+	{patrolPointName = "storm_t4_2_c_route_2", x = 4100, z = -150, y = 200},
+	{patrolPointName = "storm_t4_2_c_route_3", x = 5200, z = -600, y = -1600},
+	{patrolPointName = "storm_t4_3_escort_1", x = -5200, z = 3400, y = -4000},
+	{patrolPointName = "storm_t4_3_escort_2", x = -2600, z = 2500, y = -2100},
+	{patrolPointName = "storm_t4_3_escort_3", x = 300, z = 1500, y = -300},
+	{patrolPointName = "storm_t4_3_escort_4", x = 3200, z = 700, y = 1800},
+	{patrolPointName = "storm_t4_3_a_escape", x = 2700, z = -1200, y = -2300},
 }
 
 SpacePatrolPoints:addSpacePatrolPoints(space_endor, "space_endor")

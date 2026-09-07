@@ -57,7 +57,7 @@ local function engineerRecovery(name, nextType, nextName, parentClass, parentNam
 		questName = name, questType = "recovery", questZone = "space_endor", creditReward = parentClass == nil and 10000 or 0,
 		arrivalDelay = 5, recoveryDelay = 20, escortSpeed = 75, recoverShip = "reb_transport_tier4",
 		recoveryConversationMobile = "object/mobile/dressed_imperial_officer_m.iff",
-		escortShips = {"blacksun_fighter_s02_tier4", "blacksun_fighter_s02_tier4", "blacksun_fighter_s02_tier4", "blacksun_fighter_s02_tier4", "blacksun_fighter_s02_tier4", "blacksun_fighter_s02_tier4"},
+		escortShips = {attacker, attacker, attacker, attacker, attacker, attacker},
 		preRecoveryPoints = {{patrolPointName = name .. "_capture", zoneName = "space_endor", x = point[1], z = point[2], y = point[3], escortNumber = 1, radius = 250}},
 		recoveryPoints = {{patrolPointName = name .. "_escape", zoneName = "space_endor", x = escape[1], z = escape[2], y = escape[3], escortNumber = 1, radius = 250}},
 		attackDelay = 20, attackShips = {{attacker}},
@@ -89,7 +89,7 @@ stormT4("recovery_tatooine_imperial_tier4_2_c", SpaceRecoveryScreenplay, links({
 -- Mission 3: escort, rescue, fleet battle.
 stormT4("escort_tatooine_imperial_tier4_3", SpaceEscortScreenplay, links({
 	questName = "tatooine_imperial_tier4_3", questType = "escort", questZone = "space_endor", creditReward = 10000,
-	escortShips = {"imp_lambda_shuttle_tier4"}, escortSpeed = 75,
+	escortShips = {"imp_lambda_shuttle_tier4"}, escortSpeed = 75, orderedEscortRoute = true,
 	escortPoints = {
 		{patrolPointName = "storm_t4_3_escort_1", zoneName = "space_endor", x = -5200, z = 3400, y = -4000, escortNumber = 1, radius = 250},
 		{patrolPointName = "storm_t4_3_escort_2", zoneName = "space_endor", x = -2600, z = 2500, y = -2100, escortNumber = 2, radius = 250},

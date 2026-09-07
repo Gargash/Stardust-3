@@ -162,9 +162,9 @@ function akalColzetConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 		local tier4SkillCount = SpaceHelpers:getPilotTierSkillCount(pPlayer, "imperial_navy", 4)
 		local requiredTier4Skills = t4QuestFourComplete and 4 or t4QuestThreeComplete and 3 or t4QuestTwoComplete and 2 or t4QuestOneComplete and 1 or 0
 
-		-- Player has an active tier 4 mission from Colzet
+		-- Campaign missions must be completed before Kilnstrider can advance the player.
+		-- Duty missions remain active until dropped and must not hide earned training.
 		if ((t4QuestOneStarted and not t4QuestOneComplete) or (t4QuestTwoStarted and not t4QuestTwoComplete) or (t4QuestThreeStarted and not t4QuestThreeComplete) or (t4QuestFourStarted and not t4QuestFourComplete) or
-			(t4Duty1Started and not t4Duty1Complete) or (t4Duty2Started and not t4Duty2Complete) or (t4Duty3Started and not t4Duty3Complete) or (t4Duty4Started and not t4Duty4Complete) or
 			(masterStarted and not masterComplete)) then
 
 			return convoTemplate:getScreen("tier4_on_mission")
@@ -178,6 +178,10 @@ function akalColzetConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 
 			-- Player has not earned the master box yet
 			if (not SpaceHelpers:hasMasterSkill(pPlayer, "imperial_navy")) then
+				if (isKilnstrider and getQuestStatus(playerID .. "ImperialMasterPilot:DeclannHandoff") == "1") then
+					return convoTemplate:getScreen("report_to_declann")
+				end
+
 				return convoTemplate:getScreen("master_mission")
 			else
 				return convoTemplate:getScreen("tier4_completed")
@@ -197,9 +201,14 @@ function akalColzetConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 			if (SpaceHelpers:hasExperienceForTraining(pPlayer, 4)) then
 				return convoTemplate:getScreen("ready_train_tier4")
 			end
+
+			if ((t4Duty1Started and not t4Duty1Complete) or (t4Duty2Started and not t4Duty2Complete) or (t4Duty3Started and not t4Duty3Complete) or (t4Duty4Started and not t4Duty4Complete)) then
+				return convoTemplate:getScreen("tier4_on_mission")
+			end
+
 			return convoTemplate:getScreen("tier4_duty_repeat")
 
-		-- Has not received the tier 4 briefing from Oberhaur yet
+		-- Has not received Kilnstrider's tier 4 briefing yet
 		elseif (getQuestStatus(playerID .. "StormSquadronScreenplay:StartedColzetTier4") ~= "1") then
 			setQuestStatus(playerID .. "StormSquadronScreenplay:StartedColzetTier4", 1)
 
@@ -885,16 +894,16 @@ function akalColzetConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, 
 		local skillManager = LuaSkillManager()
 
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_starships_04") and skillManager:fulfillsSkillPrerequisitesAndXp(pPlayer, "pilot_imperial_navy_starships_04")) then
-			clonedConversation:addOption("@conversation/naboo_imperial_tier4:s_d8355c02", "tier4_train_fighters")
+			clonedConversation:addOption("@conversation/tatooine_imperial_tier4:s_a50d5eb4", "tier4_train_fighters")
 		end
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_weapons_04") and skillManager:fulfillsSkillPrerequisitesAndXp(pPlayer, "pilot_imperial_navy_weapons_04")) then
-			clonedConversation:addOption("@conversation/naboo_imperial_tier4:s_96a0374a", "tier4_train_component")
+			clonedConversation:addOption("@conversation/tatooine_imperial_tier4:s_2c2ce09e", "tier4_train_component")
 		end
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_procedures_04") and skillManager:fulfillsSkillPrerequisitesAndXp(pPlayer, "pilot_imperial_navy_procedures_04")) then
-			clonedConversation:addOption("@conversation/naboo_imperial_tier4:s_d8efd03b", "tier4_train_basics")
+			clonedConversation:addOption("@conversation/tatooine_imperial_tier4:s_a5d7d28d", "tier4_train_basics")
 		end
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_droid_04") and skillManager:fulfillsSkillPrerequisitesAndXp(pPlayer, "pilot_imperial_navy_droid_04")) then
-			clonedConversation:addOption("@conversation/naboo_imperial_tier4:s_7e1308bc", "tier4_train_droid")
+			clonedConversation:addOption("@conversation/tatooine_imperial_tier4:s_97682588", "tier4_train_droid")
 		end
 	-- Handle tier 4 skill box granting
 	elseif (string.find(screenID, "tier4_train_")) then

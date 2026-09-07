@@ -233,6 +233,7 @@ includeFile("space/squadrons/StormSquadronTier4Screenplay.lua")
 
 includeFile("space/conversations/imperial/storm_squadron/akalColzetConvoHandler.lua")
 includeFile("space/conversations/imperial/storm_squadron/alozenConvoHandler.lua")
+includeFile("space/conversations/imperial/storm_squadron/kilnstriderConvoHandler.lua")
 
 
 -- Spawning Sub Folder
