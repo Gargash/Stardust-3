@@ -64,7 +64,7 @@ public:
 			shipObject->sendShipMembersMessage(strid);
 
 			if (currentIter >= 4) {
-				shipObject->sendShipMembersMusicMessage("sound/mus_enter_hyperspace.snd");
+				shipObject->sendShipMembersMusicMessage("sound/ship_hyperspace_countdown.snd");
 
 				//close s-foils as the ship is orienting if they're still open
 				uint32 optionsBitmask = shipObject->getOptionsBitmask();
@@ -90,6 +90,7 @@ public:
 
 			shipObject->sendShipMembersMessage(strid);
 			shipObject->sendShipMembersMusicMessage("sound/ship_hyperspace_countdown.snd");
+			shipObject->sendShipMembersMusicMessage("sound/mus_enter_hyperspace.snd");
 
 			reschedule(1000);
 			return;
