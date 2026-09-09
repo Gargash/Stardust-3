@@ -44,8 +44,8 @@
 object_ship_arc170_tier4 = object_ship_shared_arc170_tier4:new {
 	objectName = "@space/space_mobile_type:arc170_tier4",
 
-	name = "arc170_tier4",
-	type = "arc170_tier4",
+	name = "bwing_tier4",
+	type = "bwing_tier4",
 	faction = "rebel",
 	difficulty = "tier4",
 

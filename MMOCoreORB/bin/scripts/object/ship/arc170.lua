@@ -44,8 +44,8 @@
 object_ship_arc170 = object_ship_shared_arc170:new {
 	objectName = "@space/space_mobile_type:arc170",
 
-	name = "arc170",
-	type = "arc170",
+	name = "bwing",
+	type = "bwing",
 	faction = "rebel",
 	difficulty = "",
 
