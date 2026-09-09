@@ -41,7 +41,8 @@ blackEpsilonMission("destroy_surpriseattack_corellia_imperial_1", SpaceSurpriseA
 
 blackEpsilonMission("destroy_corellia_imperial_2", SpaceDestroyScreenplay, chain({
 	questName = "corellia_imperial_2", questType = "destroy", questZone = corellia, creditReward = 200,
-	killsRequired = 4, shipTypes = {"reb_z95_tier1"},
+	killsRequired = 4,
+	shipTypes = {"reb_z95_tier1", "reb_xwing_tier1", "reb_xwing_cadet_tier1", "reb_ywing_tier1", "reb_awing_tier1"},
 	shipLocations = {{x = 4300, z = 600, y = -3700}, {x = 1700, z = -500, y = -500}, {x = -2400, z = 800, y = 3200}},
 }))
 
@@ -217,7 +218,7 @@ patrol_corellia_imperial_3 = escort_corellia_imperial_3
 blackEpsilonMission("destroy_duty_corellia_imperial_6", SpaceDutyDestroyScreenplay, {
 	questName = "corellia_imperial_6", questType = "destroy_duty", questZone = corellia, creditReward = 100,
 	sideQuest = false, sideQuestType = "", totalLevels = 5, totalRounds = 2, totalWaves = 3,
-	minDistance = 12500, maxDistance = 17500, bossShip = "reb_bwing_tier2", shipTypes = {{"reb_z95_tier1"}},
+	minDistance = 12500, maxDistance = 17500, bossShip = "reb_bwing_tier2", shipTypes = {{"reb_bwing_tier1"}},
 })
 blackEpsilonMission("escort_duty_corellia_imperial_7", SpaceDutyEscortScreenplay, {
 	questName = "corellia_imperial_7", questType = "escort_duty", questZone = corellia, creditReward = 1000, creditKillBonus = 100,
@@ -229,14 +230,14 @@ blackEpsilonMission("escort_duty_corellia_imperial_7", SpaceDutyEscortScreenplay
 local function tier2DestroyDuty(name, boss, ships)
 	blackEpsilonMission("destroy_duty_" .. name, SpaceDutyDestroyScreenplay, {questName = name, questType = "destroy_duty", questZone = corellia, creditReward = 200, sideQuest = false, sideQuestType = "", totalLevels = 5, totalRounds = 2, totalWaves = 3, minDistance = 12500, maxDistance = 17500, bossShip = boss, shipTypes = ships})
 end
-tier2DestroyDuty("corellia_imperial_8", "blacksun_bomber_s01_tier2", {{"blacksun_fighter_s01_tier2", "blacksun_fighter_s01_tier2"}})
+tier2DestroyDuty("corellia_imperial_8", "hidden_daggers_executioner_tier2", {{"hidden_daggers_killer_tier2", "hidden_daggers_nebula_stalker_tier2"}})
 tier2DestroyDuty("corellia_imperial_10", "reb_ywing_tier3", {{"reb_z95_tier2", "reb_ywing_tier2"}})
 
-local function tier2EscortDuty(name, ships)
-	blackEpsilonMission("escort_duty_" .. name, SpaceDutyEscortScreenplay, {questName = name, questType = "escort_duty", questZone = corellia, creditReward = 2500, creditKillBonus = 200, itemReward = {}, sideQuest = false, sideQuestType = "", escortShips = ships, escortSpeed = 70, escortPoints = {{patrolPointName = name .. "_route_1", zoneName = corellia, x = -4800, z = 800, y = 3800, escortNumber = 1, radius = 250}, {patrolPointName = name .. "_route_2", zoneName = corellia, x = -1000, z = 100, y = 500, escortNumber = 2, radius = 250}, {patrolPointName = name .. "_route_3", zoneName = corellia, x = 3500, z = -700, y = -3100, escortNumber = 3, radius = 250}}, attackDelay = 25, attackShips = {{"reb_z95_tier2", "reb_z95_tier2"}, {"reb_ywing_tier2", "reb_z95_tier2"}}})
+local function tier2EscortDuty(name, ships, attackers)
+	blackEpsilonMission("escort_duty_" .. name, SpaceDutyEscortScreenplay, {questName = name, questType = "escort_duty", questZone = corellia, creditReward = 2500, creditKillBonus = 200, itemReward = {}, sideQuest = false, sideQuestType = "", escortShips = ships, escortSpeed = 70, escortPoints = {{patrolPointName = name .. "_route_1", zoneName = corellia, x = -4800, z = 800, y = 3800, escortNumber = 1, radius = 250}, {patrolPointName = name .. "_route_2", zoneName = corellia, x = -1000, z = 100, y = 500, escortNumber = 2, radius = 250}, {patrolPointName = name .. "_route_3", zoneName = corellia, x = 3500, z = -700, y = -3100, escortNumber = 3, radius = 250}}, attackDelay = 25, attackShips = attackers})
 end
-tier2EscortDuty("corellia_imperial_9", {"imp_freighterlight_tier2", "imp_freightermedium_tier2"})
-tier2EscortDuty("corellia_imperial_11", {"imp_transport_tier2", "imp_freightermedium_tier2"})
+tier2EscortDuty("corellia_imperial_9", {"freighterlight_tier2", "freightermedium_tier2"}, {{"borvo_fighter_tier2", "borvo_defender_tier2"}, {"borvo_bomber_tier2", "borvo_fighter_tier2"}})
+tier2EscortDuty("corellia_imperial_11", {"imperial_scan_freighter_tier2"}, {{"reb_z95_tier2", "reb_z95_tier2"}, {"reb_ywing_tier2", "reb_z95_tier2"}})
 
 destroy_duty_corellia_imperial_tier2_destroyduty = destroy_duty_corellia_imperial_8
 recovery_duty_corellia_imperial_tier2_recoveryduty = escort_duty_corellia_imperial_9
@@ -248,7 +249,7 @@ blackEpsilonMission("escort_duty_corellia_imperial_tier4_2", SpaceDutyEscortScre
 blackEpsilonMission("recovery_duty_corellia_imperial_tier4_3", SpaceDutyRecoveryScreenplay, {
 	questName = "corellia_imperial_tier4_3", questType = "recovery_duty", questZone = dantooine, creditReward = 5000, creditKillBonus = 300,
 	sideQuest = false, sideQuestType = "", arrivalDelay = 5, recoveryDelay = 20, escortSpeed = 75,
-	recoverShip = "velocity_commander_tier4", recoveryConversationMobile = "object/mobile/dressed_imperial_officer_m.iff",
+	recoverShip = "velocity_smuggler_tier4", recoveryConversationMobile = "object/mobile/dressed_imperial_officer_m.iff",
 	escortShips = {"velocity_merc_med_fighter_tier4"},
 	preRecoveryPoints = {{patrolPointName = "black_epsilon_t4_duty_recovery_capture", zoneName = dantooine, x = -4200, z = 600, y = 3300, escortNumber = 1, radius = 250}},
 	recoveryPoints = {{patrolPointName = "black_epsilon_t4_duty_recovery_escape", zoneName = dantooine, x = -900, z = 100, y = 300, escortNumber = 1, radius = 250}},

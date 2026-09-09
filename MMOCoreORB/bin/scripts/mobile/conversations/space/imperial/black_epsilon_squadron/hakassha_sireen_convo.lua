@@ -796,9 +796,9 @@ hakassha_sireen_convo_tier2_duty_repeat = ConvoScreen:new {
 	leftDialog = "@conversation/naboo_imperial_trainer_2:s_be89481",
 	stopConversation = "false",
 	options = {
-		{"@conversation/naboo_imperial_trainer_2:s_f0a7a4ef", "accept_tier2_duty1"},
-		{"@conversation/naboo_imperial_trainer_2:s_e84f3a62", "accept_tier2_duty2"},
-		{"@conversation/naboo_imperial_trainer_2:s_e6765c30", "accept_tier2_duty3"},
+		{"@spacequest/destroy_duty/corellia_imperial_8:title", "accept_tier2_duty1"},
+		{"@spacequest/escort_duty/corellia_imperial_9:title", "accept_tier2_duty2"},
+		{"@spacequest/destroy_duty/corellia_imperial_10:title", "accept_tier2_duty3"},
 		{"@spacequest/escort_duty/corellia_imperial_11:title", "accept_tier2_duty4"},
 		{"@conversation/naboo_imperial_trainer_2:s_b2a924ab", "tier2_duty_brief1"},
 	}
@@ -840,9 +840,9 @@ hakassha_sireen_convo_tier2_duty_menu = ConvoScreen:new {
 	leftDialog = "@conversation/naboo_imperial_trainer_2:s_5b4ccb84",
 	stopConversation = "false",
 	options = {
-		{"@conversation/naboo_imperial_trainer_2:s_f0a7a4ef", "accept_tier2_duty1"},
-		{"@conversation/naboo_imperial_trainer_2:s_e84f3a62", "accept_tier2_duty2"},
-		{"@conversation/naboo_imperial_trainer_2:s_e6765c30", "accept_tier2_duty3"},
+		{"@spacequest/destroy_duty/corellia_imperial_8:title", "accept_tier2_duty1"},
+		{"@spacequest/escort_duty/corellia_imperial_9:title", "accept_tier2_duty2"},
+		{"@spacequest/destroy_duty/corellia_imperial_10:title", "accept_tier2_duty3"},
 		{"@spacequest/escort_duty/corellia_imperial_11:title", "accept_tier2_duty4"},
 		{"@conversation/naboo_imperial_trainer_2:s_b2a924ab", "tier2_duty_brief1"},
 	}
@@ -851,7 +851,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_duty_menu)
 
 hakassha_sireen_convo_accept_tier2_duty1 = ConvoScreen:new {
 	id = "accept_tier2_duty1",
-	leftDialog = "@conversation/naboo_imperial_trainer_2:s_aceff31e",
+	leftDialog = "@spacequest/destroy_duty/corellia_imperial_8:title",
 	stopConversation = "true",
 	options = {}
 }
@@ -859,7 +859,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_accept_tier2_duty1)
 
 hakassha_sireen_convo_accept_tier2_duty2 = ConvoScreen:new {
 	id = "accept_tier2_duty2",
-	leftDialog = "@conversation/naboo_imperial_trainer_2:s_205f33ca",
+	leftDialog = "@spacequest/escort_duty/corellia_imperial_9:title",
 	stopConversation = "true",
 	options = {}
 }
@@ -867,7 +867,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_accept_tier2_duty2)
 
 hakassha_sireen_convo_accept_tier2_duty3 = ConvoScreen:new {
 	id = "accept_tier2_duty3",
-	leftDialog = "@conversation/naboo_imperial_trainer_2:s_4682fc3c",
+	leftDialog = "@spacequest/destroy_duty/corellia_imperial_10:title",
 	stopConversation = "true",
 	options = {}
 }
@@ -1475,10 +1475,10 @@ hakassha_sireen_convo_tier4_duty_repeat = ConvoScreen:new {
 	leftDialog = "@conversation/naboo_imperial_tier4:s_ace49d41",
 	stopConversation = "false",
 	options = {
-		{"@conversation/naboo_imperial_tier4:s_82095b20", "accept_tier4_duty1"},
-		{"@conversation/naboo_imperial_tier4:s_be7e95c", "accept_tier4_duty2"},
-		{"@conversation/naboo_imperial_tier4:s_60a8bfcb", "accept_tier4_duty3"},
-		{"@conversation/naboo_imperial_tier4:s_851406fb", "accept_tier4_duty4"},
+		{"@spacequest/destroy_duty/corellia_imperial_tier4_1:title", "accept_tier4_duty1"},
+		{"@spacequest/escort_duty/corellia_imperial_tier4_2:title", "accept_tier4_duty2"},
+		{"@spacequest/recovery_duty/corellia_imperial_tier4_3:title", "accept_tier4_duty3"},
+		{"@spacequest/rescue_duty/corellia_imperial_tier4_4:title", "accept_tier4_duty4"},
 		{"@conversation/naboo_imperial_tier4:s_49805f81", "tier4_duty_brief1"},
 	}
 }
@@ -1519,10 +1519,10 @@ hakassha_sireen_convo_tier4_duty_menu = ConvoScreen:new {
 	leftDialog = "@conversation/naboo_imperial_tier4:s_ee9d18a3",
 	stopConversation = "false",
 	options = {
-		{"@conversation/naboo_imperial_tier4:s_82095b20", "accept_tier4_duty1"},
-		{"@conversation/naboo_imperial_tier4:s_be7e95c", "accept_tier4_duty2"},
-		{"@conversation/naboo_imperial_tier4:s_60a8bfcb", "accept_tier4_duty3"},
-		{"@conversation/naboo_imperial_tier4:s_851406fb", "accept_tier4_duty4"},
+		{"@spacequest/destroy_duty/corellia_imperial_tier4_1:title", "accept_tier4_duty1"},
+		{"@spacequest/escort_duty/corellia_imperial_tier4_2:title", "accept_tier4_duty2"},
+		{"@spacequest/recovery_duty/corellia_imperial_tier4_3:title", "accept_tier4_duty3"},
+		{"@spacequest/rescue_duty/corellia_imperial_tier4_4:title", "accept_tier4_duty4"},
 		{"@conversation/naboo_imperial_tier4:s_49805f81", "tier4_duty_brief1"},
 	}
 }
@@ -1530,7 +1530,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier4_duty_menu)
 
 hakassha_sireen_convo_accept_tier4_duty1 = ConvoScreen:new {
 	id = "accept_tier4_duty1",
-	leftDialog = "@conversation/naboo_imperial_tier4:s_ee5488a5",
+	leftDialog = "@spacequest/destroy_duty/corellia_imperial_tier4_1:title",
 	stopConversation = "true",
 	options = {}
 }
@@ -1538,7 +1538,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_accept_tier4_duty1)
 
 hakassha_sireen_convo_accept_tier4_duty2 = ConvoScreen:new {
 	id = "accept_tier4_duty2",
-	leftDialog = "@conversation/naboo_imperial_tier4:s_ee5488a5",
+	leftDialog = "@spacequest/escort_duty/corellia_imperial_tier4_2:title",
 	stopConversation = "true",
 	options = {}
 }
@@ -1546,7 +1546,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_accept_tier4_duty2)
 
 hakassha_sireen_convo_accept_tier4_duty3 = ConvoScreen:new {
 	id = "accept_tier4_duty3",
-	leftDialog = "@conversation/naboo_imperial_tier4:s_ee5488a5",
+	leftDialog = "@spacequest/recovery_duty/corellia_imperial_tier4_3:title",
 	stopConversation = "true",
 	options = {}
 }
@@ -1554,7 +1554,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_accept_tier4_duty3)
 
 hakassha_sireen_convo_accept_tier4_duty4 = ConvoScreen:new {
 	id = "accept_tier4_duty4",
-	leftDialog = "@conversation/naboo_imperial_tier4:s_ee5488a5",
+	leftDialog = "@spacequest/rescue_duty/corellia_imperial_tier4_4:title",
 	stopConversation = "true",
 	options = {}
 }

@@ -39,4 +39,12 @@ function SpaceDutyRescueScreenplay:completeQuest(pPlayer, notifyClient)
 	self:rewardPlayer(pPlayer)
 
 	SpaceRescueScreenplay.completeQuest(self, pPlayer, notifyClient)
+
+	local pPlayerShip = SceneObject(pPlayer):getRootParent()
+
+	if (SceneObject(pPlayer):getZoneName() == self.questZone and pPlayerShip ~= nil and SceneObject(pPlayerShip):isShipObject() and not SpaceHelpers:isInYacht(pPlayer)) then
+		self:startQuest(pPlayer, "")
+	else
+		SpaceHelpers:failSpaceQuest(pPlayer, self.questType, self.questName, false)
+	end
 end
