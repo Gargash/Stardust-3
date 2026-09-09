@@ -102,8 +102,11 @@ stormT4("escort_tatooine_imperial_tier4_3", SpaceEscortScreenplay, links({
 
 stormT4("rescue_tatooine_imperial_tier4_3_a", SpaceRescueScreenplay, links({
 	questName = "tatooine_imperial_tier4_3_a", questType = "rescue", questZone = "space_endor", arrivalDelay = 5,
-	rescueShip = "imp_lambda_shuttle_tier4", rescueLocation = {x = 5000, z = -2100, y = -4400}, repairDelay = 20, escortSpeed = 75,
-	escortPoints = {{patrolPointName = "storm_t4_3_a_escape", zoneName = "space_endor", x = 2700, z = -1200, y = -2300, escortNumber = 1, radius = 250}},
+	rescueShip = "imp_lambda_shuttle_tier4", rescueLocation = {x = 6480, z = -1213, y = -4966}, repairDelay = 20, escortSpeed = 75,
+	escortPoints = {
+		{patrolPointName = "tatooine_imperial_tier4_rescue1_2", zoneName = "space_endor", x = 379, z = -1769, y = -5254, escortNumber = 1, radius = 250},
+		{patrolPointName = "tatooine_imperial_tier4_rescue1_3", zoneName = "space_endor", x = -2016, z = -1895, y = -5391, escortNumber = 2, radius = 250},
+	},
 	escortAttackDelay = 15, escortAttackShips = {{{count = 1, shipName = "reb_z95_tier4"}}},
 }, "space_battle", "tatooine_imperial_tier4_3_b", "escort_tatooine_imperial_tier4_3", "escort", "tatooine_imperial_tier4_3"))
 
