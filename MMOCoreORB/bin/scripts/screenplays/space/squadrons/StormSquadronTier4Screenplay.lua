@@ -75,7 +75,7 @@ stormT4("delivery_tatooine_imperial_tier4_2_b", SpaceDeliveryScreenplay, links({
 }, "recovery", "tatooine_imperial_tier4_2_c", "recovery_tatooine_imperial_tier4_2_a", "recovery", "tatooine_imperial_tier4_2_a"))
 
 stormT4("recovery_tatooine_imperial_tier4_2_c", SpaceRecoveryScreenplay, links({
-	questName = "tatooine_imperial_tier4_2_c", questType = "recovery", questZone = "space_endor", arrivalDelay = 5, recoveryDelay = 10, escortSpeed = 75,
+	questName = "tatooine_imperial_tier4_2_c", questType = "recovery", questZone = "space_endor", arrivalDelay = 5, recoveryDelay = 10, escortSpeed = 50,
 	recoverShip = "reb_transport_tier4", recoveryConversationMobile = "object/mobile/dressed_imperial_officer_m.iff", escortShips = {},
 	preRecoveryPoints = {{patrolPointName = "storm_t4_2_c_engineer", zoneName = "space_endor", x = 2100, z = 500, y = 3150, escortNumber = 1, radius = 250}},
 	recoveryPoints = {
