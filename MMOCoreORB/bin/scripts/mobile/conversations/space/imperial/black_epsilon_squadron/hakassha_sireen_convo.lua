@@ -213,10 +213,10 @@ hakassha_sireen_convo_retry_quest1 = ConvoScreen:new {
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_retry_quest1)
 
---[[ Tier 1 -- Mission 2: Destroy the B-Wing prototype (handler starts destroy_corellia_imperial_2 on "quest2_accepted") ]]
+--[[ Tier 1 -- Mission 2: Destroy the Rebel cadets (handler starts destroy_corellia_imperial_2 on "quest2_accepted") ]]
 hakassha_sireen_convo_grant_quest2 = ConvoScreen:new {
 	id = "grant_quest2",
-	leftDialog = "@conversation/corellia_imperial_trainer_1:s_fbd7d1ba", -- I think you'll like this mission, hon. You get to test your mettle against some new Rebel technology. Real cutting edge stuff, too.
+	leftDialog = "@conversation/corellia_imperial_trainer_1:s_11c38900", -- I have discovered that the Rebels are training X-Wing cadets in Corellian space. Destroying the cadets will cripple that effort.
 	stopConversation = "false",
 	options = {
 		{"@conversation/corellia_imperial_trainer_1:s_96682689", "quest2_accepted"}, -- Tell me about the job.
@@ -226,7 +226,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_grant_quest2)
 
 hakassha_sireen_convo_quest2_accepted = ConvoScreen:new {
 	id = "quest2_accepted",
-	leftDialog = "@conversation/corellia_imperial_trainer_1:s_540bd789", -- Apparently the Rebels are testing a new prototype starfighter called the B-Wing. It's a heavy assault fighter, loaded with weapons and layered in armor. B-Wing prototypes have been spotted in the Corellian system. We want you to find one and destroy it.
+	leftDialog = "@conversation/corellia_imperial_trainer_1:s_a074ac18", -- The trainees should not be a match for you, but their instructors might. Hunt them down in the Corellian system.
 	stopConversation = "true",
 	options = {}
 }
@@ -235,7 +235,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_quest2_accepted)
 -- Quest 2 rewarded; leads into Mission 3 (the escort). The handler starts quest 3 on "train_me3".
 hakassha_sireen_convo_excellent_work2 = ConvoScreen:new {
 	id = "excellent_work2",
-	leftDialog = "@conversation/corellia_imperial_trainer_1:s_83dc5be7", -- Here is your pay for the B-Wing mission. I've also gotten a hold of a TIE pilot helmet. It looks pretty menacing, should make you feel more the part for these operations.
+	leftDialog = "@conversation/corellia_imperial_trainer_1:s_1345d43f", -- Excellent work. Here is your payment for a successful operation.
 	stopConversation = "false",
 	options = {
 		{"@conversation/corellia_imperial_trainer_1:s_7a80cd06", "train_me3"}, -- I'm ready for the next step in the operation.
@@ -255,7 +255,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_train_me3)
 
 hakassha_sireen_convo_failed_quest2 = ConvoScreen:new {
 	id = "failed_quest2",
-	leftDialog = "@conversation/corellia_imperial_trainer_1:s_3ac44381", -- Failure at this point is only going to encourage the Rebels to invest further in experimental ship designs. You need to get back up there and bag a B-Wing. Show the Rebels that technology isn't going to be their salvation.
+	leftDialog = "@conversation/corellia_imperial_trainer_1:s_da237511", -- I take my job seriously, babe. Get back out there and do it right this time.
 	stopConversation = "false",
 	options = {
 		{"@conversation/corellia_imperial_trainer_1:s_1adbadc4", "retry_quest2"}, -- I'm ready.
@@ -266,7 +266,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_quest2)
 -- Quest 2 retry acknowledged (handler restarts destroy_corellia_imperial_2)
 hakassha_sireen_convo_retry_quest2 = ConvoScreen:new {
 	id = "retry_quest2",
-	leftDialog = "@conversation/corellia_imperial_trainer_1:s_5dd3c672", -- Report back to me when you've taken out the prototype ship. Good luck, hon.
+	leftDialog = "@conversation/corellia_imperial_trainer_1:s_a074ac18", -- Hunt down the trainees and their instructors in the Corellian system.
 	stopConversation = "true",
 	options = {}
 }
@@ -311,10 +311,10 @@ hakassha_sireen_convo_retry_quest3 = ConvoScreen:new {
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_retry_quest3)
 
---[[ Tier 1 -- Mission 4: Destroy the Rebel X-Wing trainees (handler starts assassinate_corellia_imperial_4 on "quest4_accepted") ]]
+--[[ Tier 1 -- Mission 4: Destroy the ARC-170 prototype (handler starts assassinate_corellia_imperial_4 on "quest4_accepted") ]]
 hakassha_sireen_convo_grant_quest4 = ConvoScreen:new {
 	id = "grant_quest4",
-	leftDialog = "@conversation/corellia_imperial_trainer_1:s_6942389e", -- And you've earned it!  I'll make a deal with you, %NU.  Do just one more assignment for me, and I'll train you to be a better starfighter pilot.  Are you up for a challenge?
+	leftDialog = "@conversation/corellia_imperial_trainer_1:s_fbd7d1ba", -- Test your mettle against some heavily modified Insurgent technology.
 	stopConversation = "false",
 	options = {
 		{"@conversation/corellia_imperial_trainer_1:s_86c66182", "quest4_accepted"}, -- What's the next step?
@@ -324,7 +324,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_grant_quest4)
 
 hakassha_sireen_convo_quest4_accepted = ConvoScreen:new {
 	id = "quest4_accepted",
-	leftDialog = "@conversation/corellia_imperial_trainer_1:s_11c38900", -- I have discovered that the Rebels are training X-Wing cadets in Corellian space. The Rebels are quickly working to recruit new pilots to their cause. Destroying the cadets will cripple that effort. Corellian citizens will think twice about signing up if the Rebels can't even protect their young and inexperienced.
+	leftDialog = "@conversation/corellia_imperial_trainer_1:s_540bd789", -- The Insurgents are testing a heavily armed and armored ARC-170 prototype in the Corellian system. Find it and destroy it.
 	stopConversation = "true",
 	options = {}
 }
@@ -332,7 +332,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_quest4_accepted)
 
 hakassha_sireen_convo_failed_quest4 = ConvoScreen:new {
 	id = "failed_quest4",
-	leftDialog = "@conversation/corellia_imperial_trainer_1:s_da237511", -- I take my job seriously, babe. Get back out there and do it right this time.
+	leftDialog = "@conversation/corellia_imperial_trainer_1:s_3ac44381", -- Failure will encourage more investment in experimental ships. Get back up there and bag the ARC-170.
 	stopConversation = "false",
 	options = {
 		{"@conversation/corellia_imperial_trainer_1:s_1adbadc4", "retry_quest4"}, -- I'm ready.
@@ -343,7 +343,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_quest4)
 -- Quest 4 retry acknowledged (handler restarts assassinate_corellia_imperial_4)
 hakassha_sireen_convo_retry_quest4 = ConvoScreen:new {
 	id = "retry_quest4",
-	leftDialog = "@conversation/corellia_imperial_trainer_1:s_a074ac18", -- The trainees shouldn't be a match for you, but their instructors might. You are going to have to hunt them down in the Corellian system. Intelligence has not yet been able to locate their training grounds but there are reports of a Rebel station somewhere in the system. Might be a good start. Be on guard and don't worry if one escapes and reports you. The Empire is fully justified in destroying terrorist training grounds found within its jurisdiction.
+	leftDialog = "@conversation/corellia_imperial_trainer_1:s_5dd3c672", -- Report back when you have destroyed the prototype ship.
 	stopConversation = "true",
 	options = {}
 }
