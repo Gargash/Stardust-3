@@ -232,15 +232,12 @@ hakassha_sireen_convo_quest2_accepted = ConvoScreen:new {
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_quest2_accepted)
 
--- Quest 2 rewarded; leads into Mission 3 (the escort). The handler starts quest 3 on "train_me3".
+-- Quest 2 rewarded. The next conversation offers training or duty before Mission 3.
 hakassha_sireen_convo_excellent_work2 = ConvoScreen:new {
 	id = "excellent_work2",
 	leftDialog = "@conversation/corellia_imperial_trainer_1:s_1345d43f", -- Excellent work. Here is your payment for a successful operation.
-	stopConversation = "false",
-	options = {
-		{"@conversation/corellia_imperial_trainer_1:s_7a80cd06", "train_me3"}, -- I'm ready for the next step in the operation.
-		{"@conversation/corellia_imperial_trainer_1:s_192ddc14", "train_me3"}, -- Are you going to train me?
-	}
+	stopConversation = "true",
+	options = {}
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_excellent_work2)
 

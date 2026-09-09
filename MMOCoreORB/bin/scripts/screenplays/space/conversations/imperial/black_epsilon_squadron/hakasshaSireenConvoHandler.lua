@@ -80,6 +80,13 @@ function hakasshaSireenConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplat
 	local questTwoComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, BlackEpsilonSquadronScreenplay.QUEST_STRING_2.type, BlackEpsilonSquadronScreenplay.QUEST_STRING_2.name)
 	local questThreeComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, BlackEpsilonSquadronScreenplay.QUEST_STRING_3.type, BlackEpsilonSquadronScreenplay.QUEST_STRING_3.name) and SpaceHelpers:isSpaceQuestComplete(pPlayer, BlackEpsilonSquadronScreenplay.QUEST_STRING_3_SIDE.type, BlackEpsilonSquadronScreenplay.QUEST_STRING_3_SIDE.name)
 	local questFourComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, BlackEpsilonSquadronScreenplay.QUEST_STRING_4.type, BlackEpsilonSquadronScreenplay.QUEST_STRING_4.name)
+	local tier1SkillCount = SpaceHelpers:getPilotTierSkillCount(pPlayer, "imperial_navy", 1)
+	local requiredTier1Skills = questFourComplete and 4 or questThreeComplete and 3 or questTwoComplete and 2 or questOneComplete and 1 or 0
+	local latestTier1RewardReceived =
+		(questFourComplete and getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.QUEST_STRING_4.name .. ":reward") == "1") or
+		(not questFourComplete and questThreeComplete and getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.QUEST_STRING_3.name .. ":reward") == "1") or
+		(not questThreeComplete and questTwoComplete and getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.QUEST_STRING_2.name .. ":reward") == "1") or
+		(not questTwoComplete and questOneComplete and getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.QUEST_STRING_1.name .. ":reward") == "1")
 
 	local destroyDutyStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, BlackEpsilonSquadronScreenplay.QUEST_STRING_DUTY_1.type, BlackEpsilonSquadronScreenplay.QUEST_STRING_DUTY_1.name)
 	local escortDutyStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, BlackEpsilonSquadronScreenplay.QUEST_STRING_DUTY_2.type, BlackEpsilonSquadronScreenplay.QUEST_STRING_DUTY_2.name)
@@ -468,17 +475,15 @@ function hakasshaSireenConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplat
 	elseif (getQuestStatus(playerID .. "BlackEpsilonSquadronScreenplay:sireen_finished") == "1") then
 		return convoTemplate:getScreen("go_to_next")
 	-- Check if players have all the tier1 skill boxes, send them to next trainer.
-	elseif (SpaceHelpers:hasCompletedPilotTier(pPlayer, "imperial_navy", 1)) then
+	elseif (questFourComplete and getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.QUEST_STRING_4.name .. ":reward") == "1" and SpaceHelpers:hasCompletedPilotTier(pPlayer, "imperial_navy", 1)) then
 		return convoTemplate:getScreen("completed_sinkko")
 	-- Player is not a member of the Imperial Faction
 	elseif (faction ~= FACTIONIMPERIAL) then
 		return convoTemplate:getScreen("recruitment_not_imperial")
-	-- Player is an Inquisition pilot and has at least one of the Tier1 skill boxes
-	elseif (SpaceHelpers:hasPilotTierSkill(pPlayer, "imperial_navy", 1)) then
-		-- Check if the player can be trained in the remaining Tier1 Skills
+	-- Require one Tier 1 skill after each rewarded mission before offering the next mission.
+	elseif (latestTier1RewardReceived and tier1SkillCount < requiredTier1Skills) then
 		if (SpaceHelpers:hasExperienceForTraining(pPlayer, 1)) then
 			return convoTemplate:getScreen("more_training")
-		-- Offer Duty missions
 		else
 			CreatureObject(pPlayer):doAnimation("salute1")
 
@@ -497,7 +502,15 @@ function hakasshaSireenConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplat
 			ghost:increaseFactionStanding("imperial", 75)
 		end
 
-		return convoTemplate:getScreen("missions_complete")
+		if (tier1SkillCount < 4) then
+			if (SpaceHelpers:hasExperienceForTraining(pPlayer, 1)) then
+				return convoTemplate:getScreen("more_training")
+			end
+
+			return convoTemplate:getScreen("duty_missions")
+		end
+
+		return convoTemplate:getScreen("completed_sinkko")
 	-- Player has attempted quest 4 but failed/aborted
 	elseif (getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.QUEST_STRING_4.name .. ":attempted") == "1" and not questFourComplete) then
 		return convoTemplate:getScreen("failed_quest4")
@@ -512,7 +525,7 @@ function hakasshaSireenConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplat
 		return convoTemplate:getScreen("failed_quest3")
 	-- Player has finished 2, has received the reward and needs to start quest 3
 	elseif (questTwoComplete and not questThreeStarted and getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.QUEST_STRING_2.name .. ":reward") == "1") then
-		return convoTemplate:getScreen("excellent_work2")
+		return convoTemplate:getScreen("train_me3")
 	-- Player has completed quest 2 and needs reward
 	elseif (questTwoComplete and getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.QUEST_STRING_2.name .. ":reward") ~= "1") then
 		-- Give player the reward and update that they received it
