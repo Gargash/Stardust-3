@@ -742,6 +742,10 @@ ShipAiAgent* ShipManager::createAiShip(const String& shipName, uint32 shipCRC) {
 		return nullptr;
 	}
 
+	if (shipTemp->getShipName() == "player_arc170") {
+		shipAgent->setClientObjectCRC("object/ship/player/shared_player_arc170.iff"_hashCode);
+	}
+
 	Locker lock(shipAgent);
 
 	// info(true) << "ShipManager::createAiShip -- ShipName: " << agentTemplate->getTemplateName() << " Game Object Type: " << shipTemp->getGameObjectType() << " Ship Hash: " << shipTemp->getServerObjectCRC() << " Full Template: " << shipTemp->getFullTemplateString();

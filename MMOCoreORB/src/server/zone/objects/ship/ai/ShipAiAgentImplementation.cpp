@@ -117,7 +117,6 @@ void ShipAiAgentImplementation::loadTemplateData(SharedObjectTemplate* templateD
 		setComponentArmor(slot, armor);
 		setComponentMaxArmor(slot, armor);
 		setEfficiency(slot, 1.f);
-		setComponentOptions(slot, 0);
 
 		bool targetable = isComponentTargetable(slot);
 		setComponentTargetable(slot, targetable, false);
