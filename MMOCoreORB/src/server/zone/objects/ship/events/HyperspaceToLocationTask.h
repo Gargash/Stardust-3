@@ -64,6 +64,8 @@ public:
 			shipObject->sendShipMembersMessage(strid);
 
 			if (currentIter >= 4) {
+				shipObject->sendShipMembersMusicMessage("sound/mus_enter_hyperspace.snd");
+
 				//close s-foils as the ship is orienting if they're still open
 				uint32 optionsBitmask = shipObject->getOptionsBitmask();
 
@@ -103,7 +105,6 @@ public:
 			location.setY(location.getY() + System::random(100.f));
 
 			shipObject->sendMembersHyperspaceBeginMessage(zoneName, location);
-			shipObject->sendShipMembersMusicMessage("sound/mus_enter_hyperspace.snd");
 
 			reschedule(6000);
 			return;
