@@ -1907,6 +1907,14 @@ destroy_duty_tatooine_imperial_tier4_1 = SpaceDutyDestroyScreenplay:new {
 
 registerScreenPlay("destroy_duty_tatooine_imperial_tier4_1", true)
 
+-- Mission abort callbacks are resolved from the client quest path as
+-- <questType>_<questName>. Expose those names while retaining the descriptive
+-- screenplay globals used by the trainer conversation handler.
+escort_duty_tatooine_imperial_tier4_escortduty_1 = escort_duty_tatooine_imperial_tier4_1
+rescue_duty_tatooine_imperial_tier4_rescueduty_1 = rescue_duty_tatooine_imperial_tier4_1
+recovery_duty_tatooine_imperial_tier4_recoveryduty_1 = recovery_duty_tatooine_imperial_tier4_1
+destroy_duty_tatooine_imperial_tier4_destroyduty_1 = destroy_duty_tatooine_imperial_tier4_1
+
 --[[
 
 	StormSquadronScreenplay
