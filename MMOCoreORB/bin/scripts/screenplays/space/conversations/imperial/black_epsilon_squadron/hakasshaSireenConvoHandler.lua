@@ -750,7 +750,7 @@ function hakasshaSireenConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pN
 
 		setQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_6.name .. ":reward", 1)
 
-		destroy_corellia_imperial_17:rewardPlayer(pPlayer)
+		survival_corellia_tier2_final:rewardPlayer(pPlayer)
 	elseif (screenID == "tier2_fifth_mission_success") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 
@@ -831,8 +831,8 @@ function hakasshaSireenConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pN
 		setQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_6.name .. ":attempted", 1)
 
 		BlackEpsilonSquadronScreenplay:prepareMissionChainAttempt(pPlayer,
-			{assassinate_corellia_imperial_17, destroy_corellia_imperial_17},
-			{{type = "assassinate", name = "corellia_imperial_17"}, {type = "destroy", name = "corellia_imperial_17"}})
+			{assassinate_corellia_imperial_17, survival_corellia_tier2_final},
+			{{type = "assassinate", name = "corellia_imperial_17"}, {type = "survival", name = "corellia_tier2_final"}})
 		assassinate_corellia_imperial_17:startQuest(pPlayer, pNpc)
 	-- Tier 2 duty missions
 	elseif (screenID == "accept_tier2_duty1") then

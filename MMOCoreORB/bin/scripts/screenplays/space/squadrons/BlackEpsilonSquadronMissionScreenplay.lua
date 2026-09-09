@@ -113,12 +113,20 @@ blackEpsilonMission("assassinate_corellia_imperial_17", SpaceAssassinateScreenpl
 	questName = "corellia_imperial_17", questType = "assassinate", questZone = corellia, arrivalDelay = 5,
 	assassinateSpawns = {target = "reb_z95_tier2", escorts = {}},
 	targetPatrols = {{patrolPointName = "black_epsilon_t2_drone", zoneName = corellia, x = 900, z = 1200, y = 5100}},
-}, "destroy", "corellia_imperial_17"))
+}, "survival", "corellia_tier2_final"))
 
-blackEpsilonMission("destroy_corellia_imperial_17", SpaceDestroyScreenplay, chain({
-	questName = "corellia_imperial_17", questType = "destroy", questZone = corellia,
-	killsRequired = 8, shipTypes = {"reb_z95_tier1", "reb_z95_tier2", "reb_ywing_tier1", "reb_ywing_tier2", "reb_awing_tier1", "reb_bwing_tier1"},
-	shipLocations = {{x = 3700, z = 900, y = 1000}},
+blackEpsilonMission("survival_corellia_tier2_final", SpaceSurvivalScreenplay, chain({
+	questName = "corellia_tier2_final", questType = "survival", questZone = corellia,
+	creditReward = 0,
+	survivalPoint = {x = 3700, z = 900, y = 1000}, survivalAreaRadius = 500,
+	survivalTime = 0, survivalWaves = 4, survivalUpdateInterval = 0,
+	delayToFirstAttack = 5, attackDelay = 45,
+	attackShips = {
+		{"reb_awing_tier1", "reb_bwing_tier1", "reb_xwing_cadet_tier1", "reb_xwing_cadet_tier1"},
+		{"reb_awing_tier1", "reb_ywing_tier1", "reb_ywing_tier1", "reb_xwing_tier1"},
+		{"reb_xwing_tier1", "reb_bwing_tier1", "reb_ywing_tier1", "reb_ywing_tier1"},
+		{"reb_awing_tier1", "reb_bwing_tier1", "reb_xwing_cadet_tier1", "reb_xwing_cadet_tier1"},
+	},
 }, nil, nil, "assassinate_corellia_imperial_17", "assassinate", "corellia_imperial_17"))
 
 -- Tier 3: Haymir Rendundi.
