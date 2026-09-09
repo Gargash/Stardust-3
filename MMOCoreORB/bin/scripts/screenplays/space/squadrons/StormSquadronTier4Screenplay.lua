@@ -91,10 +91,11 @@ stormT4("escort_tatooine_imperial_tier4_3", SpaceEscortScreenplay, links({
 	questName = "tatooine_imperial_tier4_3", questType = "escort", questZone = "space_endor", creditReward = 10000,
 	escortShips = {"imp_lambda_shuttle_tier4"}, escortSpeed = 75, orderedEscortRoute = true,
 	escortPoints = {
-		{patrolPointName = "storm_t4_3_escort_1", zoneName = "space_endor", x = -5200, z = 3400, y = -4000, escortNumber = 1, radius = 250},
-		{patrolPointName = "storm_t4_3_escort_2", zoneName = "space_endor", x = -2600, z = 2500, y = -2100, escortNumber = 2, radius = 250},
-		{patrolPointName = "storm_t4_3_escort_3", zoneName = "space_endor", x = 300, z = 1500, y = -300, escortNumber = 3, radius = 250},
-		{patrolPointName = "storm_t4_3_escort_4", zoneName = "space_endor", x = 3200, z = 700, y = 1800, escortNumber = 4, radius = 250},
+		{patrolPointName = "tatooine_imperial_tier4_escort1_1", zoneName = "space_endor", x = -5348, z = -1967, y = -5055, escortNumber = 1, radius = 250},
+		{patrolPointName = "tatooine_imperial_tier4_escort1_2", zoneName = "space_endor", x = -927, z = -1526, y = -5451, escortNumber = 2, radius = 250},
+		{patrolPointName = "tatooine_imperial_tier4_escort1_3", zoneName = "space_endor", x = 1789, z = -1285, y = -5497, escortNumber = 3, radius = 250},
+		{patrolPointName = "tatooine_imperial_tier4_escort1_4", zoneName = "space_endor", x = 4366, z = -1130, y = -5212, escortNumber = 4, radius = 250},
+		{patrolPointName = "tatooine_imperial_tier4_escort1_5", zoneName = "space_endor", x = 6356, z = -1088, y = -4928, escortNumber = 5, radius = 250},
 	},
 	attackDelay = 45, attackShips = {{"reb_awing_tier4", "reb_awing_tier4", "reb_awing_tier4", "reb_awing_tier4", "reb_awing_tier4", "reb_awing_tier4"}, {"reb_z95_tier4", "reb_z95_tier4", "reb_z95_tier4", "reb_z95_tier4", "reb_z95_tier4"}, {"reb_ywing_tier4", "reb_ywing_tier4", "reb_z95_tier4", "reb_z95_tier4", "reb_z95_tier4"}, {"reb_awing_tier4", "reb_awing_tier4", "reb_awing_tier4", "reb_awing_tier4"}},
 }, "rescue", "tatooine_imperial_tier4_3_a"))
