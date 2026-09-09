@@ -729,10 +729,10 @@ hakassha_sireen_convo_tier2_fourth_mission_success = ConvoScreen:new {
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_fourth_mission_success)
 
--- Tier 2 - Final Mission: recover the personnel dossier and spring the Rebel trap
+-- Tier 2 - Mission 5: recover the personnel dossier
 hakassha_sireen_convo_tier2_fifth_mission = ConvoScreen:new {
 	id = "tier2_fifth_mission",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_d9391d4a", -- Your tour is nearly finished; I have one final task.
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_9a117462", -- I have an assignment for you and it cannot wait.
 	stopConversation = "false",
 	options = {
 		{"@conversation/corellia_imperial_trainer_2:s_6d3be6aa", "accept_tier2_fifth_mission"}, -- What is the task?
@@ -763,6 +763,51 @@ hakassha_sireen_convo_tier2_fifth_mission_success = ConvoScreen:new {
 	options = {}
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_fifth_mission_success)
+
+-- Tier 2 - Mission 6: eliminate the X-Wing drone and jam the Rebel response
+hakassha_sireen_convo_tier2_sixth_mission = ConvoScreen:new {
+	id = "tier2_sixth_mission",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_d9391d4a", -- Your tour is nearly finished; I have one final task.
+	stopConversation = "false",
+	options = {
+		{"@conversation/corellia_imperial_trainer_2:s_9d2c9b0a", "tier2_sixth_mission_details"}, -- More enemy fighter squads?
+	}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_sixth_mission)
+
+hakassha_sireen_convo_tier2_sixth_mission_details = ConvoScreen:new {
+	id = "tier2_sixth_mission_details",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_e978ca6b", -- The Rebels are setting a trap specifically for you.
+	stopConversation = "false",
+	options = {
+		{"@conversation/corellia_imperial_trainer_2:s_7ca4fcb8", "accept_tier2_sixth_mission"}, -- What sort of surprise?
+	}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_sixth_mission_details)
+
+hakassha_sireen_convo_accept_tier2_sixth_mission = ConvoScreen:new {
+	id = "accept_tier2_sixth_mission",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_25edc644", -- Destroy the unmanned fighter near the outer asteroid belts.
+	stopConversation = "true",
+	options = {}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_accept_tier2_sixth_mission)
+
+hakassha_sireen_convo_failed_tier2_sixth_mission = ConvoScreen:new {
+	id = "failed_tier2_sixth_mission",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_4cc1cf3b", -- The attack and communications disruption must proceed.
+	stopConversation = "true",
+	options = {}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_tier2_sixth_mission)
+
+hakassha_sireen_convo_tier2_sixth_mission_success = ConvoScreen:new {
+	id = "tier2_sixth_mission_success",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_25457635", -- Good, that is all.
+	stopConversation = "true",
+	options = {}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_sixth_mission_success)
 
 -- Tier 2 - Training
 hakassha_sireen_convo_ready_train_tier2 = ConvoScreen:new {

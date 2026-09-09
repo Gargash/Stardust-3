@@ -107,13 +107,13 @@ blackEpsilonMission("inspect_corellia_imperial_13", SpaceInspectScreenplay, chai
 	questName = "corellia_imperial_13", questType = "inspect", questZone = corellia,
 	inspectTargets = {"reb_freightermedium_tier2"}, inspectCargo = "rebel_personnel_dossier", spawnInspectTarget = true,
 	targetLocation = {x = -4100, z = -700, y = -4300},
-}, "assassinate", "corellia_imperial_17"))
+}))
 
 blackEpsilonMission("assassinate_corellia_imperial_17", SpaceAssassinateScreenplay, chain({
 	questName = "corellia_imperial_17", questType = "assassinate", questZone = corellia, arrivalDelay = 5,
 	assassinateSpawns = {target = "reb_z95_tier2", escorts = {}},
 	targetPatrols = {{patrolPointName = "black_epsilon_t2_drone", zoneName = corellia, x = 900, z = 1200, y = 5100}},
-}, "destroy", "corellia_imperial_17", "inspect_corellia_imperial_13", "inspect", "corellia_imperial_13"))
+}, "destroy", "corellia_imperial_17"))
 
 blackEpsilonMission("destroy_corellia_imperial_17", SpaceDestroyScreenplay, chain({
 	questName = "corellia_imperial_17", questType = "destroy", questZone = corellia,
