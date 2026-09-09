@@ -359,18 +359,35 @@ function hakasshaSireenConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplat
 	--]]
 
 	if (ghost:getPilotTier() == 2) then
-		local t2QuestOneStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_1.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_1.name) or
-			SpaceHelpers:isSpaceQuestActive(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_1_SIDE.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_1_SIDE.name)
+		local separatedMissionStatus = playerID .. "BlackEpsilonSquadronScreenplay:tier2SeparatedMissions"
+
+		-- Characters who completed the former combined chain already have Darmin marked
+		-- complete. Clear only that unrewarded legacy completion so Mission 2 can be
+		-- offered after their first Tier 2 skill is trained.
+		if (getQuestStatus(separatedMissionStatus) ~= "1") then
+			if (SpaceHelpers:isSpaceQuestComplete(pPlayer, "recovery", "corellia_imperial_16") and
+				SpaceHelpers:isSpaceQuestComplete(pPlayer, "assassinate", "corellia_imperial_12") and
+				getQuestStatus(playerID .. "corellia_imperial_12:reward") ~= "1") then
+				SpaceHelpers:clearSpaceQuest(pPlayer, "assassinate", "corellia_imperial_12", false)
+				removeQuestStatus(playerID .. "corellia_imperial_12:attempted")
+			end
+
+			setQuestStatus(separatedMissionStatus, 1)
+		end
+
+		local t2QuestOneStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_1.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_1.name)
 		local t2QuestTwoStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_2.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_2.name)
 		local t2QuestThreeStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_3.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_3.name)
-		t2QuestThreeStarted = t2QuestThreeStarted or SpaceHelpers:isSpaceQuestActive(pPlayer, "patrol", "corellia_imperial_15")
 		local t2QuestFourStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_4.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_4.name) or
+			SpaceHelpers:isSpaceQuestActive(pPlayer, "patrol", "corellia_imperial_15")
+		local t2QuestFiveStarted = SpaceHelpers:isSpaceQuestActive(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_5.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_5.name) or
 			SpaceHelpers:isSpaceQuestActive(pPlayer, "inspect", "corellia_imperial_13") or SpaceHelpers:isSpaceQuestActive(pPlayer, "assassinate", "corellia_imperial_17")
 
-		local t2QuestOneComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_1_SIDE.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_1_SIDE.name)
+		local t2QuestOneComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_1.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_1.name)
 		local t2QuestTwoComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_2.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_2.name)
 		local t2QuestThreeComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_3.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_3.name)
 		local t2QuestFourComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_4.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_4.name)
+		local t2QuestFiveComplete = SpaceHelpers:isSpaceQuestComplete(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_5.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_5.name)
 
 		local t2Duty1Started = SpaceHelpers:isSpaceQuestActive(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_DUTY_1.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_DUTY_1.name)
 		local t2Duty2Started = SpaceHelpers:isSpaceQuestActive(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_DUTY_2.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_DUTY_2.name)
@@ -387,13 +404,13 @@ function hakasshaSireenConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplat
 		local requiredTier2Skills = t2QuestFourComplete and 4 or t2QuestThreeComplete and 3 or t2QuestTwoComplete and 2 or t2QuestOneComplete and 1 or 0
 
 		-- Player has an active tier 2 mission from Sireen
-		if ((t2QuestOneStarted and not t2QuestOneComplete) or (t2QuestTwoStarted and not t2QuestTwoComplete) or (t2QuestThreeStarted and not t2QuestThreeComplete) or (t2QuestFourStarted and not t2QuestFourComplete) or
+		if ((t2QuestOneStarted and not t2QuestOneComplete) or (t2QuestTwoStarted and not t2QuestTwoComplete) or (t2QuestThreeStarted and not t2QuestThreeComplete) or (t2QuestFourStarted and not t2QuestFourComplete) or (t2QuestFiveStarted and not t2QuestFiveComplete) or
 			(t2Duty1Started and not t2Duty1Complete) or (t2Duty2Started and not t2Duty2Complete) or (t2Duty3Started and not t2Duty3Complete) or (t2Duty4Started and not t2Duty4Complete)) then
 
 			return convoTemplate:getScreen("tier2_on_mission")
 
 		-- Player finished the final tier 2 mission and has all the tier 2 skill boxes
-		elseif (t2QuestFourComplete and completedTier2 and getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_4.name .. ":reward") == "1") then
+		elseif (t2QuestFiveComplete and completedTier2 and getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_5.name .. ":reward") == "1") then
 			if (ghost:getPilotTier() <= 2) then
 				-- Increment pilot to Tier 3!
 				ghost:incrementPilotTier()
@@ -404,6 +421,8 @@ function hakasshaSireenConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplat
 			return convoTemplate:getScreen("tier2_completed")
 
 		-- Reward Checks
+		elseif (t2QuestFiveComplete and getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_5.name .. ":reward") ~= "1") then
+			return convoTemplate:getScreen("tier2_fifth_mission_success")
 		elseif (t2QuestFourComplete and getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_4.name .. ":reward") ~= "1") then
 			return convoTemplate:getScreen("tier2_fourth_mission_success")
 		elseif (t2QuestThreeComplete and getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_3.name .. ":reward") ~= "1") then
@@ -426,9 +445,16 @@ function hakasshaSireenConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplat
 			return convoTemplate:getScreen("tier2_initial_briefing")
 
 		-- Missions are not complete yet
-		elseif (not t2QuestFourComplete) then
+		elseif (not t2QuestFiveComplete) then
+			-- All four skill boxes are trained; offer the final dossier operation.
+			if (t2QuestFourComplete and completedTier2 and not t2QuestFiveStarted) then
+				if (getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_5.name .. ":attempted") == "1") then
+					return convoTemplate:getScreen("failed_tier2_fifth_mission")
+				else
+					return convoTemplate:getScreen("tier2_fifth_mission")
+				end
 			-- Player is able to start fourth mission
-			if (t2QuestThreeComplete and not t2QuestFourStarted) then
+			elseif (t2QuestThreeComplete and not t2QuestFourStarted) then
 				if (getQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_4.name .. ":attempted") == "1") then
 					return convoTemplate:getScreen("failed_tier2_fourth_mission")
 				else
@@ -688,41 +714,42 @@ function hakasshaSireenConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pN
 			end
 		end
 
-		if (ghost:getPilotTier() <= 2 and SpaceHelpers:hasCompletedPilotTier(pPlayer, "imperial_navy", 2)) then
-			-- Increment pilot to Tier 3!
-			ghost:incrementPilotTier()
-		end
-
 		if (SpaceHelpers:hasExperienceForTraining(pPlayer, 2) or SpaceHelpers:isSpaceQuestComplete(pPlayer, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_4.type, BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_4.name)) then
 			return self:getInitialScreen(pPlayer, pNpc, pConvTemplate)
 		end
 
 		return pClonedScreen
 	-- Tier 2 mission rewards
+	elseif (screenID == "tier2_fifth_mission_success") then
+		local playerID = CreatureObject(pPlayer):getObjectID()
+
+		setQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_5.name .. ":reward", 1)
+
+		inspect_corellia_imperial_13:rewardPlayer(pPlayer)
 	elseif (screenID == "tier2_fourth_mission_success") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 
 		setQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_4.name .. ":reward", 1)
 
-		assassinate_corellia_imperial_tier2_4:rewardPlayer(pPlayer)
+		patrol_corellia_imperial_15:rewardPlayer(pPlayer)
 	elseif (screenID == "tier2_third_mission_success") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 
 		setQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_3.name .. ":reward", 1)
 
-		recovery_corellia_imperial_tier2_3:rewardPlayer(pPlayer)
+		assassinate_corellia_imperial_14:rewardPlayer(pPlayer)
 	elseif (screenID == "tier2_second_mission_success") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 
 		setQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_2.name .. ":reward", 1)
 
-		escort_corellia_imperial_tier2_2:rewardPlayer(pPlayer)
+		assassinate_corellia_imperial_12:rewardPlayer(pPlayer)
 	elseif (screenID == "tier2_first_mission_success") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 
 		setQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_1.name .. ":reward", 1)
 
-		inspect_corellia_imperial_tier2_1:rewardPlayer(pPlayer)
+		recovery_corellia_imperial_16:rewardPlayer(pPlayer)
 	-- Tier 2 mission starters
 	elseif (screenID == "accept_tier2_first_mission" or screenID == "failed_tier2_first_mission") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
@@ -730,29 +757,37 @@ function hakasshaSireenConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pN
 		setQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_1.name .. ":attempted", 1)
 
 		BlackEpsilonSquadronScreenplay:prepareMissionChainAttempt(pPlayer,
-			{recovery_corellia_imperial_16, assassinate_corellia_imperial_12},
-			{{type = "recovery", name = "corellia_imperial_16"}, {type = "assassinate", name = "corellia_imperial_12"}})
+			{recovery_corellia_imperial_16},
+			{{type = "recovery", name = "corellia_imperial_16"}})
 		recovery_corellia_imperial_16:startQuest(pPlayer, pNpc)
 	elseif (screenID == "accept_tier2_second_mission" or screenID == "failed_tier2_second_mission") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 
+		setQuestStatus(playerID .. "BlackEpsilonSquadronScreenplay:tier2SeparatedMissions", 1)
 		setQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_2.name .. ":attempted", 1)
 
-		BlackEpsilonSquadronScreenplay:prepareMissionChainAttempt(pPlayer, {assassinate_corellia_imperial_14}, {{type = "assassinate", name = "corellia_imperial_14"}})
-		assassinate_corellia_imperial_14:startQuest(pPlayer, pNpc)
+		BlackEpsilonSquadronScreenplay:prepareMissionChainAttempt(pPlayer, {assassinate_corellia_imperial_12}, {{type = "assassinate", name = "corellia_imperial_12"}})
+		assassinate_corellia_imperial_12:startQuest(pPlayer, pNpc)
 	elseif (screenID == "accept_tier2_third_mission" or screenID == "failed_tier2_third_mission") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 
 		setQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_3.name .. ":attempted", 1)
 
-		BlackEpsilonSquadronScreenplay:prepareMissionChainAttempt(pPlayer,
-			{patrol_corellia_imperial_15, destroy_surpriseattack_corellia_imperial_15_split},
-			{{type = "patrol", name = "corellia_imperial_15"}, {type = "destroy_surpriseattack", name = "corellia_imperial_15_split"}})
-		patrol_corellia_imperial_15:startQuest(pPlayer, pNpc)
+		BlackEpsilonSquadronScreenplay:prepareMissionChainAttempt(pPlayer, {assassinate_corellia_imperial_14}, {{type = "assassinate", name = "corellia_imperial_14"}})
+		assassinate_corellia_imperial_14:startQuest(pPlayer, pNpc)
 	elseif (screenID == "accept_tier2_fourth_mission" or screenID == "failed_tier2_fourth_mission") then
 		local playerID = CreatureObject(pPlayer):getObjectID()
 
 		setQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_4.name .. ":attempted", 1)
+
+		BlackEpsilonSquadronScreenplay:prepareMissionChainAttempt(pPlayer,
+			{patrol_corellia_imperial_15, destroy_surpriseattack_corellia_imperial_15_split},
+			{{type = "patrol", name = "corellia_imperial_15"}, {type = "destroy_surpriseattack", name = "corellia_imperial_15_split"}})
+		patrol_corellia_imperial_15:startQuest(pPlayer, pNpc)
+	elseif (screenID == "accept_tier2_fifth_mission" or screenID == "failed_tier2_fifth_mission") then
+		local playerID = CreatureObject(pPlayer):getObjectID()
+
+		setQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_5.name .. ":attempted", 1)
 
 		BlackEpsilonSquadronScreenplay:prepareMissionChainAttempt(pPlayer,
 			{inspect_corellia_imperial_13, assassinate_corellia_imperial_17, destroy_corellia_imperial_17},

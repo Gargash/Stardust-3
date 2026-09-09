@@ -1990,10 +1990,10 @@ BlackEpsilonSquadronScreenplay = ScreenPlay:new {
 
 	-- Tier 2
 	TIER2_QUEST_STRING_1 = {type = "recovery", name = "corellia_imperial_16"},
-	TIER2_QUEST_STRING_1_SIDE = {type = "assassinate", name = "corellia_imperial_12"},
-	TIER2_QUEST_STRING_2 = {type = "assassinate", name = "corellia_imperial_14"},
-	TIER2_QUEST_STRING_3 = {type = "destroy_surpriseattack", name = "corellia_imperial_15_split"},
-	TIER2_QUEST_STRING_4 = {type = "destroy", name = "corellia_imperial_17"},
+	TIER2_QUEST_STRING_2 = {type = "assassinate", name = "corellia_imperial_12"},
+	TIER2_QUEST_STRING_3 = {type = "assassinate", name = "corellia_imperial_14"},
+	TIER2_QUEST_STRING_4 = {type = "destroy_surpriseattack", name = "corellia_imperial_15_split"},
+	TIER2_QUEST_STRING_5 = {type = "destroy", name = "corellia_imperial_17"},
 	TIER2_QUEST_STRING_DUTY_1 = {type = "destroy_duty", name = "corellia_imperial_8"},
 	TIER2_QUEST_STRING_DUTY_2 = {type = "escort_duty", name = "corellia_imperial_9"},
 	TIER2_QUEST_STRING_DUTY_3 = {type = "destroy_duty", name = "corellia_imperial_10"},
@@ -2106,22 +2106,24 @@ function BlackEpsilonSquadronScreenplay:resetTier2Quests(pPlayer)
 	end
 
 	-- Mission 1
-	inspect_corellia_imperial_tier2_1:resetQuest(pPlayer)
+	recovery_corellia_imperial_16:resetQuest(pPlayer)
 	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER2_QUEST_STRING_1.type, self.TIER2_QUEST_STRING_1.name, false)
-	destroy_surpriseattack_corellia_imperial_tier2_1:resetQuest(pPlayer)
-	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER2_QUEST_STRING_1_SIDE.type, self.TIER2_QUEST_STRING_1_SIDE.name, false)
 
 	-- Mission 2
-	escort_corellia_imperial_tier2_2:resetQuest(pPlayer)
+	assassinate_corellia_imperial_12:resetQuest(pPlayer)
 	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER2_QUEST_STRING_2.type, self.TIER2_QUEST_STRING_2.name, false)
 
 	-- Mission 3
-	recovery_corellia_imperial_tier2_3:resetQuest(pPlayer)
+	assassinate_corellia_imperial_14:resetQuest(pPlayer)
 	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER2_QUEST_STRING_3.type, self.TIER2_QUEST_STRING_3.name, false)
 
 	-- Mission 4
-	assassinate_corellia_imperial_tier2_4:resetQuest(pPlayer)
+	patrol_corellia_imperial_15:resetQuest(pPlayer)
 	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER2_QUEST_STRING_4.type, self.TIER2_QUEST_STRING_4.name, false)
+
+	-- Mission 5
+	inspect_corellia_imperial_13:resetQuest(pPlayer)
+	SpaceHelpers:clearSpaceQuest(pPlayer, self.TIER2_QUEST_STRING_5.type, self.TIER2_QUEST_STRING_5.name, false)
 
 	local playerID = SceneObject(pPlayer):getObjectID()
 
@@ -2130,11 +2132,14 @@ function BlackEpsilonSquadronScreenplay:resetTier2Quests(pPlayer)
 	removeQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_2.name .. ":attempted")
 	removeQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_3.name .. ":attempted")
 	removeQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_4.name .. ":attempted")
+	removeQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_5.name .. ":attempted")
 	removeQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_1.name .. ":reward")
 	removeQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_2.name .. ":reward")
 	removeQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_3.name .. ":reward")
 	removeQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_4.name .. ":reward")
+	removeQuestStatus(playerID .. BlackEpsilonSquadronScreenplay.TIER2_QUEST_STRING_5.name .. ":reward")
 	removeQuestStatus(playerID .. "BlackEpsilonSquadron:tier2Smuggler")
+	removeQuestStatus(playerID .. "BlackEpsilonSquadronScreenplay:tier2SeparatedMissions")
 end
 
 function BlackEpsilonSquadronScreenplay:resetTier3Quests(pPlayer)

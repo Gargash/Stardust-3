@@ -605,17 +605,17 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_first_mission_succes
 -- Tier 2 - Mission 2
 hakassha_sireen_convo_tier2_second_mission = ConvoScreen:new {
 	id = "tier2_second_mission",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_98840984",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_9a117462", -- I have an assignment for you and it cannot wait.
 	stopConversation = "false",
 	options = {
-		{"@conversation/corellia_imperial_trainer_2:s_1ff4247a", "accept_tier2_second_mission"},
+		{"@conversation/corellia_imperial_trainer_2:s_6d3be6aa", "accept_tier2_second_mission"}, -- What is the task?
 	}
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_second_mission)
 
 hakassha_sireen_convo_accept_tier2_second_mission = ConvoScreen:new {
 	id = "accept_tier2_second_mission",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_b5a3714a",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_8db61bfa", -- Eliminate the Rebel diplomat Darmin Lerspri before he reaches Corellia.
 	stopConversation = "true",
 	options = {}
 }
@@ -623,7 +623,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_accept_tier2_second_missio
 
 hakassha_sireen_convo_failed_tier2_second_mission = ConvoScreen:new {
 	id = "failed_tier2_second_mission",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_fe284208", -- Were the Rebels too much for you? Get back up there.
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_bae9fe80", -- You failed to dispose of Darmin. Get back up there.
 	stopConversation = "true",
 	options = {}
 }
@@ -631,7 +631,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_tier2_second_missio
 
 hakassha_sireen_convo_tier2_second_mission_success = ConvoScreen:new {
 	id = "tier2_second_mission_success",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_b69b5bf4",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_e67a0734", -- Darmin will no longer be a thorn in the Empire's side.
 	stopConversation = "true",
 	options = {}
 }
@@ -640,28 +640,28 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_second_mission_succe
 -- Tier 2 - Mission 3
 hakassha_sireen_convo_tier2_third_mission = ConvoScreen:new {
 	id = "tier2_third_mission",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_9a117462",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_98840984", -- A Rebel bomber squadron has been sighted in the system.
 	stopConversation = "false",
 	options = {
-		{"@conversation/corellia_imperial_trainer_2:s_7ca4fcb8", "tier2_third_mission_details"},
-		{"@conversation/corellia_imperial_trainer_2:s_1d1f03a8", "accept_tier2_third_mission"},
+		{"@conversation/corellia_imperial_trainer_2:s_d6dfa36e", "tier2_third_mission_details"}, -- Shouldn't the Navy handle a direct assault?
+		{"@conversation/corellia_imperial_trainer_2:s_1ff4247a", "accept_tier2_third_mission"}, -- I will not fail.
 	}
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_third_mission)
 
 hakassha_sireen_convo_tier2_third_mission_details = ConvoScreen:new {
 	id = "tier2_third_mission_details",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_af16cd74",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_2517a327", -- Black Epsilon can do with one craft what takes the Navy ten.
 	stopConversation = "false",
 	options = {
-		{"@conversation/corellia_imperial_trainer_2:s_1d1f03a8", "accept_tier2_third_mission"},
+		{"@conversation/corellia_imperial_trainer_2:s_1ff4247a", "accept_tier2_third_mission"}, -- I will not fail.
 	}
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_third_mission_details)
 
 hakassha_sireen_convo_accept_tier2_third_mission = ConvoScreen:new {
 	id = "accept_tier2_third_mission",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_329f7488",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_b5a3714a", -- Do not let the bombers reach their objective.
 	stopConversation = "true",
 	options = {}
 }
@@ -669,7 +669,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_accept_tier2_third_mission
 
 hakassha_sireen_convo_failed_tier2_third_mission = ConvoScreen:new {
 	id = "failed_tier2_third_mission",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_4cc1cf3b", -- The ambush must proceed as planned.
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_fe284208", -- Get back up there and finish the Rebels.
 	stopConversation = "true",
 	options = {}
 }
@@ -677,7 +677,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_tier2_third_mission
 
 hakassha_sireen_convo_tier2_third_mission_success = ConvoScreen:new {
 	id = "tier2_third_mission_success",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_9d96ae32",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_b69b5bf4", -- The bomber squadron has been destroyed.
 	stopConversation = "true",
 	options = {}
 }
@@ -686,7 +686,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_third_mission_succes
 -- Tier 2 - Mission 4
 hakassha_sireen_convo_tier2_fourth_mission = ConvoScreen:new {
 	id = "tier2_fourth_mission",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_d9391d4a",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_9a117462", -- I have an assignment for you and it cannot wait.
 	stopConversation = "false",
 	options = {
 		{"@conversation/corellia_imperial_trainer_2:s_6d3be6aa", "tier2_fourth_mission_details"},
@@ -697,7 +697,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_fourth_mission)
 
 hakassha_sireen_convo_tier2_fourth_mission_details = ConvoScreen:new {
 	id = "tier2_fourth_mission_details",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_79813bfb",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_1946850", -- A scanning vessel detected possible Rebel craft in a nebula.
 	stopConversation = "false",
 	options = {
 		{"@conversation/corellia_imperial_trainer_2:s_8bf01045", "accept_tier2_fourth_mission"},
@@ -707,7 +707,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_fourth_mission_detai
 
 hakassha_sireen_convo_accept_tier2_fourth_mission = ConvoScreen:new {
 	id = "accept_tier2_fourth_mission",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_96e86218",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_f4fd144d", -- They will not resist attacking; show them what it means to cross Black Epsilon.
 	stopConversation = "true",
 	options = {}
 }
@@ -715,7 +715,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_accept_tier2_fourth_missio
 
 hakassha_sireen_convo_failed_tier2_fourth_mission = ConvoScreen:new {
 	id = "failed_tier2_fourth_mission",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_63e01bb7",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_4cc1cf3b", -- The operation must proceed as planned.
 	stopConversation = "true",
 	options = {}
 }
@@ -723,11 +723,46 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_tier2_fourth_missio
 
 hakassha_sireen_convo_tier2_fourth_mission_success = ConvoScreen:new {
 	id = "tier2_fourth_mission_success",
-	leftDialog = "@conversation/corellia_imperial_trainer_2:s_9f952cc3",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_9d96ae32", -- You handled the Rebel attack with skill and ruthlessness.
 	stopConversation = "true",
 	options = {}
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_fourth_mission_success)
+
+-- Tier 2 - Final Mission: recover the personnel dossier and spring the Rebel trap
+hakassha_sireen_convo_tier2_fifth_mission = ConvoScreen:new {
+	id = "tier2_fifth_mission",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_d9391d4a", -- Your tour is nearly finished; I have one final task.
+	stopConversation = "false",
+	options = {
+		{"@conversation/corellia_imperial_trainer_2:s_6d3be6aa", "accept_tier2_fifth_mission"}, -- What is the task?
+	}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_fifth_mission)
+
+hakassha_sireen_convo_accept_tier2_fifth_mission = ConvoScreen:new {
+	id = "accept_tier2_fifth_mission",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_79813bfb", -- Intercept the freighter and recover the personnel dossier.
+	stopConversation = "true",
+	options = {}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_accept_tier2_fifth_mission)
+
+hakassha_sireen_convo_failed_tier2_fifth_mission = ConvoScreen:new {
+	id = "failed_tier2_fifth_mission",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_63e01bb7", -- Get back into space and complete your mission.
+	stopConversation = "true",
+	options = {}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_tier2_fifth_mission)
+
+hakassha_sireen_convo_tier2_fifth_mission_success = ConvoScreen:new {
+	id = "tier2_fifth_mission_success",
+	leftDialog = "@conversation/corellia_imperial_trainer_2:s_9f952cc3", -- The dossier will be useful to the Inquisition. Here is your payment.
+	stopConversation = "true",
+	options = {}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier2_fifth_mission_success)
 
 -- Tier 2 - Training
 hakassha_sireen_convo_ready_train_tier2 = ConvoScreen:new {

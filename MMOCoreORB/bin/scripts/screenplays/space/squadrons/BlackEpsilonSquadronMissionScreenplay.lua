@@ -75,7 +75,7 @@ blackEpsilonMission("recovery_corellia_imperial_16", SpaceRecoveryScreenplay, ch
 	preRecoveryPoints = {{patrolPointName = "black_epsilon_t2_torton_capture", zoneName = corellia, x = -5500, z = 600, y = 3900, escortNumber = 1, radius = 250}},
 	recoveryPoints = {{patrolPointName = "black_epsilon_t2_torton_escape", zoneName = corellia, x = -2800, z = 200, y = 1300, escortNumber = 1, radius = 250}},
 	attackDelay = 15, attackShips = {{"hidden_daggers_eliminator_tier2"}},
-}, "assassinate", "corellia_imperial_12"))
+}))
 
 blackEpsilonMission("assassinate_corellia_imperial_12", SpaceAssassinateScreenplay, chain({
 	questName = "corellia_imperial_12", questType = "assassinate", questZone = corellia, creditReward = 5000, arrivalDelay = 5,
