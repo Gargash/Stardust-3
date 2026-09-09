@@ -132,6 +132,16 @@ end
 
 --]]
 
+function SpaceDutyEscortScreenplay:enteredZone(pPlayer, nill, zoneNameHash)
+	local dutyExitResult = self:endDutyOnZoneExit(pPlayer, zoneNameHash)
+
+	if (dutyExitResult ~= nil) then
+		return dutyExitResult
+	end
+
+	return SpaceEscortScreenplay.enteredZone(self, pPlayer, nill, zoneNameHash)
+end
+
 function SpaceDutyEscortScreenplay:notifyEnteredQuestArea(pActiveArea, pShip)
 	if ((pActiveArea == nil) or (pShip == nil)) then
 		return 0
