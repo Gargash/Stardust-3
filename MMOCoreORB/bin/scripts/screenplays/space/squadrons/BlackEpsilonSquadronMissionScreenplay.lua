@@ -118,7 +118,8 @@ blackEpsilonMission("assassinate_corellia_imperial_17", SpaceAssassinateScreenpl
 blackEpsilonMission("survival_corellia_tier2_final", SpaceSurvivalScreenplay, chain({
 	questName = "corellia_tier2_final", questType = "survival", questZone = corellia,
 	creditReward = 0,
-	survivalPoint = {x = 3700, z = 900, y = 1000}, survivalAreaRadius = 500,
+	survivalPoint = {x = 3700, z = 900, y = 1000}, survivalAreaRadius = 500, survivalMaxDistance = 500,
+	retainWaypointDuringSurvival = true,
 	survivalTime = 0, survivalWaves = 4, survivalUpdateInterval = 0,
 	delayToFirstAttack = 5, attackDelay = 45,
 	attackShips = {
