@@ -70,11 +70,11 @@ blackEpsilonMission("assassinate_corellia_imperial_4", SpaceAssassinateScreenpla
 -- Tier 2: Prisk Kith'Vys. Four trainer assignments contain all six wiki operations.
 blackEpsilonMission("recovery_corellia_imperial_16", SpaceRecoveryScreenplay, chain({
 	questName = "corellia_imperial_16", questType = "recovery", questZone = corellia, arrivalDelay = 5, recoveryDelay = 20, escortSpeed = 30,
-	recoverShip = "reb_freighterheavy_tier2", recoveryConversationMobile = "object/mobile/dressed_imperial_officer_m.iff",
-	escortShips = {"reb_z95_tier2"},
+	recoverShip = "hidden_daggers_gunship_tier2", recoveryConversationMobile = "object/mobile/dressed_imperial_officer_m.iff",
+	escortShips = {"hidden_daggers_enforcer_tier2"},
 	preRecoveryPoints = {{patrolPointName = "black_epsilon_t2_torton_capture", zoneName = corellia, x = -5500, z = 600, y = 3900, escortNumber = 1, radius = 250}},
 	recoveryPoints = {{patrolPointName = "black_epsilon_t2_torton_escape", zoneName = corellia, x = -2800, z = 200, y = 1300, escortNumber = 1, radius = 250}},
-	attackDelay = 15, attackShips = {{"reb_z95_tier2"}},
+	attackDelay = 15, attackShips = {{"hidden_daggers_eliminator_tier2"}},
 }, "assassinate", "corellia_imperial_12"))
 
 blackEpsilonMission("assassinate_corellia_imperial_12", SpaceAssassinateScreenplay, chain({
