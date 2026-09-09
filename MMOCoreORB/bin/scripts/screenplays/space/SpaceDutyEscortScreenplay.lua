@@ -37,6 +37,9 @@ function SpaceDutyEscortScreenplay:resetDutyMission(pPlayer)
 	-- Kill Count Tracking
 	deleteData(playerID .. ":" .. self.className .. ":" .. ":EscortKillCount:")
 
+	deleteData(playerID .. ":" .. self.className .. ":escortRouteIndex:")
+	deleteStringVectorSharedMemory(playerID .. ":" .. self.className .. ":escortRoute:")
+
 	local pGhost = CreatureObject(pPlayer):getPlayerObject()
 
 	if (pGhost == nil) then
@@ -49,6 +52,9 @@ function SpaceDutyEscortScreenplay:resetDutyMission(pPlayer)
 
 	-- Activate quest task 1 again
 	SpaceHelpers:activateSpaceQuestTask(pPlayer, self.questType, self.questName, 1, false)
+
+	-- Remove the completed escort leg's destination before assigning the next rendezvous.
+	SpaceHelpers:clearQuestWaypoint(pPlayer, self.className)
 
 	-- Setup the next duty escort for the player
 	local randomStart = getRandomNumber(1, #self.escortPoints)
@@ -253,6 +259,8 @@ function SpaceDutyEscortScreenplay:notifyEnteredQuestArea(pActiveArea, pShip)
 			-- Give the Credits to bank
 			CreatureObject(pPlayer):addBankCredits(amount, true)
 
+			SpaceHelpers:clearQuestWaypoint(pPlayer, self.className)
+
 			-- Reset the duty mission for the next escort
 			createEvent(10000, self.className, "resetDutyMission", pPlayer, "")
 
@@ -261,6 +269,10 @@ function SpaceDutyEscortScreenplay:notifyEnteredQuestArea(pActiveArea, pShip)
 
 		-- Write the escort ships progress
 		writeData(shipAgentID .. ":" .. self.className .. ":escortShipProgress:", shipProgress)
+
+		local routeIndex = readData(playerID .. ":" .. self.className .. ":escortRouteIndex:")
+		writeData(playerID .. ":" .. self.className .. ":escortRouteIndex:", routeIndex + 1)
+		self:updateEscortWaypoint(pShip)
 
 		return 0
 	end
