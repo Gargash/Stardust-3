@@ -804,6 +804,9 @@ space_yavin4 = SpacePatrolPointTable:new {
 	{patrolPointName = "black_epsilon_t3_1_c_escape", x = 2800, z = 500, y = 200},
 	{patrolPointName = "black_epsilon_t3_2_capture", x = -4400, z = -700, y = 3300},
 	{patrolPointName = "black_epsilon_t3_2_escape", x = -1800, z = -200, y = 900},
+	{patrolPointName = "black_epsilon_t3_2_b_1", x = -3200, z = -1000, y = 2500},
+	{patrolPointName = "black_epsilon_t3_2_b_2", x = -900, z = 100, y = 300},
+	{patrolPointName = "black_epsilon_t3_2_b_3", x = 2800, z = -600, y = -2200},
 	{patrolPointName = "black_epsilon_t3_3_escape", x = -1800, z = 200, y = -900},
 	{patrolPointName = "black_epsilon_t3_3_emissary", x = 3800, z = 1400, y = 4600},
 }
