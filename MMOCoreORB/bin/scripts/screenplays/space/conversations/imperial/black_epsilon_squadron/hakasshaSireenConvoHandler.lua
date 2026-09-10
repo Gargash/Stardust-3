@@ -933,16 +933,16 @@ function hakasshaSireenConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pN
 		local skillManager = LuaSkillManager()
 
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_starships_04") and skillManager:fulfillsSkillPrerequisitesAndXp(pPlayer, "pilot_imperial_navy_starships_04")) then
-			clonedConversation:addOption("@conversation/naboo_imperial_tier4:s_d8355c02", "tier4_train_fighters")
+			clonedConversation:addOption("@conversation/corellia_imperial_tier4:s_c17d1a82", "tier4_train_fighters")
 		end
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_weapons_04") and skillManager:fulfillsSkillPrerequisitesAndXp(pPlayer, "pilot_imperial_navy_weapons_04")) then
-			clonedConversation:addOption("@conversation/naboo_imperial_tier4:s_96a0374a", "tier4_train_component")
+			clonedConversation:addOption("@conversation/corellia_imperial_tier4:s_6560cc1a", "tier4_train_component")
 		end
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_procedures_04") and skillManager:fulfillsSkillPrerequisitesAndXp(pPlayer, "pilot_imperial_navy_procedures_04")) then
-			clonedConversation:addOption("@conversation/naboo_imperial_tier4:s_d8efd03b", "tier4_train_basics")
+			clonedConversation:addOption("@conversation/corellia_imperial_tier4:s_bfe54df0", "tier4_train_basics")
 		end
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_droid_04") and skillManager:fulfillsSkillPrerequisitesAndXp(pPlayer, "pilot_imperial_navy_droid_04")) then
-			clonedConversation:addOption("@conversation/naboo_imperial_tier4:s_7e1308bc", "tier4_train_droid")
+			clonedConversation:addOption("@conversation/corellia_imperial_tier4:s_588da3c3", "tier4_train_droid")
 		end
 	-- Handle tier 4 skill box granting
 	elseif (string.find(screenID, "tier4_train_")) then
