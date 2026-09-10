@@ -1018,10 +1018,10 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_first_mission_succes
 -- Tier 3 - Mission 2
 hakassha_sireen_convo_tier3_second_mission = ConvoScreen:new {
 	id = "tier3_second_mission",
-	leftDialog = "@conversation/corellia_imperial_tier3:s_27e5eff7",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_fdda16c7",
 	stopConversation = "false",
 	options = {
-		{"@conversation/corellia_imperial_tier3:s_c9015929", "tier3_second_mission_details"},
+		{"@conversation/corellia_imperial_tier3:s_7c05dd60", "tier3_second_mission_details"},
 		{"@conversation/corellia_imperial_tier3:s_5eb7a1e3", "accept_tier3_second_mission"},
 	}
 }
@@ -1029,7 +1029,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_second_mission)
 
 hakassha_sireen_convo_tier3_second_mission_details = ConvoScreen:new {
 	id = "tier3_second_mission_details",
-	leftDialog = "@conversation/corellia_imperial_tier3:s_36900273",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_22f895e3",
 	stopConversation = "false",
 	options = {
 		{"@conversation/corellia_imperial_tier3:s_5eb7a1e3", "accept_tier3_second_mission"},
@@ -1039,7 +1039,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_second_mission_detai
 
 hakassha_sireen_convo_accept_tier3_second_mission = ConvoScreen:new {
 	id = "accept_tier3_second_mission",
-	leftDialog = "@conversation/corellia_imperial_tier3:s_271e95b3",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_1e26f934",
 	stopConversation = "true",
 	options = {}
 }
@@ -1047,7 +1047,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_accept_tier3_second_missio
 
 hakassha_sireen_convo_failed_tier3_second_mission = ConvoScreen:new {
 	id = "failed_tier3_second_mission",
-	leftDialog = "@conversation/corellia_imperial_tier3:s_73c4833",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_d32315a8",
 	stopConversation = "true",
 	options = {}
 }
@@ -1055,7 +1055,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_tier3_second_missio
 
 hakassha_sireen_convo_tier3_second_mission_success = ConvoScreen:new {
 	id = "tier3_second_mission_success",
-	leftDialog = "@conversation/corellia_imperial_tier3:s_64d5bea6",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_6cef5164",
 	stopConversation = "false",
 	options = {
 		-- Training options added dynamically via handler
@@ -1114,10 +1114,10 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_third_mission_succes
 -- Tier 3 - Mission 4
 hakassha_sireen_convo_tier3_fourth_mission = ConvoScreen:new {
 	id = "tier3_fourth_mission",
-	leftDialog = "@conversation/corellia_imperial_tier3:s_fdda16c7",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_27e5eff7",
 	stopConversation = "false",
 	options = {
-		{"@conversation/corellia_imperial_tier3:s_7c05dd60", "tier3_fourth_mission_details"},
+		{"@conversation/corellia_imperial_tier3:s_c9015929", "tier3_fourth_mission_details"},
 		{"@conversation/corellia_imperial_tier3:s_5eb7a1e3", "accept_tier3_fourth_mission"},
 	}
 }
@@ -1125,7 +1125,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_fourth_mission)
 
 hakassha_sireen_convo_tier3_fourth_mission_details = ConvoScreen:new {
 	id = "tier3_fourth_mission_details",
-	leftDialog = "@conversation/corellia_imperial_tier3:s_22f895e3",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_36900273",
 	stopConversation = "false",
 	options = {
 		{"@conversation/corellia_imperial_tier3:s_5eb7a1e3", "accept_tier3_fourth_mission"},
@@ -1135,7 +1135,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_fourth_mission_detai
 
 hakassha_sireen_convo_accept_tier3_fourth_mission = ConvoScreen:new {
 	id = "accept_tier3_fourth_mission",
-	leftDialog = "@conversation/corellia_imperial_tier3:s_1e26f934",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_271e95b3",
 	stopConversation = "true",
 	options = {}
 }
@@ -1143,7 +1143,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_accept_tier3_fourth_missio
 
 hakassha_sireen_convo_failed_tier3_fourth_mission = ConvoScreen:new {
 	id = "failed_tier3_fourth_mission",
-	leftDialog = "@conversation/corellia_imperial_tier3:s_d32315a8",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_73c4833",
 	stopConversation = "true",
 	options = {}
 }
@@ -1151,7 +1151,7 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_tier3_fourth_missio
 
 hakassha_sireen_convo_tier3_fourth_mission_success = ConvoScreen:new {
 	id = "tier3_fourth_mission_success",
-	leftDialog = "@conversation/corellia_imperial_tier3:s_a1314746",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_dd4ea40c",
 	stopConversation = "false",
 	options = {
 		-- Training options added dynamically via handler
