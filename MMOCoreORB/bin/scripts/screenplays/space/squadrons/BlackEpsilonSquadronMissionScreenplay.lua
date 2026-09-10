@@ -137,7 +137,7 @@ blackEpsilonMission("patrol_corellia_imperial_tier3_1", SpacePatrolScreenplay, c
 }, "inspect", "corellia_imperial_tier3_1_a"))
 
 blackEpsilonMission("inspect_corellia_imperial_tier3_1_a", SpaceInspectScreenplay, chain({
-	questName = "corellia_imperial_tier3_1_a", questType = "inspect", questZone = yavin, inspectTargets = {"reb_z95_tier3"}, inspectCargo = "rebel_spy_data", spawnInspectTarget = true, targetLocation = {x = 2200, z = 500, y = -2900},
+	questName = "corellia_imperial_tier3_1_a", questType = "inspect", questZone = yavin, inspectTargets = {"blacksun_fighter_s01_tier3"}, inspectCargo = "rebel_spy_data", spawnInspectTarget = true, targetLocation = {x = 2200, z = 500, y = -2900},
 }, "delivery_no_pickup", "corellia_imperial_tier3_1_b", "patrol_corellia_imperial_tier3_1", "patrol", "corellia_imperial_tier3_1"))
 
 blackEpsilonMission("delivery_no_pickup_corellia_imperial_tier3_1_b", SpaceDeliveryNoPickupScreenplay, chain({
@@ -145,7 +145,7 @@ blackEpsilonMission("delivery_no_pickup_corellia_imperial_tier3_1_b", SpaceDeliv
 }, "recovery", "corellia_imperial_tier3_1_c", "inspect_corellia_imperial_tier3_1_a", "inspect", "corellia_imperial_tier3_1_a"))
 
 blackEpsilonMission("recovery_corellia_imperial_tier3_1_c", SpaceRecoveryScreenplay, chain({
-	questName = "corellia_imperial_tier3_1_c", questType = "recovery", questZone = yavin, arrivalDelay = 5, recoveryDelay = 20, escortSpeed = 45, recoverShip = "reb_ywing_tier3", recoveryConversationMobile = "object/mobile/dressed_imperial_officer_m.iff", escortShips = {"reb_z95_tier3", "reb_z95_tier3"}, preRecoveryPoints = {{patrolPointName = "black_epsilon_t3_1_c_capture", zoneName = yavin, x = 5100, z = 1200, y = 2100, escortNumber = 1, radius = 250}}, recoveryPoints = {{patrolPointName = "black_epsilon_t3_1_c_escape", zoneName = yavin, x = 2800, z = 500, y = 200, escortNumber = 1, radius = 250}}, attackDelay = 15, attackShips = {{"reb_z95_tier3"}},
+	questName = "corellia_imperial_tier3_1_c", questType = "recovery", questZone = yavin, arrivalDelay = 5, recoveryDelay = 20, escortSpeed = 45, recoverShip = "blacksun_ywing_bomber_tier3", recoveryConversationMobile = "object/mobile/dressed_imperial_officer_m.iff", escortShips = {"blacksun_fighter_s01_tier3", "blacksun_fighter_s01_tier3"}, preRecoveryPoints = {{patrolPointName = "black_epsilon_t3_1_c_capture", zoneName = yavin, x = 5100, z = 1200, y = 2100, escortNumber = 1, radius = 250}}, recoveryPoints = {{patrolPointName = "black_epsilon_t3_1_c_escape", zoneName = yavin, x = 2800, z = 500, y = 200, escortNumber = 1, radius = 250}}, attackDelay = 15, attackShips = {{"blacksun_fighter_s01_tier3"}},
 }, nil, nil, "delivery_no_pickup_corellia_imperial_tier3_1_b", "delivery_no_pickup", "corellia_imperial_tier3_1_b"))
 
 blackEpsilonMission("recovery_corellia_imperial_tier3_2", SpaceRecoveryScreenplay, chain({
