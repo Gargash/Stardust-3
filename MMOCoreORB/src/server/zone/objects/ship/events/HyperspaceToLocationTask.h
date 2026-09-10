@@ -89,8 +89,14 @@ public:
 			strid += String::valueOf(currentIter);
 
 			shipObject->sendShipMembersMessage(strid);
+
+			// Repeat countdown sound every iteration
 			shipObject->sendShipMembersMusicMessage("sound/ship_hyperspace_countdown.snd");
-			shipObject->sendShipMembersMusicMessage("sound/mus_enter_hyperspace.snd");
+
+			// Start hyperspace music only once so it can continue playing
+			if (currentIter == 1) {
+				shipObject->sendShipMembersMusicMessage("sound/mus_enter_hyperspace.snd");
+			}
 
 			reschedule(1000);
 			return;
