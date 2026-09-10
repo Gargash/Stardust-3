@@ -1425,10 +1425,8 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_tier4_first_mission
 hakassha_sireen_convo_tier4_first_mission_success = ConvoScreen:new {
 	id = "tier4_first_mission_success",
 	leftDialog = "@conversation/corellia_imperial_tier4:s_e705e25f",
-	stopConversation = "false",
-	options = {
-		{"@conversation/corellia_imperial_tier4:s_fd6077a1", "tier4_second_mission"},
-	}
+	stopConversation = "true",
+	options = {}
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier4_first_mission_success)
 
@@ -1473,10 +1471,8 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_tier4_second_missio
 hakassha_sireen_convo_tier4_second_mission_success = ConvoScreen:new {
 	id = "tier4_second_mission_success",
 	leftDialog = "@conversation/corellia_imperial_tier4:s_f8880079",
-	stopConversation = "false",
-	options = {
-		{"@conversation/corellia_imperial_tier4:s_f83729d0", "tier4_third_mission"},
-	}
+	stopConversation = "true",
+	options = {}
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier4_second_mission_success)
 
@@ -1521,10 +1517,8 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_tier4_third_mission
 hakassha_sireen_convo_tier4_third_mission_success = ConvoScreen:new {
 	id = "tier4_third_mission_success",
 	leftDialog = "@conversation/corellia_imperial_tier4:s_3f2bae5b",
-	stopConversation = "false",
-	options = {
-		{"@conversation/corellia_imperial_tier4:s_596bf3ab", "tier4_fourth_mission"},
-	}
+	stopConversation = "true",
+	options = {}
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier4_third_mission_success)
 
@@ -1569,14 +1563,8 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_tier4_fourth_missio
 hakassha_sireen_convo_tier4_fourth_mission_success = ConvoScreen:new {
 	id = "tier4_fourth_mission_success",
 	leftDialog = "@conversation/corellia_imperial_tier4:s_d4500734",
-	stopConversation = "false",
-	options = {
-		{"@conversation/corellia_imperial_tier4:s_817cf33", "master_who_declann"},
-		{"@conversation/corellia_imperial_tier4:s_6d9530c5", "master_where_report"},
-		{"@conversation/corellia_imperial_tier4:s_11c1ca52", "master_what_want"},
-		{"@conversation/corellia_imperial_tier4:s_9ec3be5d", "master_becoming_imperial"},
-		{"@conversation/corellia_imperial_tier4:s_ea248fbf", "accept_master_mission"},
-	}
+	stopConversation = "true",
+	options = {}
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier4_fourth_mission_success)
 
