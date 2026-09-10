@@ -1294,11 +1294,41 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_train_droid)
 -- Tier 3 - Completed
 hakassha_sireen_convo_tier3_completed = ConvoScreen:new {
 	id = "tier3_completed",
-	leftDialog = "@conversation/corellia_imperial_tier3:s_c65e1fa7",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_91cf92a7", -- From now on, you'll be reporting to someone named Insurgent.
+	stopConversation = "false",
+	options = {
+		{"@conversation/corellia_imperial_tier3:s_900f01d1", "tier3_transfer_orders"}, -- What?
+	}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_completed)
+
+hakassha_sireen_convo_tier3_transfer_orders = ConvoScreen:new {
+	id = "tier3_transfer_orders",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_c18b617e", -- The transfer order was signed by the Emperor.
+	stopConversation = "false",
+	options = {
+		{"@conversation/corellia_imperial_tier3:s_1474f13c", "tier3_transfer_command"}, -- What did the order say?
+	}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_transfer_orders)
+
+hakassha_sireen_convo_tier3_transfer_command = ConvoScreen:new {
+	id = "tier3_transfer_command",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_6d0b02b", -- Insurgent ordered Haymir to transfer the pilot immediately.
+	stopConversation = "false",
+	options = {
+		{"@conversation/corellia_imperial_tier3:s_9b5a6b23", "tier3_transfer_destination"}, -- He asked for me by name?
+	}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_transfer_command)
+
+hakassha_sireen_convo_tier3_transfer_destination = ConvoScreen:new {
+	id = "tier3_transfer_destination",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_c65e1fa7", -- Meet Insurgent at the Imperial Outpost on Dantooine.
 	stopConversation = "true",
 	options = {}
 }
-hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_completed)
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_transfer_destination)
 
 --[[
 

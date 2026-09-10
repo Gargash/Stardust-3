@@ -61,7 +61,10 @@ function hakasshaSireenConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplat
 	-- repeat their handoff after the player has advanced.
 	if (SpaceHelpers:isBlackEpsilonSquadron(pPlayer)) then
 		local pilotTier = ghost:getPilotTier()
-		if ((pilotTier == 2 and not isPrisk) or (pilotTier == 3 and not isHaymir) or (pilotTier >= 4 and not isInsurgent)) then
+		if (isHaymir and pilotTier >= 4) then
+			SpaceHelpers:addBlackEpsilonInsurgentWaypoint(pPlayer)
+			return convoTemplate:getScreen("tier3_completed")
+		elseif ((pilotTier == 2 and not isPrisk) or (pilotTier == 3 and not isHaymir) or (pilotTier >= 4 and not isInsurgent)) then
 			return convoTemplate:getScreen("go_to_next")
 		elseif ((isPrisk and pilotTier ~= 2) or (isHaymir and pilotTier ~= 3) or (isInsurgent and pilotTier < 4)) then
 			return convoTemplate:getScreen("go_to_next")
