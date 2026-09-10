@@ -849,16 +849,19 @@ function hakasshaSireenConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pN
 	--]]
 
 	-- Tier 3 training options (missions only, no experience check)
-	elseif (screenID == "tier3_first_mission_success" or screenID == "tier3_second_mission_success" or screenID == "tier3_third_mission_success" or screenID == "tier3_fourth_mission_success") then
+	elseif (screenID == "tier3_first_mission_training") then
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_starships_03")) then
 			clonedConversation:addOption("@conversation/corellia_imperial_tier3:s_adc23ed9", "tier3_train_fighters")
 		end
+	elseif (screenID == "tier3_second_mission_success") then
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_weapons_03")) then
 			clonedConversation:addOption("@conversation/corellia_imperial_tier3:s_77f35957", "tier3_train_component")
 		end
+	elseif (screenID == "tier3_third_mission_success") then
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_procedures_03")) then
 			clonedConversation:addOption("@conversation/corellia_imperial_tier3:s_3f4fdcbd", "tier3_train_procedures")
 		end
+	elseif (screenID == "tier3_fourth_mission_success") then
 		if (not CreatureObject(pPlayer):hasSkill("pilot_imperial_navy_droid_03")) then
 			clonedConversation:addOption("@conversation/corellia_imperial_tier3:s_2dd8b42", "tier3_train_droid")
 		end

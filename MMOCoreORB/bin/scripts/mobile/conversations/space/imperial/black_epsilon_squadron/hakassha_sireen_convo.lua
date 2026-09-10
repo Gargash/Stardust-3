@@ -1056,13 +1056,63 @@ hakassha_sireen_convo:addScreen(hakassha_sireen_convo_failed_tier3_first_mission
 
 hakassha_sireen_convo_tier3_first_mission_success = ConvoScreen:new {
 	id = "tier3_first_mission_success",
-	leftDialog = "@conversation/corellia_imperial_tier3:s_b695af6b",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_14060a1c",
 	stopConversation = "false",
 	options = {
-		-- Training options added dynamically via handler
+		{"@conversation/corellia_imperial_tier3:s_b200234c", "tier3_first_mission_success_report"},
 	}
 }
 hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_first_mission_success)
+
+hakassha_sireen_convo_tier3_first_mission_success_report = ConvoScreen:new {
+	id = "tier3_first_mission_success_report",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_b695af6b",
+	stopConversation = "false",
+	options = {
+		{"@conversation/corellia_imperial_tier3:s_2c7b60e", "tier3_first_mission_success_alliance"},
+	}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_first_mission_success_report)
+
+hakassha_sireen_convo_tier3_first_mission_success_alliance = ConvoScreen:new {
+	id = "tier3_first_mission_success_alliance",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_2b261439",
+	stopConversation = "false",
+	options = {
+		{"@conversation/corellia_imperial_tier3:s_72418db3", "tier3_first_mission_success_losses"},
+	}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_first_mission_success_alliance)
+
+hakassha_sireen_convo_tier3_first_mission_success_losses = ConvoScreen:new {
+	id = "tier3_first_mission_success_losses",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_a1b009ed",
+	stopConversation = "false",
+	options = {
+		{"@conversation/corellia_imperial_tier3:s_8c751827", "tier3_first_mission_success_strategy"},
+	}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_first_mission_success_losses)
+
+hakassha_sireen_convo_tier3_first_mission_success_strategy = ConvoScreen:new {
+	id = "tier3_first_mission_success_strategy",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_a4f70dc9",
+	stopConversation = "false",
+	options = {
+		{"@conversation/corellia_imperial_tier3:s_b6b25f13", "tier3_first_mission_training"},
+	}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_first_mission_success_strategy)
+
+hakassha_sireen_convo_tier3_first_mission_training = ConvoScreen:new {
+	id = "tier3_first_mission_training",
+	leftDialog = "@conversation/corellia_imperial_tier3:s_8dcf50f",
+	stopConversation = "false",
+	options = {
+		-- Training option added dynamically via handler
+	}
+}
+hakassha_sireen_convo:addScreen(hakassha_sireen_convo_tier3_first_mission_training)
 
 -- Tier 3 - Mission 2
 hakassha_sireen_convo_tier3_second_mission = ConvoScreen:new {
